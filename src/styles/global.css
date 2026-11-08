@@ -8,9 +8,11 @@
   --ink-faint: #8d8e86;
   --line: #deddd5;
   --line-strong: #c9c8bf;
-  --accent: #c65a24;
-  --accent-deep: #a84719;
-  --accent-wash: #f5e6d9;
+  --accent: #a44316;
+  --accent-deep: #84370f;
+  --accent-strong: #a44316;
+  --accent-strong-hover: #84370f;
+  --accent-wash: #f7f1eb;
   --green: #537258;
   --sidebar: 252px;
   --content: 1180px;
@@ -33,14 +35,16 @@
   --ink-faint: #85847d;
   --line: #33332d;
   --line-strong: #494840;
-  --accent: #e4864b;
-  --accent-deep: #f09a61;
-  --accent-wash: #38281e;
+  --accent: #f2a06b;
+  --accent-deep: #ffc18f;
+  --accent-strong: #a44316;
+  --accent-strong-hover: #84370f;
+  --accent-wash: #30251f;
   --green: #99b79b;
 }
 
 :root[data-theme="dark"] .resource-button {
-  color: #24150c;
+  color: #fffdfa;
 }
 
 * {
@@ -1272,12 +1276,12 @@ p {
 
 .button--primary {
   color: #fffdfa;
-  background: var(--accent);
+  background: var(--accent-strong);
 }
 
 .button--primary:hover {
   transform: translateY(-2px);
-  background: var(--accent-deep);
+  background: var(--accent-strong-hover);
 }
 
 .form-note {
@@ -1444,7 +1448,7 @@ p {
   --content: 1420px;
   --line: #dedfdc;
   --line-strong: #c9cbc9;
-  --accent: #c65a24;
+  --accent: #a44316;
 }
 
 .sidebar {
@@ -1679,8 +1683,8 @@ p {
   padding: 0 17px;
   border-radius: 24px;
   color: #fff;
-  background: var(--accent);
-  box-shadow: 0 4px 10px color-mix(in srgb, var(--accent), transparent 82%);
+  background: var(--accent-strong);
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--accent-strong), transparent 85%);
   font-size: 11px;
   font-weight: 650;
   transition: transform 180ms ease, box-shadow 180ms ease;
@@ -1688,8 +1692,8 @@ p {
 
 .resource-button:hover {
   transform: translateY(-2px);
-  background: var(--accent-deep);
-  box-shadow: 0 7px 15px color-mix(in srgb, var(--accent), transparent 72%);
+  background: var(--accent-strong-hover);
+  box-shadow: 0 7px 15px color-mix(in srgb, var(--accent-strong), transparent 78%);
 }
 
 .resource-button span {
@@ -1701,7 +1705,7 @@ p {
   right: 24%;
   width: 520px;
   height: 520px;
-  border-color: color-mix(in srgb, var(--accent), transparent 82%);
+  border-color: color-mix(in srgb, var(--ink), transparent 94%);
 }
 
 .hero-orbit--two {
@@ -1709,7 +1713,7 @@ p {
   right: calc(24% + 50px);
   width: 420px;
   height: 420px;
-  border-color: color-mix(in srgb, var(--accent), transparent 88%);
+  border-color: color-mix(in srgb, var(--ink), transparent 96%);
 }
 
 .toolbelt {
@@ -1720,9 +1724,9 @@ p {
   gap: 11px;
   margin: 0 auto 15px;
   padding: 8px;
-  border: 1px solid color-mix(in srgb, var(--accent), var(--line) 86%);
+  border: 1px solid var(--line);
   border-radius: 20px;
-  background: linear-gradient(105deg, var(--surface), var(--accent-wash) 78%, color-mix(in srgb, var(--accent), var(--surface) 78%));
+  background: linear-gradient(105deg, var(--surface), var(--surface-soft));
 }
 
 .toolbelt-label {
@@ -1801,10 +1805,10 @@ p {
   width: min(var(--content), calc(100% - 88px));
   margin: 0 auto 62px;
   padding: 12px;
-  border: 1px solid color-mix(in srgb, var(--accent), var(--line) 86%);
+  border: 1px solid var(--line);
   border-radius: 24px;
-  background: linear-gradient(110deg, var(--surface) 10%, var(--accent-wash) 65%, color-mix(in srgb, var(--accent), var(--surface) 76%) 100%);
-  box-shadow: 0 16px 38px color-mix(in srgb, var(--accent), transparent 93%);
+  background: linear-gradient(110deg, var(--surface), var(--surface-soft));
+  box-shadow: 0 16px 38px color-mix(in srgb, var(--ink), transparent 95%);
 }
 
 .dashboard-grid {
@@ -1826,7 +1830,7 @@ p {
 
 :root[data-theme="dark"] .dashboard-wrap {
   border-color: var(--line);
-  background: linear-gradient(110deg, var(--surface), var(--accent-wash) 75%);
+  background: linear-gradient(110deg, var(--surface), var(--surface-soft));
 }
 
 :root[data-theme="dark"] .dashboard-card {
@@ -1840,12 +1844,12 @@ p {
   flex-direction: column;
   align-items: center;
   padding: 20px 15px 16px;
-  background: linear-gradient(155deg, var(--surface), var(--accent-wash) 96%);
+  background: var(--surface);
   text-align: center;
 }
 
 :root[data-theme="dark"] .dashboard-profile {
-  background: linear-gradient(155deg, var(--surface), var(--accent-wash) 90%);
+  background: var(--surface);
 }
 
 .dashboard-portrait-wrap {
@@ -1924,8 +1928,8 @@ p {
   flex: 0 0 31px;
   place-items: center;
   border-radius: 9px;
-  color: #fff;
-  background: var(--accent);
+  color: var(--accent);
+  background: var(--accent-wash);
   font-size: 15px;
   font-weight: 700;
 }
@@ -2564,7 +2568,7 @@ p {
 
 .chat-launcher:hover {
   transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 11px 30px color-mix(in srgb, var(--accent), transparent 62%);
+  box-shadow: 0 11px 30px color-mix(in srgb, var(--ink), transparent 82%);
 }
 
 .chat-launcher:focus-visible {
@@ -2582,7 +2586,7 @@ p {
   border-radius: 9px;
   color: var(--ink);
   background: var(--surface);
-  box-shadow: 0 5px 18px color-mix(in srgb, var(--accent), transparent 88%);
+  box-shadow: 0 5px 18px color-mix(in srgb, var(--ink), transparent 90%);
   font-size: 11px;
   font-weight: 650;
   opacity: 0;
@@ -2738,7 +2742,7 @@ p {
   align-self: flex-end;
   border-top-right-radius: 4px;
   color: #fffdfa;
-  background: var(--accent);
+  background: var(--accent-strong);
 }
 
 .chat-answer-link {
