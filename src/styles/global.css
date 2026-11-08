@@ -1794,6 +1794,13 @@ p {
   fill: currentColor;
 }
 
+.tool-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .tool-monogram {
   display: inline-grid;
   min-width: 15px;
