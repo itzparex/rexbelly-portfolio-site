@@ -1,25 +1,55 @@
 ---
 import "../styles/global.css";
+import {
+  siClaude,
+  siClickup,
+  siCss,
+  siDocker,
+  siFigma,
+  siGit,
+  siGoogledrive,
+  siHtml5,
+  siJavascript,
+  siMailchimp,
+  siReact,
+  siShopify,
+  siTypescript,
+  siWebflow,
+  siWordpress,
+  siZendesk,
+} from "simple-icons";
 
 const tools = [
-  "Shopify",
-  "Liquid",
-  "HTML5",
-  "CSS3",
-  "JavaScript",
-  "React",
-  "TypeScript",
-  "Figma",
-  "Adobe Photoshop",
-  "Canva",
-  "Klaviyo",
-  "Mailchimp",
-  "systeme.io",
-  "GoHighLevel",
-  "Gorgias",
-  "Docker",
-  "Git",
+  { name: "Shopify", icon: siShopify },
+  { name: "Liquid", mark: "LQ", color: "#5eacff" },
+  { name: "HTML5", icon: siHtml5 },
+  { name: "CSS3", icon: siCss },
+  { name: "JavaScript", icon: siJavascript, color: "#947a00" },
+  { name: "React", icon: siReact },
+  { name: "TypeScript", icon: siTypescript },
+  { name: "Figma", icon: siFigma },
+  { name: "Adobe Photoshop", mark: "Ps", color: "#31a8ff" },
+  { name: "Canva", mark: "C", color: "#00c4cc" },
+  { name: "Klaviyo", mark: "K", color: "#222222" },
+  { name: "Mailchimp", icon: siMailchimp },
+  { name: "systeme.io", mark: "S", color: "#f57935" },
+  { name: "GoHighLevel", mark: "GHL", color: "#146ef5" },
+  { name: "Gorgias", mark: "G", color: "#6945ed" },
+  { name: "Docker", icon: siDocker },
+  { name: "Git", icon: siGit },
+  { name: "Webflow", icon: siWebflow },
+  { name: "WordPress", icon: siWordpress },
+  { name: "Hermes AI", mark: "H", color: "#527a68" },
+  { name: "Claude", icon: siClaude },
+  { name: "Codex", mark: "CX", color: "#171717" },
+  { name: "Google Workspace", icon: siGoogledrive },
+  { name: "Zendesk", icon: siZendesk },
+  { name: "Slack", mark: "S", color: "#611f69" },
+  { name: "ClickUp", icon: siClickup },
+  { name: "VS Code", mark: "VS", color: "#007acc" },
 ];
+
+const toolColor = (tool) => tool.color ?? `#${tool.icon?.hex ?? "3269ae"}`;
 
 const projects = [
   {
@@ -264,8 +294,19 @@ const services = [
             <div class="marquee-track">
               {Array.from({ length: 2 }).map((_, groupIndex) => (
                 <div class="marquee-group" aria-hidden={groupIndex === 1 ? "true" : undefined}>
-                  {tools.map((tool, index) => (
-                    <span class="tool-chip"><span class:list={["tool-dot", `tool-dot--${index % 5}`]}></span>{tool}</span>
+                  {tools.map((tool) => (
+                    <span class="tool-chip" style={`--tool-color: ${toolColor(tool)}`}>
+                      <span class="tool-logo" aria-hidden="true">
+                        {tool.icon ? (
+                          <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+                            <path d={tool.icon.path} />
+                          </svg>
+                        ) : (
+                          <span class="tool-monogram">{tool.mark}</span>
+                        )}
+                      </span>
+                      {tool.name}
+                    </span>
                   ))}
                 </div>
               ))}
