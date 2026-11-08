@@ -1462,16 +1462,58 @@ p {
   text-align: center;
 }
 
-.sidebar-portrait {
-  display: block;
+.sidebar-avatar-wrap {
+  position: relative;
+  display: grid;
   width: min(100%, 208px);
   height: 186px;
-  aspect-ratio: 1.12;
+  grid-template-rows: minmax(0, 1fr);
+  place-items: end center;
   margin-bottom: 12px;
+  overflow: hidden;
   border-radius: 12px;
-  background: #d7d9de;
-  object-fit: cover;
-  object-position: center 27%;
+  background: linear-gradient(160deg, #dce5f2, #c6d5e9);
+}
+
+.sidebar-portrait {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+.sidebar-name-line,
+.profile-name-line {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.verified-badge {
+  display: inline-grid;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  place-items: center;
+  border: 2px solid var(--surface);
+  border-radius: 50%;
+  color: #fff;
+  background: #2874d0;
+  box-shadow: 0 1px 3px rgb(22 48 90 / 22%);
+}
+
+.verified-badge svg {
+  display: block;
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.4;
 }
 
 .sidebar-name {
@@ -1527,7 +1569,12 @@ p {
 .nav-link {
   min-height: 42px;
   gap: 11px;
+  padding: 0 11px;
+  border: 1px solid transparent;
   border-radius: 9px;
+  color: var(--ink-soft);
+  background: transparent;
+  font: inherit;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
@@ -1811,28 +1858,9 @@ p {
   display: block;
   width: 100%;
   height: 100%;
-  border: 2px solid #fff;
   border-radius: 18px;
-  background: #d7d9de;
-  box-shadow: 0 6px 15px rgb(24 38 62 / 15%);
-  object-fit: cover;
-  object-position: center 23%;
-}
-
-.portrait-check {
-  position: absolute;
-  right: -3px;
-  bottom: -3px;
-  display: grid;
-  width: 27px;
-  height: 27px;
-  place-items: center;
-  border: 2px solid #fff;
-  border-radius: 50%;
-  color: #fff;
-  background: #3574b8;
-  font-size: 13px;
-  font-weight: 700;
+  object-fit: contain;
+  object-position: center bottom;
 }
 
 .profile-overline {
@@ -1848,6 +1876,11 @@ p {
   font-weight: 750;
   letter-spacing: -0.065em;
   line-height: 1.1;
+}
+
+.profile-name-line .verified-badge {
+  align-self: flex-start;
+  margin-top: 6px;
 }
 
 .profile-rule {
@@ -2115,8 +2148,14 @@ p {
   }
 
   .sidebar-portrait {
+    width: 100%;
+    height: 100%;
+  }
+
+  .sidebar-avatar-wrap {
     width: min(100%, 186px);
     height: 166px;
+    grid-template-rows: minmax(0, 1fr);
   }
 
   .section-wrap,
@@ -2398,20 +2437,17 @@ p {
     border-radius: 13px;
   }
 
-  .portrait-check {
-    width: 22px;
-    height: 22px;
-    font-size: 10px;
-  }
-
   .profile-overline {
     grid-column: 2;
     margin-top: 1px;
     font-size: 7px;
   }
 
-  .dashboard-profile h2 {
+  .profile-name-line {
     grid-column: 2;
+  }
+
+  .dashboard-profile h2 {
     font-size: 19px;
   }
 

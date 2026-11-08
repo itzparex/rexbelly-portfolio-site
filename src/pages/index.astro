@@ -215,15 +215,22 @@ const services = [
     <a class="skip-link" href="#main">Skip to content</a>
     <aside class="sidebar" aria-label="Site navigation">
       <a class="sidebar-identity" href="#home" aria-label="Rexbelly P. Zipagan, home">
-        <img
-          class="sidebar-portrait"
-          src="/rex-portrait.jpg"
-          alt="Portrait of Rexbelly P. Zipagan"
-          width="768"
-          height="768"
-          fetchpriority="high"
-        />
-        <span class="sidebar-name">Rexbelly P. Zipagan</span>
+        <span class="sidebar-avatar-wrap">
+          <img
+            class="sidebar-portrait"
+            src="/profile-avatar.png"
+            alt="Illustrated profile avatar of Rexbelly P. Zipagan"
+            width="768"
+            height="768"
+            fetchpriority="high"
+          />
+        </span>
+        <span class="sidebar-name-line">
+          <span class="sidebar-name">Rexbelly P. Zipagan</span>
+          <span class="verified-badge" role="img" aria-label="Verified profile">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 10.3 3.2 3.1L15.2 6.8" /></svg>
+          </span>
+        </span>
         <span class="sidebar-role">Shopify Developer</span>
         <span class="sidebar-handle">@itzparex · Philippines</span>
       </a>
@@ -320,16 +327,20 @@ const services = [
             <article class="dashboard-card dashboard-profile">
               <div class="dashboard-portrait-wrap">
                 <img
-                  src="/rex-portrait.jpg"
-                  alt="Rexbelly P. Zipagan"
+                  src="/profile-avatar.png"
+                  alt="Illustrated profile avatar of Rexbelly P. Zipagan"
                   width="768"
                   height="768"
                   fetchpriority="high"
                 />
-                <span class="portrait-check" aria-label="Profile">✓</span>
               </div>
               <span class="eyebrow profile-overline">HI, I’M</span>
-              <h2>Rexbelly<br />P. Zipagan</h2>
+              <span class="profile-name-line">
+                <h2>Rexbelly<br />P. Zipagan</h2>
+                <span class="verified-badge" role="img" aria-label="Verified profile">
+                  <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 10.3 3.2 3.1L15.2 6.8" /></svg>
+                </span>
+              </span>
               <span class="profile-rule"></span>
               <p class="profile-specialty">SHOPIFY DEVELOPER · WEB DESIGN ENGINEER</p>
               <a class="profile-contact" href="mailto:rexbelly.zipagan@gmail.com">Let’s make something useful <span aria-hidden="true">↗</span></a>
