@@ -580,6 +580,45 @@ const services = [
         <span class="footer-year">© 2026</span>
       </footer>
     </div>
+    <aside class="portfolio-chat" aria-label="Portfolio chat">
+      <section
+        class="chat-panel"
+        id="chat-panel"
+        role="dialog"
+        aria-labelledby="chat-title"
+        aria-describedby="chat-description"
+        hidden
+      >
+        <header class="chat-header">
+          <img src="/aris-chat-avatar.png" alt="" width="44" height="44" />
+          <div class="chat-header-copy">
+            <h2 id="chat-title">A.R.I.S.</h2>
+            <p id="chat-description"><span aria-hidden="true"></span> Rex’s portfolio guide</p>
+          </div>
+          <button class="chat-close" type="button" aria-label="Close chat">×</button>
+        </header>
+        <div class="chat-thread" id="chat-thread" role="log" aria-live="polite" aria-relevant="additions">
+          <p class="chat-message chat-message--assistant">
+            Hi there! I can help you explore Rex’s work, services, or how to get in touch.
+          </p>
+        </div>
+        <div class="chat-prompts" aria-label="Choose a topic">
+          <button type="button" data-chat-question="projects">Show me your projects</button>
+          <button type="button" data-chat-question="services">What services do you offer?</button>
+          <button type="button" data-chat-question="contact">How can I contact Rex?</button>
+        </div>
+      </section>
+      <button
+        class="chat-launcher"
+        type="button"
+        aria-label="Open chat with A.R.I.S., Rex’s portfolio guide"
+        aria-controls="chat-panel"
+        aria-expanded="false"
+      >
+        <img src="/aris-chat-avatar.png" alt="" width="72" height="72" />
+        <span class="chat-launcher-status" aria-hidden="true"></span>
+      </button>
+    </aside>
     <script>
       const root = document.documentElement;
       const themeButtons = document.querySelectorAll(".theme-toggle");
@@ -693,6 +732,67 @@ const services = [
 
       const initialTab = decodeURIComponent(location.hash.slice(1));
       activateTab(tabPanels.has(initialTab) ? initialTab : "home", { updateHistory: false });
+
+      const chatPanel = document.querySelector("#chat-panel");
+      const chatLauncher = document.querySelector(".chat-launcher");
+      const chatClose = document.querySelector(".chat-close");
+      const chatThread = document.querySelector("#chat-thread");
+      const chatResponses = {
+        projects: {
+          text: "Rex has built Shopify storefronts and product experiences for brands including PunkRIDE, Tour Flex, and Winx Wheels, plus an independent travel-tech project.",
+          link: { href: "#projects", label: "Explore projects" },
+        },
+        services: {
+          text: "Rex works across Shopify storefront and theme development, web design engineering, and marketing automation and management.",
+          link: { href: "#services", label: "Explore services" },
+        },
+        contact: {
+          text: "For project inquiries, send Rex a note. You can also use the contact form to share a few details.",
+          link: { href: "#contact", label: "Go to contact" },
+        },
+      };
+
+      const setChatOpen = (isOpen) => {
+        chatPanel.hidden = !isOpen;
+        chatLauncher.setAttribute("aria-expanded", String(isOpen));
+        if (isOpen) chatClose.focus();
+        else chatLauncher.focus();
+      };
+
+      chatLauncher.addEventListener("click", () => {
+        setChatOpen(chatPanel.hidden);
+      });
+      chatClose.addEventListener("click", () => setChatOpen(false));
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !chatPanel.hidden) setChatOpen(false);
+      });
+
+      document.querySelector(".chat-prompts").addEventListener("click", (event) => {
+        const prompt = event.target.closest("[data-chat-question]");
+        if (!prompt) return;
+
+        const response = chatResponses[prompt.dataset.chatQuestion];
+        if (!response) return;
+
+        const userMessage = document.createElement("p");
+        userMessage.className = "chat-message chat-message--user";
+        userMessage.textContent = prompt.textContent.trim();
+        chatThread.append(userMessage);
+
+        const assistantMessage = document.createElement("div");
+        assistantMessage.className = "chat-message chat-message--assistant";
+        const answer = document.createElement("p");
+        answer.textContent = response.text;
+        assistantMessage.append(answer);
+
+        const link = document.createElement("a");
+        link.href = response.link.href;
+        link.textContent = response.link.label;
+        link.className = "chat-answer-link";
+        assistantMessage.append(link);
+        chatThread.append(assistantMessage);
+        chatThread.scrollTop = chatThread.scrollHeight;
+      });
 
       document.querySelector("#contact-form").addEventListener("submit", (event) => {
         event.preventDefault();
