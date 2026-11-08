@@ -566,10 +566,22 @@ const services = [
           </header>
 
           <div class="project-filters" role="group" aria-label="Filter projects">
-            <button type="button" class="project-filter is-active" data-project-filter="all" aria-pressed="true">All work <span>{projectCount.toString().padStart(2, "0")}</span></button>
-            <button type="button" class="project-filter" data-project-filter="storefronts" aria-pressed="false">Storefronts <span>{storefrontProjects.length.toString().padStart(2, "0")}</span></button>
-            <button type="button" class="project-filter" data-project-filter="websites" aria-pressed="false">Websites <span>{websiteProjects.length.toString().padStart(2, "0")}</span></button>
-            <button type="button" class="project-filter" data-project-filter="funnels" aria-pressed="false">Funnels <span>{funnelCount.toString().padStart(2, "0")}</span></button>
+            <button type="button" class="project-filter is-active" data-project-filter="all" aria-pressed="true">
+              <svg class="project-filter-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1.5" /><rect x="14" y="4" width="6" height="6" rx="1.5" /><rect x="4" y="14" width="6" height="6" rx="1.5" /><rect x="14" y="14" width="6" height="6" rx="1.5" /></svg>
+              <span class="project-filter-label">All work</span><span class="project-filter-count">{projectCount.toString().padStart(2, "0")}</span>
+            </button>
+            <button type="button" class="project-filter" data-project-filter="storefronts" aria-pressed="false">
+              <svg class="project-filter-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 10h16l-1.4-5H5.4L4 10Z" /><path d="M5 10v9h14v-9M9 19v-5h6v5M4 10a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0" /></svg>
+              <span class="project-filter-label">Storefronts</span><span class="project-filter-count">{storefrontProjects.length.toString().padStart(2, "0")}</span>
+            </button>
+            <button type="button" class="project-filter" data-project-filter="websites" aria-pressed="false">
+              <svg class="project-filter-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5" /><path d="M3.5 9h17M7 6.8h.01M10 6.8h.01" /></svg>
+              <span class="project-filter-label">Websites</span><span class="project-filter-count">{websiteProjects.length.toString().padStart(2, "0")}</span>
+            </button>
+            <button type="button" class="project-filter" data-project-filter="funnels" aria-pressed="false">
+              <svg class="project-filter-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h16l-6.2 7.1v5.5l-3.6 1.9v-7.4L4 5Z" /></svg>
+              <span class="project-filter-label">Funnels</span><span class="project-filter-count">{funnelCount.toString().padStart(2, "0")}</span>
+            </button>
           </div>
 
           <section class="project-group project-reveal" data-project-group="storefronts" aria-labelledby="storefronts-title">
@@ -856,7 +868,30 @@ const services = [
       }
 
       const projectFilters = [...document.querySelectorAll("[data-project-filter]")];
+      const projectFilterDock = document.querySelector(".project-filters");
       const projectGroups = [...document.querySelectorAll("[data-project-group]")];
+
+      if (projectFilterDock && !prefersReducedMotion && matchMedia("(pointer: fine)").matches) {
+        const resetDock = () => {
+          projectFilters.forEach((button) => {
+            button.style.removeProperty("--dock-scale");
+            button.style.removeProperty("--dock-lift");
+          });
+        };
+
+        projectFilterDock.addEventListener("pointermove", (event) => {
+          if (event.pointerType !== "mouse") return;
+          projectFilters.forEach((button) => {
+            const bounds = button.getBoundingClientRect();
+            const distance = Math.abs(event.clientX - (bounds.left + bounds.width / 2));
+            const proximity = Math.max(0, 1 - distance / 145);
+            const eased = proximity * proximity * (3 - 2 * proximity);
+            button.style.setProperty("--dock-scale", (1 + eased * 0.22).toFixed(3));
+            button.style.setProperty("--dock-lift", `${(eased * 9).toFixed(1)}px`);
+          });
+        });
+        projectFilterDock.addEventListener("pointerleave", resetDock);
+      }
 
       projectFilters.forEach((button) => {
         button.addEventListener("click", () => {
