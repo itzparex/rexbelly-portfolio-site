@@ -1,0 +1,911 @@
+---
+import "../styles/global.css";
+import { frameworkWorkflows } from "../data/framework-content";
+
+const initialWorkflow = frameworkWorkflows[0];
+const initialTask = initialWorkflow.tasks[0];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f6f5f1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="author" content="Rexbelly P. Zipagan" />
+    <meta
+      name="description"
+      content="Explore Rexbelly P. Zipagan’s workflows for Shopify development, business websites, and product research strategy."
+    />
+    <title>How I build with AI | Rexbelly P. Zipagan</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="framework-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="framework-shell">
+      <header class="framework-topbar">
+        <a class="framework-brand" href="/" aria-label="Rexbelly P. Zipagan — return to portfolio">
+          <span class="framework-brand-mark" aria-hidden="true">R<span>.</span></span>
+          <span>Rexbelly P. Zipagan<small>Independent workflow guide</small></span>
+        </a>
+        <div class="framework-topbar-actions">
+          <a class="framework-home-link" href="/">← <span>Back to portfolio</span></a>
+          <button class="theme-toggle theme-toggle--icon framework-theme-toggle" type="button" aria-label="Switch to dark theme">
+            <span class="theme-icon" aria-hidden="true">◐</span>
+          </button>
+        </div>
+      </header>
+
+      <main id="main">
+        <section class="framework-hero" aria-labelledby="framework-title">
+          <div class="framework-hero-copy">
+            <span class="framework-eyebrow">REXBELLY P. ZIPAGAN <i aria-hidden="true"></i> AI WORK FRAMEWORK</span>
+            <h1 id="framework-title">How I build <span>with AI</span></h1>
+            <p>Follow my workflows for building Shopify stores, creating business websites, and turning product research into copy for pages, emails, and ads.</p>
+            <a class="framework-primary-action" href="#workflows">Choose a workflow <span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="framework-hero-orbit" aria-hidden="true">
+            <span class="framework-orbit-ring framework-orbit-ring--outer"></span>
+            <span class="framework-orbit-ring framework-orbit-ring--middle"></span>
+            <span class="framework-orbit-ring framework-orbit-ring--inner"></span>
+            <span class="framework-orbit-core">AI<span>×</span>R</span>
+          </div>
+          <div class="framework-principles" aria-label="Shared workflow">
+            <span>Define</span><i aria-hidden="true">→</i>
+            <span>Work in small pieces</span><i aria-hidden="true">→</i>
+            <span>Verify</span><i aria-hidden="true">→</i>
+            <span>Approve</span>
+          </div>
+        </section>
+
+        <section class="framework-workflows" id="workflows" aria-labelledby="workflows-title">
+          <div class="framework-section-heading">
+            <div>
+              <span class="framework-eyebrow">PICK A PATH <i aria-hidden="true"></i> 01—03</span>
+              <h2 id="workflows-title">Choose a workflow</h2>
+            </div>
+            <p>Each path has its own roadmap and task prompts.</p>
+          </div>
+          <div class="framework-workflow-grid" role="group" aria-label="Workflows">
+            {frameworkWorkflows.map((workflow, index) => (
+              <button
+                class:list={["framework-workflow-card", index === 0 && "is-active"]}
+                type="button"
+                data-workflow-id={workflow.id}
+                aria-pressed={index === 0 ? "true" : "false"}
+              >
+                <span class="framework-card-number">{workflow.number} / WORKFLOW</span>
+                <span class="framework-card-title">{workflow.title}</span>
+                <span class="framework-card-copy">{workflow.cardCopy}</span>
+                <span class="framework-card-arrow" aria-hidden="true">↗</span>
+              </button>
+            ))}
+          </div>
+        </section>
+
+        <section class="framework-workspace" aria-labelledby="workspace-title">
+          <div class="framework-section-heading framework-workspace-heading">
+            <div>
+              <span class="framework-eyebrow">THE ROADMAP <i aria-hidden="true"></i> WORK, THEN HANDOFF</span>
+              <h2 id="workspace-title">{initialWorkflow.title}</h2>
+            </div>
+            <p id="workflow-intro">{initialWorkflow.intro}</p>
+          </div>
+
+          <div class="framework-workspace-grid">
+            <section class="framework-roadmap-panel" aria-label="Workflow roadmap">
+              <div class="framework-panel-heading">
+                <div><span class="framework-panel-kicker">IN ORDER</span><h3>Roadmap</h3></div>
+                <span class="framework-stage-count" id="stage-count">{initialWorkflow.stages.length} stages</span>
+              </div>
+              <ol class="framework-roadmap" id="roadmap-list">
+                {initialWorkflow.stages.map((stage, index) => (
+                  <li id={stage.anchorId} class:list={["framework-stage", index === 0 && "is-active", index === 0 && "is-expanded"]}>
+                    <span class="framework-stage-connector" aria-hidden="true"></span>
+                    <button class="framework-stage-trigger" type="button" aria-expanded={index === 0 ? "true" : "false"}>
+                      <span class="framework-stage-index">{String(index + 1).padStart(2, "0")}</span>
+                      <span class="framework-stage-title">{stage.title}</span>
+                      <span class="framework-stage-state">{index === 0 ? "ACTIVE" : "NEXT"}</span>
+                      <span class="framework-stage-chevron" aria-hidden="true">⌄</span>
+                    </button>
+                    <div class="framework-stage-content" hidden={index !== 0}>
+                      <div class="framework-stage-detail"><span>What I do</span><p>{stage.do}</p></div>
+                      <div class="framework-stage-detail"><span>What AI helps with</span><p>{stage.ai}</p></div>
+                      <div class="framework-stage-detail"><span>What I check</span><p>{stage.check}</p></div>
+                      <button class="framework-stage-use" type="button" data-task-id={stage.taskId ?? initialWorkflow.tasks[0].id}>Use this prompt <span aria-hidden="true">→</span></button>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+              <div class="framework-approval-note">
+                <span class="framework-approval-icon" aria-hidden="true">✓</span>
+                <p><strong>I decide.</strong> Goals, acceptance criteria, and when changes go live stay with me. Work involving checkout, customer data, external writes, or production access needs explicit review and approval.</p>
+              </div>
+            </section>
+
+            <section class="framework-prompt-panel" aria-labelledby="prompt-panel-title">
+              <div class="framework-panel-heading">
+                <div><span class="framework-panel-kicker">LOCAL · NO API REQUIRED</span><h3 id="prompt-panel-title">Build a task prompt</h3></div>
+                <span class="framework-prompt-mark" aria-hidden="true">✳</span>
+              </div>
+
+              <label class="framework-field-label" for="task-select">Task</label>
+              <select id="task-select" class="framework-task-select">
+                {initialWorkflow.tasks.map((task) => <option value={task.id}>{task.title}</option>)}
+              </select>
+              <p class="framework-task-summary" id="task-summary">{initialTask.summary}</p>
+
+              <div class="framework-mode-row">
+                <span class="framework-field-label">How to work</span>
+                <div class="framework-mode-controls" id="mode-controls" role="group" aria-label="Prompt mode">
+                  <button class="is-active" type="button" data-mode="plan" aria-pressed="true">Plan</button>
+                  <button type="button" data-mode="implement" aria-pressed="false">Implement</button>
+                </div>
+                <span class="framework-mode-static" id="mode-static" hidden></span>
+              </div>
+
+              <form id="task-fields" class="framework-task-fields">
+                <div id="primary-fields"></div>
+                <details class="framework-more-details" id="optional-fields" hidden>
+                  <summary>More details <span>Optional inputs</span></summary>
+                  <div id="optional-fields-list"></div>
+                </details>
+              </form>
+
+              <label class="framework-field-label" for="project-context">Project context / rules <span>Optional</span></label>
+              <textarea class="framework-context-input" id="project-context" rows="2" placeholder="Existing project path, theme conventions, or rules to preserve"></textarea>
+
+              <div class="framework-example">
+                <div><span class="framework-example-mark" aria-hidden="true">✦</span><p><strong>Try an example</strong><span id="example-description">A reusable product size-guide dialog, with theme-editor and mobile checks.</span></p></div>
+                <button id="load-example" type="button">Load example</button>
+              </div>
+
+              <div class="framework-prompt-preview">
+                <div class="framework-preview-heading"><label for="prompt-preview">Prompt preview</label><span>Generated in this page</span></div>
+                <textarea id="prompt-preview" rows="13" readonly aria-label="Generated prompt preview"></textarea>
+                <div class="framework-prompt-actions">
+                  <span class="framework-copy-status" id="copy-status" role="status" aria-live="polite"></span>
+                  <button class="framework-copy-button" id="copy-prompt" type="button">Copy prompt <span aria-hidden="true">⧉</span></button>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <section class="research-hub" id="research-hub" aria-labelledby="research-hub-title" hidden>
+            <header class="research-hub-heading">
+              <div>
+                <span class="framework-eyebrow">PRODUCT RESEARCH STRATEGY <i aria-hidden="true"></i> FIELD GUIDE & WORKSPACE</span>
+                <h2 id="research-hub-title">Research, with a clear handoff.</h2>
+                <p>Follow the DevLabs setup guide, then keep each product’s sources, decisions, and stage outputs together.</p>
+              </div>
+              <span class="research-hub-note"><span aria-hidden="true">i</span> Guide is public · private workspace setup is pending</span>
+            </header>
+
+            <div class="research-hub-tabs" role="tablist" aria-label="Product research tools">
+              <button id="research-tab-guide" class="research-hub-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="research-panel-guide" data-research-tab="guide">Setup &amp; Resources</button>
+              <button id="research-tab-workspace" class="research-hub-tab" type="button" role="tab" aria-selected="false" aria-controls="research-panel-workspace" tabindex="-1" data-research-tab="workspace">My Workspace</button>
+            </div>
+
+            <section id="research-panel-guide" class="research-hub-panel" role="tabpanel" aria-labelledby="research-tab-guide" data-research-panel="guide">
+              <div class="research-guide-layout">
+                <aside class="research-guide-index" aria-label="Setup guide contents">
+                  <span class="framework-panel-kicker">IN THIS GUIDE</span>
+                  <nav>
+                    <a href="#guide-what-you-need">What you need</a>
+                    <a href="#guide-setup-mac">Set up DevLabs on your Mac</a>
+                    <a href="#guide-prepare-product">Prepare a product</a>
+                    <a href="#guide-first-pilot">Run your first pilot</a>
+                    <a href="#guide-full-workflow">Run or resume the workflow</a>
+                    <a href="#guide-experiments">Run optional experiments</a>
+                    <a href="#guide-save-results">Retrieve, review &amp; save results</a>
+                    <a href="#guide-troubleshooting">Troubleshooting</a>
+                  </nav>
+                </aside>
+
+                <div class="research-guide-content">
+                  <div class="research-guide-intro">
+                    <span class="framework-eyebrow">LOCAL DEVLABS · MANUAL HANDOFF</span>
+                    <h3>A product folder is the source of truth.</h3>
+                    <p>DevLabs runs the skills on your Mac. This guide explains the supplied starter files and the handoffs; it does not connect to DevLabs or sync files with this site.</p>
+                  </div>
+
+                  <details class="research-guide-section" id="guide-what-you-need">
+                    <summary><span class="research-guide-number">01</span><span>What you need</span><span class="research-guide-toggle" aria-hidden="true">+</span></summary>
+                    <div class="research-guide-section-body">
+                      <p>Before starting, have these four things ready:</p>
+                      <ul>
+                        <li><strong>DevLabs</strong> installed on your Mac. Get it from <a href="https://devlabs.atmt.dev/" target="_blank" rel="noopener noreferrer">the official DevLabs site</a>.</li>
+                        <li><strong>A working local Claude Code session</strong>, signed in and responding to a normal test message.</li>
+                        <li><strong>The Rexbelly DevLabs starter package</strong>, extracted into a private folder on your Mac.</li>
+                        <li><strong>One product and source material</strong> you are authorized to use: real customer reviews, support questions, interviews, product documentation, or other relevant sources.</li>
+                      </ul>
+                      <p>The website guide is readable without the package. The private download library is not enabled until owner sign-in and private storage are configured.</p>
+                    </div>
+                  </details>
+
+                  <details class="research-guide-section" id="guide-setup-mac">
+                    <summary><span class="research-guide-number">02</span><span>Set up DevLabs on your Mac</span><span class="research-guide-toggle" aria-hidden="true">+</span></summary>
+                    <div class="research-guide-section-body">
+                      <ol>
+                        <li>Confirm DevLabs is installed. If needed, download it from <a href="https://devlabs.atmt.dev/" target="_blank" rel="noopener noreferrer">devlabs.atmt.dev</a>.</li>
+                        <li>Confirm Claude Code is installed and signed in on this Mac. Open it in VS Code and send a normal test message.</li>
+                        <li>Unzip the starter and keep the extracted <code>Rexbelly-DevLabs-Research-Starter</code> folder in a private location on your Mac.</li>
+                        <li>Open DevLabs and choose <strong>Settings → General → New project floor</strong>.</li>
+                        <li>Select the extracted <code>Rexbelly-DevLabs-Research-Starter</code> folder itself as the project root.</li>
+                        <li>Set the floor’s autonomy to <strong>Ask first</strong> in <strong>Settings → Autonomy &amp; Budgets</strong>.</li>
+                        <li>Choose <strong>Add agent → Import floor</strong>, then select <code>Rexbelly-Research-Team.floor.json</code> from the extracted folder.</li>
+                        <li>Choose <strong>Review one by one</strong> before accepting the two agent roles.</li>
+                        <li>Start <strong>Research Strategist</strong> with the starter folder as its project folder.</li>
+                        <li>Start <strong>Evidence Reviewer</strong> with the same project folder. Ramon is DevLabs’ existing manager.</li>
+                      </ol>
+                      <div class="research-guide-callout"><strong>If “Import floor” is missing:</strong> choose <strong>Add agent</strong>, create the two roles manually, select <strong>Claude Code</strong> for each, and paste the matching role from <code>AGENT-ROLES.md</code> into its briefing.</div>
+                      <p>The nine project skills live at <code>.claude/skills/</code> under the starter project root. Claude Code loads project skills from that folder. macOS Finder hides dot-folders; press <kbd>Command</kbd> + <kbd>Shift</kbd> + <kbd>Period</kbd> to show them. If a personal skill with the same name may take precedence, ask the strategist to report the project folder and exact skill paths it can access before running the pilot.</p>
+                      <a class="research-guide-stage-link" href="#guide-full-workflow">Next: prepare a product and run a pilot <span aria-hidden="true">↓</span></a>
+                    </div>
+                  </details>
+
+                  <details class="research-guide-section" id="guide-prepare-product">
+                    <summary><span class="research-guide-number">03</span><span>Prepare a product</span><span class="research-guide-toggle" aria-hidden="true">+</span></summary>
+                    <div class="research-guide-section-body">
+                      <ol>
+                        <li>Duplicate <code>products/PRODUCT-TEMPLATE/</code> and rename the copy to a simple folder name, for example <code>rideready-moto-pants</code>.</li>
+                        <li>Fill in <code>PRODUCT-BRIEF.md</code>: product name/category, description or product URL, verified features, market and language, intended channel, competitors/positioning, audience, and the decision the research should inform.</li>
+                        <li>Put source files you are authorized to use in <code>sources/</code>. Add each URL or filename, market/audience, what it contains, and any limits to <code>sources/SOURCE-INDEX.md</code>. Remove customer identifiers the research does not need.</li>
+                        <li>Put earlier approved research, a Booklet, offer, or proof in <code>approved/</code>. In the brief, list exact filenames, market, version, and approval status. Leave this list blank when starting from scratch.</li>
+                        <li>Complete the commercial details before offer and proof work: approved price/range and currency, margin/inventory constraints, confirmed shipping/returns/guarantee/bonuses/urgency, proof assets, and owner decisions still open.</li>
+                      </ol>
+                      <div class="research-template-preview">
+                        <div><span class="framework-panel-kicker">BLANK TEMPLATE · PRODUCT-BRIEF.MD</span><span>Fill in before the pilot</span></div>
+                        <pre>Product name and category —
+Product page URL or description —
+Verified features and specifications —
+Primary market and language —
+Intended channel and deliverable —
+Customer research sources —
+Known competitors and current positioning —
+Known audience —
+Existing approved documents — filename, version, market
+Decision this research should help me make —</pre>
+                      </div>
+                      <div class="research-template-preview">
+                        <div><span class="framework-panel-kicker">BLANK TEMPLATE · SOURCE-INDEX.MD</span><span>One source per row</span></div>
+                        <pre>| Source ID | File or URL | Market or audience | What it contains | Limitations or usage notes |
+| S01 |  |  |  |  |</pre>
+                      </div>
+                      <p>The full original blank templates remain in the starter ZIP for private download after secure owner storage is configured; they are not served from the public site.</p>
+                    </div>
+                  </details>
+
+                  <details class="research-guide-section" id="guide-first-pilot">
+                    <summary><span class="research-guide-number">04</span><span>Run your first pilot</span><span class="research-guide-toggle" aria-hidden="true">+</span></summary>
+                    <div class="research-guide-section-body">
+                      <ol>
+                        <li>Open <code>RAMON-PILOT.txt</code> and replace <code>[PRODUCT-FOLDER]</code> with the product folder name.</li>
+                        <li>In DevLabs, open Ramon’s <strong>Floor</strong> tab. Paste the prompt into <strong>Dispatch via Ramon</strong>, then press <strong>Dispatch</strong>.</li>
+                        <li>Ramon first confirms the project folder, product brief and source index, and the project skill paths for Customer Deep Dive and Marketer’s Booklet.</li>
+                      </ol>
+                      <div class="research-guide-pilot-prompt">
+                        <div class="research-guide-pilot-heading"><div><span class="framework-panel-kicker">COPYABLE · RAMON PILOT</span><strong>Stages 01 and 02 only</strong></div><button id="copy-pilot-prompt" class="framework-copy-button" type="button">Copy pilot prompt <span aria-hidden="true">⧉</span></button></div>
+                        <textarea id="pilot-prompt-template" rows="9" readonly aria-label="Ramon pilot prompt">Ramon, run a pilot for products/[PRODUCT-FOLDER]. Use the Research Strategist and Evidence Reviewer on this DevLabs floor.
+
+First ask the strategist to confirm the workspace, locate the product brief and source index, and identify the project skill files for Customer Deep Dive and Marketer's Booklet. Then follow WORKFLOW.md. Run 01 Customer Deep Dive and 02 Marketer's Booklet only, in order. Reuse matching approved inputs. When a required input is missing, ask for that input.
+
+Save the two draft outputs in this product's outputs folder. Ask the reviewer to check their evidence labels, source references, and handoff from the research into the Booklet. Deliver the files, the review findings, and the decisions you need from me. End the pilot at the Booklet review checkpoint.</textarea>
+                        <span id="pilot-copy-status" class="framework-copy-status" role="status" aria-live="polite"></span>
+                      </div>
+                      <p>The pilot stops after the Deep Dive and Booklet so you can review customer evidence, audience/angle choices, and whether research carried into the Booklet accurately. Approve the Booklet before asking Ramon to continue with stage 04. Review offer terms before stages 06 and 07 rely on them.</p>
+                      <a class="research-guide-stage-link" href="#stage-ai-customer-deep-dive">Open stage 01 in the roadmap <span aria-hidden="true">↗</span></a>
+                    </div>
+                  </details>
+
+                  <details class="research-guide-section" id="guide-full-workflow">
+                    <summary><span class="research-guide-number">05</span><span>Run or resume the full workflow</span><span class="research-guide-toggle" aria-hidden="true">+</span></summary>
+                    <div class="research-guide-section-body">
+                      <p>Read the selected product’s brief and source index first. Reuse an approved document only when its product, market, offer, and evidence match. Follow the numbered core stages; each stage reads the brief and named upstream outputs.</p>
+                      <div class="research-stage-table-wrap">
+                        <table class="research-stage-table">
+                          <thead><tr><th>Stage</th><th>Input</th><th>Output / handoff</th><th>Review</th></tr></thead>
+                          <tbody>
+                            <tr><th><a href="#stage-ai-customer-deep-dive">01 · Customer Deep Dive</a><small>customer-deep-dive-research</small></th><td>Verified product facts, market, and real customer sources.</td><td>Sourced insights, customer language, objections, angles, and evidence gaps → save as <code>outputs/01-deep-dive.md</code>.</td><td>Trace quotes to the source index; label interpretations and hypotheses.</td></tr>
+                            <tr><th><a href="#stage-marketers-booklet">02 · Marketer’s Booklet</a><small>marketers-booklet</small></th><td>Deep Dive or equivalent research, positioning, competitors, and intended channel.</td><td>Ranked audiences, primary angle, objections, and test priorities → <code>outputs/02-marketers-booklet.md</code>.</td><td>Pilot checkpoint: review the audience and angle before approving.</td></tr>
+                            <tr><th><a href="#stage-offer-builder">04 · Offer Strategy</a><small>offer-builder</small></th><td>Research and Booklet, current offer, prices/ranges, margins, inventory, guarantee, and constraints.</td><td>Draft offer, confirmed terms, and test proposals → <code>outputs/04-offer-strategy.md</code>.</td><td>Offer terms are proposals until you confirm them. Approve commercial terms before continuing.</td></tr>
+                            <tr><th><a href="#stage-proof-and-belief">06 · Proof &amp; Belief</a><small>proof-belief-builder</small></th><td>Research, Booklet, approved offer, and product specs/reviews/demonstrations.</td><td>Claim-to-proof map, ranked buyer doubts, and missing assets → <code>outputs/06-proof-belief.md</code>.</td><td>Keep each claim tied to actual approved evidence.</td></tr>
+                            <tr><th><a href="#stage-conversion-strategy">07 · Conversion Strategy</a><small>conversion-strategy-builder</small></th><td>Research, Booklet, approved offer, proof map, and intended page or acquisition route.</td><td>Sales argument sequence, proof placement, CTA timing, and page handoff → <code>outputs/07-conversion-strategy.md</code>.</td><td>Review the offer and evidence before copy treats them as commitments.</td></tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <p>Create <code>outputs/</code> as needed. Keep prior drafts by adding a version suffix, note source files and versions near the top of each output, and ask Evidence Reviewer to report checked items, severity-ranked findings, and unresolved gaps. Reuse matching approved outputs when resuming; list missing inputs before running a dependent stage. After each stage, review the handoff and explicitly approve what moves forward.</p>
+                      <a class="research-guide-stage-link" href="#stage-offer-builder">Jump to Offer Builder in the roadmap <span aria-hidden="true">↗</span></a>
+                    </div>
+                  </details>
+
+                  <details class="research-guide-section" id="guide-experiments">
+                    <summary><span class="research-guide-number">06</span><span>Run optional experiments</span><span class="research-guide-toggle" aria-hidden="true">+</span></summary>
+                    <div class="research-guide-section-body">
+                      <p>Run these only on request. Keep experiments separate from approved strategy and record which approved inputs they used.</p>
+                      <ul>
+                        <li><strong>03 · Creative Vault</strong> (<code>creative-vault-builder</code>): use research and the Booklet, optionally with offer context, to explore audiences, angles, and creative tests.</li>
+                        <li><strong>05 · Offer Vault</strong> (<code>05-offer-vault-update</code>): use research, the Booklet, approved offer, and optionally Creative Vault to propose offer presentation tests or changes for approval.</li>
+                        <li><strong>08 · Conversion Vault</strong> (<code>conversion-vault-builder</code>): use core Conversion Strategy, Creative Vault, approved offer, and proof map to explore routes and tests.</li>
+                      </ul>
+                      <div class="research-guide-callout"><strong>Combined conversion is an alternative path.</strong> <code>conversion-architecture-builder</code> combines core conversion and supported experiments in one deliverable. Use it instead of running stages 07 and 08 for the same job—not as an extra duplicate pass.</div>
+                    </div>
+                  </details>
+
+                  <details class="research-guide-section" id="guide-save-results">
+                    <summary><span class="research-guide-number">07</span><span>Retrieve, review, and save the results</span><span class="research-guide-toggle" aria-hidden="true">+</span></summary>
+                    <div class="research-guide-section-body">
+                      <ol>
+                        <li>Ask Ramon for completed, skipped, and blocked stages; the output file paths; reviewer findings; and decisions needed.</li>
+                        <li>In DevLabs, collect the files saved under the selected local product’s <code>outputs/</code> folder. Keep source files, approved inputs, drafts, and final deliverables in their separate folders.</li>
+                        <li>Before dispatching a later run, download any referenced site-uploaded file to the matching local product folder. A site upload and a local DevLabs file are separate copies; the website does not sync them.</li>
+                        <li>Compare the output’s product, market, offer version, and source references with the brief. Keep older versions, and label an upload as a draft until you explicitly approve it.</li>
+                        <li>When owner-only workspace storage is configured, create/open the matching product, attach each file to its stage, record its version and market, and set its status to <strong>Not started</strong>, <strong>Draft</strong>, <strong>Needs review</strong>, or <strong>Approved</strong>. Download a product export for your local project copy.</li>
+                      </ol>
+                      <p>Step 5 is a planned private-workspace flow and is not active in this static preview. Until secure storage exists, save results in your private local DevLabs product folder.</p>
+                    </div>
+                  </details>
+
+                  <details class="research-guide-section" id="guide-troubleshooting">
+                    <summary><span class="research-guide-number">08</span><span>Troubleshooting</span><span class="research-guide-toggle" aria-hidden="true">+</span></summary>
+                    <div class="research-guide-section-body">
+                      <ul>
+                        <li><strong>Wrong project folder:</strong> stop before dispatch. Confirm the floor root is the extracted <code>Rexbelly-DevLabs-Research-Starter</code> folder and the strategist’s selected folder is the product workspace. Ask it to report both paths.</li>
+                        <li><strong>Skills missing from the session:</strong> confirm <code>.claude/skills/</code> exists under the actual project root, show hidden files in Finder with <kbd>Command</kbd> + <kbd>Shift</kbd> + <kbd>Period</kbd>, and ask which skill paths Claude Code can load. Check duplicate personal skills if results differ.</li>
+                        <li><strong>Source material missing:</strong> check <code>products/&lt;product&gt;/sources/</code> and <code>SOURCE-INDEX.md</code>. Ask the strategist to identify what input is missing; do not ask it to invent research or quotes.</li>
+                        <li><strong>Market or offer version mismatch:</strong> stop the dependent stage. Compare product, market, currency, version, and approval status in the brief and upstream documents. Re-run or request approval instead of mixing versions.</li>
+                        <li><strong>An agent is waiting:</strong> open the active DevLabs floor/session and check its agent activity or conversation for a pending question. Answer missing-input or approval questions there, then resume; this portfolio does not monitor DevLabs activity.</li>
+                      </ul>
+                    </div>
+                  </details>
+
+                  <div class="research-references">
+                    <span class="framework-panel-kicker">REFERENCE DOCS</span>
+                    <a href="https://github.com/jeffreycayao/Dev-Labs/blob/main/docs/USER_GUIDE.md" target="_blank" rel="noopener noreferrer">DevLabs User Guide ↗</a>
+                    <a href="https://github.com/jeffreycayao/Dev-Labs/blob/main/.documentations/FLOORS.md" target="_blank" rel="noopener noreferrer">DevLabs floor import guide ↗</a>
+                    <a href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener noreferrer">Claude Code project skills ↗</a>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="research-panel-workspace" class="research-hub-panel" role="tabpanel" aria-labelledby="research-tab-workspace" data-research-panel="workspace" hidden>
+              <div class="workspace-setup-alert" role="status">
+                <span class="workspace-alert-icon" aria-hidden="true">!</span>
+                <div><strong>Owner sign-in and private storage are not configured.</strong><p>This Astro site currently builds static pages. There is no authentication, private database, or private file bucket, so real product records, uploads, downloads, exports, and DevLabs handoffs are disabled. The preview below is sample data only—it is not saved and clears when you leave or refresh.</p></div>
+              </div>
+
+              <div class="workspace-demo-layout">
+                <section class="workspace-products-panel" aria-labelledby="workspace-products-title">
+                  <div class="framework-panel-heading"><div><span class="framework-panel-kicker">ILLUSTRATIVE ONLY</span><h3 id="workspace-products-title">Sample products</h3></div><span class="workspace-sample-badge">NOT SAVED</span></div>
+                  <div class="workspace-sample-products" role="group" aria-label="Example products">
+                    <button class="workspace-sample-product is-active" type="button" data-sample-product="garden-shoes" aria-pressed="true"><span class="workspace-product-monogram">GS</span><span><strong>Garden shoes</strong><small>Sample · US / English · Product page</small></span><span aria-hidden="true">↗</span></button>
+                    <button class="workspace-sample-product" type="button" data-sample-product="garden-cart" aria-pressed="false"><span class="workspace-product-monogram workspace-product-monogram--alt">GC</span><span><strong>Portable garden cart</strong><small>Sample · CA / English · Email</small></span><span aria-hidden="true">↗</span></button>
+                  </div>
+                  <div class="workspace-resource-library">
+                    <div class="framework-panel-heading"><div><span class="framework-panel-kicker">OWNER-ONLY FILES</span><h3>Resource Library</h3></div><span class="workspace-lock" aria-label="Locked until authentication and private storage are configured">⌑</span></div>
+                    <p class="workspace-resource-note">The original files remain in <code>local-reference/</code>, ignored by Git and outside public assets. Downloads and owner replacements are intentionally unavailable in this preview; secure storage should retain resource versions when the owner uploads an update.</p>
+                    <ul class="workspace-resource-list">
+                      <li><span><strong>Complete starter workspace</strong><small>Archive · DevLabs floor, nine skills, roles, prompts, and reusable product folder.</small></span><button type="button" disabled aria-disabled="true">Private setup needed</button></li>
+                      <li><span><strong>Setup and roles</strong><small>Setup guide · Install the floor, understand agent roles, and follow core-stage handoffs. <code>START-HERE.md</code>, <code>AGENT-ROLES.md</code>, <code>Rexbelly-Research-Team.floor.json</code>, <code>WORKFLOW.md</code>.</small></span><button type="button" disabled aria-disabled="true">Private setup needed</button></li>
+                      <li><span><strong>Prompts</strong><small>Prompt templates · Dispatch the pilot to Ramon or connect the local research workspace to the portfolio. <code>RAMON-PILOT.txt</code>, <code>WEBSITE-CLAUDE-PROMPT.md</code>.</small></span><button type="button" disabled aria-disabled="true">Private setup needed</button></li>
+                      <li><span><strong>Reusable product templates</strong><small>Product templates · Capture verified product details, source references, and approved inputs. <code>PRODUCT-BRIEF.md</code>, <code>SOURCE-INDEX.md</code>, approved-input README.</small></span><button type="button" disabled aria-disabled="true">Private setup needed</button></li>
+                      <li><span><strong>Nine project skill folders</strong><small>Agent skill packages · Research, Booklet, offer, proof, creative, and conversion skills are included in the complete starter ZIP; no separate skill ZIPs were supplied.</small></span><button type="button" disabled aria-disabled="true">Private setup needed</button></li>
+                    </ul>
+                  </div>
+                </section>
+
+                <section class="workspace-product-detail" aria-labelledby="sample-product-title">
+                  <div class="framework-panel-heading"><div><span class="framework-panel-kicker">SAMPLE RECORD · NOT A REAL PRODUCT</span><h3 id="sample-product-title">Garden shoes</h3></div><span class="workspace-sample-badge">EXAMPLE</span></div>
+                  <p class="workspace-sample-disclaimer">Illustrative UI only. Replace with owner data after secure setup; do not enter private product or customer information here.</p>
+                  <dl class="workspace-brief-fields" id="sample-product-brief">
+                    <div><dt>Brand</dt><dd>Example garden goods</dd></div>
+                    <div><dt>Description / URL</dt><dd>Illustrative gardening footwear product</dd></div>
+                    <div><dt>Market &amp; language</dt><dd>United States · English</dd></div>
+                    <div><dt>Intended channel</dt><dd>Product page</dd></div>
+                    <div><dt>Offer &amp; constraints</dt><dd>Not supplied in this example; terms need owner confirmation.</dd></div>
+                    <div><dt>Available proof</dt><dd>Example only; no customer evidence attached.</dd></div>
+                    <div><dt>Next decision</dt><dd>Which verified product benefits should the research investigate?</dd></div>
+                    <div><dt>Created</dt><dd>Sample timestamp · no record is saved</dd></div>
+                    <div><dt>Last updated</dt><dd>Sample timestamp · no record is saved</dd></div>
+                  </dl>
+
+                  <div class="workspace-sources">
+                    <div class="framework-panel-heading"><div><span class="framework-panel-kicker">SOURCE INDEX</span><h3>Sources</h3></div><span class="workspace-file-count" id="sample-source-count">1 example</span></div>
+                    <div id="sample-source-list"><div class="workspace-file-row"><span class="workspace-file-kind">S01</span><span><strong>Example review notes</strong><small>Illustrative source only · no real customer data</small></span></div></div>
+                  </div>
+
+                  <div class="workspace-stage-statuses">
+                    <div class="framework-panel-heading"><div><span class="framework-panel-kicker">OWNER-RECORDED STATUS</span><h3>Core stages</h3></div><span class="workspace-sample-badge">SAMPLE</span></div>
+                    <ol id="sample-stage-list">
+                      <li><a href="#stage-ai-customer-deep-dive">01 · Customer Deep Dive</a><span class="workspace-stage-status status--draft">Draft</span><small>01-deep-dive-v1.md · Sample</small></li>
+                      <li><a href="#stage-marketers-booklet">02 · Marketer’s Booklet</a><span class="workspace-stage-status status--review">Needs review</span><small>02-marketers-booklet-v1.md · Sample</small></li>
+                      <li><a href="#stage-offer-builder">04 · Offer Strategy</a><span class="workspace-stage-status status--not-started">Not started</span><small>No sample file</small></li>
+                      <li><a href="#stage-proof-and-belief">06 · Proof &amp; Belief</a><span class="workspace-stage-status status--not-started">Not started</span><small>No sample file</small></li>
+                      <li><a href="#stage-conversion-strategy">07 · Conversion Strategy</a><span class="workspace-stage-status status--not-started">Not started</span><small>No sample file</small></li>
+                    </ol>
+                    <p class="workspace-approved-note">An uploaded file would start as a draft. Approval must be an explicit owner action, and older versions remain available.</p>
+                  </div>
+                  <div class="workspace-actions">
+                    <button class="framework-stage-use" type="button" disabled aria-disabled="true">Copy brief for DevLabs <span aria-hidden="true">→</span></button>
+                    <button class="framework-stage-use" type="button" disabled aria-disabled="true">Export sample product <span aria-hidden="true">↓</span></button>
+                    <span>Activate after private storage and owner authentication are configured.</span>
+                  </div>
+                </section>
+              </div>
+
+              <section class="workspace-handoff" aria-labelledby="workspace-handoff-title">
+                <div class="framework-panel-heading"><div><span class="framework-panel-kicker">MANUAL HANDOFF · NO LIVE SYNC</span><h3 id="workspace-handoff-title">Save brief → Copy to Ramon → Run in DevLabs → Upload results here</h3></div><span class="workspace-sample-badge">PLANNED</span></div>
+                <p>When owner storage is configured, the handoff will use the selected saved product, offer <strong>Run full core workflow</strong>, <strong>Resume from a stage</strong>, and <strong>Run one stage</strong>, and list only the approved input names, markets, and versions selected for that run. Site uploads and local DevLabs files are separate copies; download referenced inputs into the local product folder before dispatching. Ramon runs the workflow locally, and the owner uploads reviewed results back here.</p>
+              </section>
+
+              <div class="workspace-setup-requirements">
+                <div class="framework-panel-heading"><div><span class="framework-panel-kicker">REQUIRED BEFORE PRIVATE DATA</span><h3>What needs to be configured</h3></div><span class="workspace-sample-badge">NOT SET UP</span></div>
+                <ol>
+                  <li><strong>Supabase project:</strong> create a project with Auth, Postgres, and Storage enabled. Configure owner-only email sign-in (for example, magic-link sign-in restricted to your email) and approved redirect URLs for localhost and the production domain.</li>
+                  <li><strong>Database and row-level security:</strong> add product, source, stage-document/version, and resource metadata tables with an owner ID. Enable RLS and policies on every private table so only the signed-in owner can read or mutate their rows.</li>
+                  <li><strong>Private object storage:</strong> create a non-public bucket such as <code>framework-private</code>. Scope paths to the owner and product, reject unauthorized uploads/downloads/replacements/exports, validate size and allowed types, and issue short-lived signed download links.</li>
+                  <li><strong>Server-side Astro on Vercel:</strong> replace static-only output with the Astro Vercel server adapter and authenticated server endpoints/middleware. Check the owner session on every private record and file operation. Keep file bytes outside <code>public/</code> and the client bundle.</li>
+                  <li><strong>Environment secrets:</strong> add <code>PUBLIC_SUPABASE_URL</code> and <code>PUBLIC_SUPABASE_ANON_KEY</code> for client initialization under RLS, plus <code>SUPABASE_SERVICE_ROLE_KEY</code> only if server code requires elevated access. Store secrets in local <code>.env</code> (ignored by Git) and Vercel project environment settings; never prefix the service key with <code>PUBLIC_</code>/<code>VITE_</code> or expose it in browser code.</li>
+                  <li><strong>Test before use:</strong> verify signed-out direct requests fail, owner requests can manage products/resources, two products and versions stay isolated, drafts do not replace approved files, uploads/downloads/exports work, and records persist across refresh, sign-out, and another device.</li>
+                </ol>
+                <p>Until those pieces are implemented and tested, the site offers only this static guide and clearly labeled sample data. No authentication or storage credentials have been added.</p>
+              </div>
+            </section>
+          </section>
+        </section>
+
+        <footer class="framework-footer">
+          <div class="framework-footer-copy">
+            <span class="framework-eyebrow">CREDITS & INSPIRATION</span>
+            <p>The AI-assisted build-and-review workflow was inspired by <a href="https://brewedops.cloud/framework/" target="_blank" rel="noopener noreferrer">Kenneth’s AI Agentic Framework at BrewedOps</a>. The interactive roadmap format was inspired by <a href="https://roadmap.sh/product-design" target="_blank" rel="noopener noreferrer">roadmap.sh</a>.</p>
+          </div>
+          <a class="framework-footer-home" href="/">Rexbelly P. Zipagan <span aria-hidden="true">↗</span></a>
+        </footer>
+      </main>
+    </div>
+
+    <script>
+      import { frameworkWorkflows } from "../data/framework-content";
+
+      const root = document.documentElement;
+      const workflowCards = [...document.querySelectorAll("[data-workflow-id]")];
+      const roadmapList = document.querySelector("#roadmap-list");
+      const researchHub = document.querySelector("#research-hub");
+      const researchTabs = [...document.querySelectorAll("[data-research-tab]")];
+      const researchPanels = [...document.querySelectorAll("[data-research-panel]")];
+      const workspaceTitle = document.querySelector("#workspace-title");
+      const workflowIntro = document.querySelector("#workflow-intro");
+      const stageCount = document.querySelector("#stage-count");
+      const taskSelect = document.querySelector("#task-select");
+      const taskSummary = document.querySelector("#task-summary");
+      const primaryFields = document.querySelector("#primary-fields");
+      const optionalFields = document.querySelector("#optional-fields");
+      const optionalFieldsList = document.querySelector("#optional-fields-list");
+      const modeControls = document.querySelector("#mode-controls");
+      const modeStatic = document.querySelector("#mode-static");
+      const promptPreview = document.querySelector("#prompt-preview");
+      const copyStatus = document.querySelector("#copy-status");
+      const projectContext = document.querySelector("#project-context");
+      const exampleDescription = document.querySelector("#example-description");
+      const copyButton = document.querySelector("#copy-prompt");
+      const pilotPrompt = document.querySelector("#pilot-prompt-template");
+      const pilotCopyStatus = document.querySelector("#pilot-copy-status");
+      const pageState = new Map();
+      let activeWorkflow = frameworkWorkflows[0];
+      let activeTask = activeWorkflow.tasks[0];
+      let activeStage = 0;
+      let activeMode = "plan";
+      let copyStatusTimer;
+
+      const getTaskKey = (workflow, task) => `${workflow.id}:${task.id}`;
+      const getTaskState = (workflow, task) => pageState.get(getTaskKey(workflow, task)) ?? {};
+      const setTaskState = (workflow, task, values) => pageState.set(getTaskKey(workflow, task), values);
+
+      const updatePrompt = () => {
+        const values = getTaskState(activeWorkflow, activeTask);
+        const missing = activeTask.fields
+          .filter((field) => !field.optional && !values[field.key]?.trim())
+          .map((field) => `[Add ${field.label}]`);
+        const inputs = activeTask.fields
+          .filter((field) => values[field.key]?.trim())
+          .map((field) => `${field.label} — ${values[field.key].trim()}`);
+        const context = projectContext.value.trim();
+        const mode = activeTask.mode === "build"
+          ? activeMode
+          : activeTask.mode === "read-only"
+            ? "Read-only audit"
+            : activeTask.mode === "research"
+              ? "Research"
+              : "Draft";
+
+        promptPreview.value = [
+          `Help me with ${activeWorkflow.title} → ${activeTask.title}. Work in ${mode} mode.`,
+          "",
+          `Goal — ${activeTask.summary}`,
+          "",
+          `Inputs — ${inputs.length ? inputs.join("\n") : "No task details supplied yet."}${missing.length ? `\nMissing required inputs — ${missing.join(", ")}` : ""}`,
+          context ? `\nProject context — ${context}` : "",
+          `\nConstraints — ${activeTask.constraints} Goals, done criteria, and release approval stay with me. Require explicit approval before changes involving checkout, customer data, external writes, or production access.${context ? ` Project context and rules: ${context}` : ""}`,
+          `\nDeliver — ${activeTask.deliver}`,
+          `\nVerify — ${activeTask.verify} Use a focused accuracy-and-tone check for copy-only changes; verify relevant behavior and responsive states for feature changes. Report checks that could not run.`,
+          missing.length ? `\nIf a missing required input blocks meaningful work, ask only for that input before proceeding. Do not guess.` : "",
+        ].filter(Boolean).join("\n");
+        copyStatus.textContent = "";
+      };
+
+      const renderRoadmap = () => {
+        roadmapList.replaceChildren();
+        activeWorkflow.stages.forEach((stage, index) => {
+          const item = document.createElement("li");
+          item.className = `framework-stage${index === activeStage ? " is-active is-expanded" : ""}`;
+          if (stage.anchorId) item.id = stage.anchorId;
+          const connector = document.createElement("span");
+          connector.className = "framework-stage-connector";
+          connector.setAttribute("aria-hidden", "true");
+          const trigger = document.createElement("button");
+          trigger.className = "framework-stage-trigger";
+          trigger.type = "button";
+          trigger.setAttribute("aria-expanded", String(index === activeStage));
+          trigger.innerHTML = `<span class="framework-stage-index">${String(index + 1).padStart(2, "0")}</span><span class="framework-stage-title"></span><span class="framework-stage-state"></span><span class="framework-stage-chevron" aria-hidden="true">⌄</span>`;
+          trigger.querySelector(".framework-stage-title").textContent = stage.title;
+          trigger.querySelector(".framework-stage-state").textContent = index === activeStage ? "ACTIVE" : "NEXT";
+          trigger.addEventListener("click", () => {
+            activeStage = index;
+            renderRoadmap();
+          });
+          const content = document.createElement("div");
+          content.className = "framework-stage-content";
+          content.hidden = index !== activeStage;
+          for (const [label, text] of [
+            ["What I do", stage.do],
+            ["What AI helps with", stage.ai],
+            ["What I check", stage.check],
+          ]) {
+            const detail = document.createElement("div");
+            detail.className = "framework-stage-detail";
+            const title = document.createElement("span");
+            title.textContent = label;
+            const paragraph = document.createElement("p");
+            paragraph.textContent = text;
+            detail.append(title, paragraph);
+            content.append(detail);
+          }
+          const useButton = document.createElement("button");
+          useButton.className = "framework-stage-use";
+          useButton.type = "button";
+          useButton.dataset.taskId = stage.taskId ?? activeWorkflow.tasks[0].id;
+          useButton.innerHTML = "Use this prompt <span aria-hidden=\"true\">→</span>";
+          content.append(useButton);
+          item.append(connector, trigger, content);
+          roadmapList.append(item);
+        });
+      };
+
+      const makeField = (field, values) => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "framework-form-field";
+        const label = document.createElement("label");
+        label.className = "framework-field-label";
+        label.textContent = field.label;
+        const input = document.createElement("textarea");
+        input.rows = 2;
+        input.name = field.key;
+        input.placeholder = field.placeholder;
+        input.value = values[field.key] ?? "";
+        input.required = !field.optional;
+        input.setAttribute("aria-label", field.label);
+        if (!field.optional) {
+          const requiredMark = document.createElement("span");
+          requiredMark.textContent = "Required";
+          label.append(requiredMark);
+        } else {
+          const optionalMark = document.createElement("span");
+          optionalMark.textContent = "Optional";
+          label.append(optionalMark);
+        }
+        wrapper.append(label, input);
+        input.addEventListener("input", () => {
+          setTaskState(activeWorkflow, activeTask, {
+            ...getTaskState(activeWorkflow, activeTask),
+            [field.key]: input.value,
+          });
+          updatePrompt();
+        });
+        return wrapper;
+      };
+
+      const renderTask = () => {
+        activeTask = activeWorkflow.tasks.find((task) => task.id === taskSelect.value) ?? activeWorkflow.tasks[0];
+        taskSelect.value = activeTask.id;
+        taskSummary.textContent = activeTask.summary;
+        const values = getTaskState(activeWorkflow, activeTask);
+        primaryFields.replaceChildren();
+        optionalFieldsList.replaceChildren();
+        optionalFields.hidden = !activeTask.fields.some((field) => field.optional);
+        for (const field of activeTask.fields) {
+          (field.optional ? optionalFieldsList : primaryFields).append(makeField(field, values));
+        }
+        const isBuild = activeTask.mode === "build";
+        modeControls.hidden = !isBuild;
+        modeStatic.hidden = isBuild;
+        modeStatic.textContent = activeTask.mode === "read-only"
+          ? "Read-only"
+          : activeTask.mode === "research"
+            ? "Research"
+            : "Draft";
+        activeMode = "plan";
+        modeControls.querySelectorAll("[data-mode]").forEach((button) => {
+          button.classList.toggle("is-active", button.dataset.mode === activeMode);
+          button.setAttribute("aria-pressed", String(button.dataset.mode === activeMode));
+        });
+        exampleDescription.textContent = activeTask.id === activeWorkflow.exampleTaskId
+          ? activeWorkflow.exampleDescription
+          : `${activeTask.title} example · ${Object.keys(activeTask.example).length} inputs ready to load.`;
+        updatePrompt();
+      };
+
+      const selectTask = (taskId) => {
+        if (!activeWorkflow.tasks.some((task) => task.id === taskId)) return;
+        taskSelect.value = taskId;
+        renderTask();
+        document.querySelector("#prompt-panel-title").scrollIntoView({ behavior: "smooth", block: "nearest" });
+      };
+
+      const selectWorkflow = (workflowId) => {
+        const nextWorkflow = frameworkWorkflows.find((workflow) => workflow.id === workflowId);
+        if (!nextWorkflow) return;
+        activeWorkflow = nextWorkflow;
+        activeStage = 0;
+        researchHub.hidden = workflowId !== "research";
+        workflowCards.forEach((card) => {
+          const selected = card.dataset.workflowId === workflowId;
+          card.classList.toggle("is-active", selected);
+          card.setAttribute("aria-pressed", String(selected));
+        });
+        workspaceTitle.textContent = activeWorkflow.title;
+        workflowIntro.textContent = activeWorkflow.intro;
+        stageCount.textContent = `${activeWorkflow.stages.length} stages`;
+        taskSelect.replaceChildren(...activeWorkflow.tasks.map((task) => {
+          const option = document.createElement("option");
+          option.value = task.id;
+          option.textContent = task.title;
+          return option;
+        }));
+        taskSelect.value = activeWorkflow.exampleTaskId;
+        renderRoadmap();
+        renderTask();
+      };
+
+      const selectResearchTab = (tabName, focus = false) => {
+        researchTabs.forEach((tab) => {
+          const selected = tab.dataset.researchTab === tabName;
+          tab.classList.toggle("is-active", selected);
+          tab.setAttribute("aria-selected", String(selected));
+          tab.tabIndex = selected ? 0 : -1;
+          if (selected && focus) tab.focus();
+        });
+        researchPanels.forEach((panel) => {
+          panel.hidden = panel.dataset.researchPanel !== tabName;
+        });
+      };
+
+      const sampleProducts = {
+        "garden-shoes": {
+          title: "Garden shoes",
+          brand: "Example garden goods",
+          description: "Illustrative gardening footwear product",
+          market: "United States · English",
+          channel: "Product page",
+          offer: "Not supplied in this example; terms need owner confirmation.",
+          proof: "Example only; no customer evidence attached.",
+          decision: "Which verified product benefits should the research investigate?",
+          sources: [{ id: "S01", title: "Example review notes", note: "Illustrative source only · no real customer data" }],
+          stages: [
+            ["01 · Customer Deep Dive", "Draft", "01-deep-dive-v1.md · Sample"],
+            ["02 · Marketer’s Booklet", "Needs review", "02-marketers-booklet-v1.md · Sample"],
+            ["04 · Offer Strategy", "Not started", "No sample file"],
+            ["06 · Proof & Belief", "Not started", "No sample file"],
+            ["07 · Conversion Strategy", "Not started", "No sample file"],
+          ],
+        },
+        "garden-cart": {
+          title: "Portable garden cart",
+          brand: "Illustrative outdoor tools",
+          description: "Sample product record for a portable garden cart",
+          market: "Canada · English",
+          channel: "Email",
+          offer: "Example only; no approved offer or commercial terms.",
+          proof: "No evidence attached in this sample.",
+          decision: "Which sourced customer problem should the next email address?",
+          sources: [{ id: "S01", title: "Example product notes", note: "Illustrative source only · no real customer data" }],
+          stages: [
+            ["01 · Customer Deep Dive", "Approved", "01-deep-dive-v1-CA.md · Canada · v1 · Approved sample"],
+            ["02 · Marketer’s Booklet", "Draft", "v1 retained · 02-marketers-booklet-v2-CA.md · Canada · v2 · Draft sample"],
+            ["04 · Offer Strategy", "Not started", "No sample file"],
+            ["06 · Proof & Belief", "Not started", "No sample file"],
+            ["07 · Conversion Strategy", "Not started", "No sample file"],
+          ],
+        },
+      };
+
+      const sampleStatusClass = (status) => ({
+        "Not started": "status--not-started",
+        Draft: "status--draft",
+        "Needs review": "status--review",
+        Approved: "status--approved",
+      })[status] ?? "status--not-started";
+
+      const renderSampleProduct = (productId) => {
+        const product = sampleProducts[productId];
+        if (!product) return;
+        document.querySelectorAll("[data-sample-product]").forEach((button) => {
+          const selected = button.dataset.sampleProduct === productId;
+          button.classList.toggle("is-active", selected);
+          button.setAttribute("aria-pressed", String(selected));
+        });
+        document.querySelector("#sample-product-title").textContent = product.title;
+        document.querySelector("#sample-product-brief").replaceChildren(
+          ...[
+            ["Brand", product.brand],
+            ["Description / URL", product.description],
+            ["Market & language", product.market],
+            ["Intended channel", product.channel],
+            ["Offer & constraints", product.offer],
+            ["Available proof", product.proof],
+            ["Next decision", product.decision],
+            ["Updated", "Sample timestamp · no record is saved"],
+          ].map(([label, value]) => {
+            const row = document.createElement("div");
+            const term = document.createElement("dt");
+            const description = document.createElement("dd");
+            term.textContent = label;
+            description.textContent = value;
+            row.append(term, description);
+            return row;
+          }),
+        );
+        document.querySelector("#sample-source-count").textContent = `${product.sources.length} example`;
+        document.querySelector("#sample-source-list").replaceChildren(
+          ...product.sources.map((source) => {
+            const row = document.createElement("div");
+            row.className = "workspace-file-row";
+            const sourceId = document.createElement("span");
+            sourceId.className = "workspace-file-kind";
+            sourceId.textContent = source.id;
+            const details = document.createElement("span");
+            const title = document.createElement("strong");
+            const note = document.createElement("small");
+            title.textContent = source.title;
+            note.textContent = source.note;
+            details.append(title, note);
+            row.append(sourceId, details);
+            return row;
+          }),
+        );
+        document.querySelector("#sample-stage-list").replaceChildren(
+          ...product.stages.map(([label, status, file], index) => {
+            const row = document.createElement("li");
+            const link = document.createElement("a");
+            const stage = frameworkWorkflows.find((workflow) => workflow.id === "research").stages[index];
+            const statusLabel = document.createElement("span");
+            const fileLabel = document.createElement("small");
+            link.href = `#${stage.anchorId}`;
+            link.textContent = label;
+            statusLabel.className = `workspace-stage-status ${sampleStatusClass(status)}`;
+            statusLabel.textContent = status;
+            fileLabel.textContent = file;
+            row.append(link, statusLabel, fileLabel);
+            return row;
+          }),
+        );
+      };
+
+      document.querySelectorAll("[data-research-tab]").forEach((tab) => {
+        tab.addEventListener("click", () => selectResearchTab(tab.dataset.researchTab));
+        tab.addEventListener("keydown", (event) => {
+          if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+          event.preventDefault();
+          const currentIndex = researchTabs.indexOf(tab);
+          const nextIndex = (currentIndex + (event.key === "ArrowRight" ? 1 : researchTabs.length - 1)) % researchTabs.length;
+          selectResearchTab(researchTabs[nextIndex].dataset.researchTab, true);
+        });
+      });
+
+      document.addEventListener("click", (event) => {
+        const stageLink = event.target.closest('a[href^="#stage-"]');
+        if (!stageLink) return;
+        const research = frameworkWorkflows.find((workflow) => workflow.id === "research");
+        const stageIndex = research.stages.findIndex((stage) => `#${stage.anchorId}` === stageLink.getAttribute("href"));
+        if (stageIndex < 0) return;
+        event.preventDefault();
+        selectWorkflow("research");
+        activeStage = stageIndex;
+        renderRoadmap();
+        taskSelect.value = research.stages[stageIndex].taskId;
+        renderTask();
+        selectResearchTab("guide");
+        history.replaceState(null, "", stageLink.getAttribute("href"));
+        document.querySelector(stageLink.getAttribute("href"))?.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+
+      document.querySelectorAll("[data-sample-product]").forEach((button) => {
+        button.addEventListener("click", () => renderSampleProduct(button.dataset.sampleProduct));
+      });
+
+      document.querySelector("#copy-pilot-prompt").addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(pilotPrompt.value);
+          pilotCopyStatus.textContent = "Copied. Replace [PRODUCT-FOLDER] before dispatching.";
+        } catch {
+          pilotPrompt.focus();
+          pilotPrompt.select();
+          pilotCopyStatus.textContent = "Clipboard unavailable. The prompt is selected so you can copy it.";
+        }
+      });
+
+      const loadExample = () => {
+        setTaskState(activeWorkflow, activeTask, { ...activeTask.example });
+        primaryFields.replaceChildren();
+        optionalFieldsList.replaceChildren();
+        for (const field of activeTask.fields) {
+          (field.optional ? optionalFieldsList : primaryFields).append(makeField(field, activeTask.example));
+        }
+        if (activeTask.fields.some((field) => field.optional)) optionalFields.open = true;
+        updatePrompt();
+      };
+
+      roadmapList.addEventListener("click", (event) => {
+        const useButton = event.target.closest("[data-task-id]");
+        if (useButton) selectTask(useButton.dataset.taskId);
+      });
+      workflowCards.forEach((card) => card.addEventListener("click", () => selectWorkflow(card.dataset.workflowId)));
+      taskSelect.addEventListener("change", renderTask);
+      projectContext.addEventListener("input", updatePrompt);
+      modeControls.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-mode]");
+        if (!button) return;
+        activeMode = button.dataset.mode;
+        modeControls.querySelectorAll("[data-mode]").forEach((modeButton) => {
+          const selected = modeButton === button;
+          modeButton.classList.toggle("is-active", selected);
+          modeButton.setAttribute("aria-pressed", String(selected));
+        });
+        updatePrompt();
+      });
+      document.querySelector("#load-example").addEventListener("click", loadExample);
+      copyButton.addEventListener("click", async () => {
+        window.clearTimeout(copyStatusTimer);
+        try {
+          await navigator.clipboard.writeText(promptPreview.value);
+          copyStatus.textContent = "Copied. Your prompt is ready to paste.";
+          copyButton.classList.add("is-copied");
+          copyStatusTimer = window.setTimeout(() => copyButton.classList.remove("is-copied"), 1800);
+        } catch {
+          promptPreview.focus();
+          promptPreview.select();
+          copyStatus.textContent = "Clipboard access was unavailable. The prompt is selected for you to copy.";
+        }
+      });
+
+      const savedTheme = localStorage.getItem("rexbelly-theme");
+      const themeButton = document.querySelector(".framework-theme-toggle");
+      const themeColor = document.querySelector('meta[name="theme-color"]');
+      const applyTheme = (theme) => {
+        root.dataset.theme = theme;
+        themeButton.setAttribute("aria-label", `Switch to ${theme === "dark" ? "light" : "dark"} theme`);
+        themeColor.setAttribute("content", theme === "dark" ? "#151512" : "#f6f5f1");
+      };
+      if (savedTheme === "light" || savedTheme === "dark") applyTheme(savedTheme);
+      themeButton.addEventListener("click", () => {
+        const theme = root.dataset.theme === "dark" ? "light" : "dark";
+        applyTheme(theme);
+        localStorage.setItem("rexbelly-theme", theme);
+      });
+
+      renderTask();
+      renderSampleProduct("garden-shoes");
+    </script>
+  </body>
+</html>
