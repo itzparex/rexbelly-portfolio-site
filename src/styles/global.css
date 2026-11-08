@@ -8,9 +8,9 @@
   --ink-faint: #8d8e86;
   --line: #deddd5;
   --line-strong: #c9c8bf;
-  --accent: #c65a24;
-  --accent-deep: #a84719;
-  --accent-wash: #f5e6d9;
+  --accent: #2867bd;
+  --accent-deep: #1d4f99;
+  --accent-wash: #e8f0fc;
   --green: #537258;
   --sidebar: 252px;
   --content: 1180px;
@@ -33,9 +33,9 @@
   --ink-faint: #85847d;
   --line: #33332d;
   --line-strong: #494840;
-  --accent: #e4864b;
-  --accent-deep: #f09a61;
-  --accent-wash: #38281e;
+  --accent: #78a9f0;
+  --accent-deep: #9dc2ff;
+  --accent-wash: #1e2b40;
   --green: #99b79b;
 }
 
@@ -409,8 +409,7 @@ p {
 .text-link,
 .project-link,
 .archive-link,
-.contact-email,
-.back-top {
+.contact-email {
   display: inline-flex;
   align-items: center;
   gap: 9px;
@@ -1300,12 +1299,6 @@ p {
   font-size: 9px;
 }
 
-.back-top {
-  margin-left: auto;
-  color: var(--ink-soft);
-  font-size: 10px;
-}
-
 .footer-year {
   color: var(--ink-faint);
   font-size: 9px;
@@ -1428,7 +1421,6 @@ p {
   .footer { min-height: 83px; flex-wrap: wrap; gap: 8px 13px; padding-block: 18px; }
   .footer-brand { font-size: 13px; }
   .footer > p { max-width: 160px; font-size: 8px; }
-  .back-top { font-size: 9px; }
   .footer-year { display: none; }
 }
 
@@ -1448,7 +1440,7 @@ p {
   --content: 1420px;
   --line: #dedfdc;
   --line-strong: #c9cbc9;
-  --accent: #c65a24;
+  --accent: #2867bd;
 }
 
 .sidebar {
@@ -1470,9 +1462,8 @@ p {
   grid-template-rows: minmax(0, 1fr);
   place-items: end center;
   margin-bottom: 12px;
-  overflow: hidden;
-  border-radius: 12px;
-  background: linear-gradient(160deg, #dce5f2, #c6d5e9);
+  overflow: visible;
+  background: transparent;
 }
 
 .sidebar-portrait {
