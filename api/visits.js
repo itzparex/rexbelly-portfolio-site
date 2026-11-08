@@ -44,7 +44,8 @@ export default async function handler(request, response) {
     }
 
     const result = await counterResponse.json();
-    const rawValue = result?.value ?? result?.data?.value;
+    const rawValue =
+      result?.value ?? result?.data?.value ?? result?.data?.up_count;
     const value =
       typeof rawValue === "number"
         ? rawValue
