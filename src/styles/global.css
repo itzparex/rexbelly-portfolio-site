@@ -413,6 +413,10 @@ html.has-brand-cursor select {
   display: none;
 }
 
+.mobile-nav {
+  display: none;
+}
+
 .hero {
   position: relative;
   display: flex;
@@ -2837,10 +2841,10 @@ p {
 
   .page-shell {
     margin: 0;
-    padding-bottom: calc(82px + env(safe-area-inset-bottom, 0px));
   }
 
   .mobile-header {
+    --mobile-header-height: 57px;
     position: sticky;
     z-index: 5;
     top: 0;
@@ -2899,24 +2903,21 @@ p {
   }
 
   .mobile-nav {
-    position: fixed;
-    z-index: 30;
-    right: auto;
-    bottom: max(8px, env(safe-area-inset-bottom, 0px));
-    left: 50%;
+    position: sticky;
+    z-index: 6;
+    top: var(--mobile-header-height, 57px);
     display: flex;
     width: min(390px, calc(100vw - 28px));
     align-items: center;
     justify-content: space-between;
     gap: 3px;
-    margin: 0;
+    margin: 8px auto 14px;
     padding: 6px;
     border: 1px solid color-mix(in srgb, var(--line), transparent 10%);
     border-radius: 24px;
     background: color-mix(in srgb, var(--surface), transparent 12%);
     box-shadow: 0 12px 38px color-mix(in srgb, var(--ink), transparent 82%);
     backdrop-filter: blur(22px) saturate(1.5);
-    transform: translateX(-50%);
   }
 
   .mobile-nav::-webkit-scrollbar {
@@ -2992,7 +2993,7 @@ p {
 
   .project-filters.is-bottom-docked {
     top: auto;
-    bottom: calc(78px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
     left: 50%;
     width: min(390px, calc(100vw - 28px));
     justify-content: space-between;
@@ -3032,7 +3033,7 @@ p {
   }
 
   .project-filters-pinned .portfolio-chat {
-    bottom: calc(164px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(106px + env(safe-area-inset-bottom, 0px));
   }
 
   .section-wrap,
