@@ -94,6 +94,90 @@ textarea:focus-visible {
   outline-offset: 3px;
 }
 
+html.has-brand-cursor,
+html.has-brand-cursor body,
+html.has-brand-cursor body * {
+  cursor: none !important;
+}
+
+html.has-brand-cursor input,
+html.has-brand-cursor textarea,
+html.has-brand-cursor [contenteditable="true"] {
+  cursor: text !important;
+}
+
+html.has-brand-cursor select {
+  cursor: default !important;
+}
+
+.brand-cursor {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.7);
+  transition: opacity 160ms ease, transform 180ms var(--ease);
+  will-change: left, top, transform;
+}
+
+.brand-cursor.is-visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.brand-cursor-orbit {
+  position: absolute;
+  inset: 5px;
+  border: 1px solid color-mix(in srgb, var(--accent), transparent 28%);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent-wash), transparent 22%);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--accent), transparent 70%);
+  transition: inset 220ms var(--ease), background-color 220ms ease, border-color 220ms ease;
+}
+
+.brand-cursor-orbit::after {
+  position: absolute;
+  inset: 4px;
+  border: 1px solid color-mix(in srgb, var(--accent), transparent 65%);
+  border-radius: inherit;
+  content: "";
+}
+
+.brand-cursor-star {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: var(--accent-deep);
+  font-size: 13px;
+  line-height: 1;
+  text-shadow: 0 0 10px color-mix(in srgb, var(--accent), transparent 42%);
+  transform: translate(-50%, -50%);
+  transition: color 180ms ease, font-size 180ms ease, transform 220ms var(--ease);
+}
+
+.brand-cursor.is-interactive .brand-cursor-orbit {
+  inset: 1px;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent-wash), transparent 7%);
+}
+
+.brand-cursor.is-interactive .brand-cursor-star {
+  font-size: 16px;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.brand-cursor.is-pressed {
+  transform: translate(-50%, -50%) scale(0.82);
+}
+
+.brand-cursor.is-native {
+  opacity: 0;
+}
+
 .skip-link {
   position: fixed;
   z-index: 20;
