@@ -660,6 +660,48 @@ const services = [
       const themeStates = document.querySelectorAll(".theme-state");
       const themeColor = document.querySelector('meta[name="theme-color"]');
 
+      const dashboardCards = [...document.querySelectorAll(".dashboard-grid > .dashboard-card")];
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (!prefersReducedMotion && typeof Element.prototype.animate === "function") {
+        dashboardCards.forEach((card, index) => {
+          card.animate(
+            [
+              { opacity: 0, transform: "translateY(22px) scale(0.985)" },
+              { opacity: 1, transform: "translateY(0) scale(1)" },
+            ],
+            {
+              duration: 560,
+              delay: index * 75,
+              easing: "cubic-bezier(0.23, 1, 0.32, 1)",
+            },
+          );
+        });
+      }
+
+      if (!prefersReducedMotion && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        dashboardCards.forEach((card) => {
+          card.addEventListener("pointermove", (event) => {
+            if (event.pointerType !== "mouse") return;
+
+            const bounds = card.getBoundingClientRect();
+            const x = (event.clientX - bounds.left) / bounds.width;
+            const y = (event.clientY - bounds.top) / bounds.height;
+            card.style.setProperty("--card-rotate-x", `${((0.5 - y) * 5).toFixed(2)}deg`);
+            card.style.setProperty("--card-rotate-y", `${((x - 0.5) * 5).toFixed(2)}deg`);
+            card.style.setProperty("--card-pointer-x", `${(x * 100).toFixed(1)}%`);
+            card.style.setProperty("--card-pointer-y", `${(y * 100).toFixed(1)}%`);
+            card.classList.add("is-tilting");
+          });
+
+          card.addEventListener("pointerleave", () => {
+            card.style.setProperty("--card-rotate-x", "0deg");
+            card.style.setProperty("--card-rotate-y", "0deg");
+            card.classList.remove("is-tilting");
+          });
+        });
+      }
+
       const setTheme = (theme) => {
         root.dataset.theme = theme;
         localStorage.setItem("rexbelly-theme", theme);
