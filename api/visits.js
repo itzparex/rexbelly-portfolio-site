@@ -1,4 +1,4 @@
-const counterName = "First Counter";
+const counterName = "portfolio-visits";
 
 export default async function handler(request, response) {
   response.setHeader("Cache-Control", "no-store");
