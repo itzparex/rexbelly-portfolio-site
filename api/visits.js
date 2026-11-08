@@ -44,7 +44,7 @@ export default async function handler(request, response) {
     }
 
     const result = await counterResponse.json();
-    const rawValue = result?.value;
+    const rawValue = result?.value ?? result?.data?.value;
     const value =
       typeof rawValue === "number"
         ? rawValue
@@ -55,6 +55,7 @@ export default async function handler(request, response) {
     if (!Number.isSafeInteger(value) || value < 0) {
       console.error("CounterAPI returned an invalid visit count.", {
         responseKeys: Object.keys(result ?? {}),
+        dataKeys: Object.keys(result?.data ?? {}),
         valueType: typeof rawValue,
       });
       return response.status(502).json({ error: "Unable to update visit count" });
