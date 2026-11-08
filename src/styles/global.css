@@ -1890,6 +1890,14 @@ p {
   line-height: 1.1;
 }
 
+.profile-name-full {
+  display: none;
+}
+
+.profile-name-short {
+  display: inline;
+}
+
 .profile-name-line .verified-badge {
   align-self: flex-start;
   margin-top: 6px;
@@ -2455,13 +2463,17 @@ p {
     font-size: 7px;
   }
 
-  .profile-overline-name {
-    display: none;
-  }
-
   .profile-name-line {
     grid-column: 2;
     justify-content: flex-start;
+  }
+
+  .dashboard-profile .profile-name-full {
+    display: inline;
+  }
+
+  .dashboard-profile .profile-name-short {
+    display: none;
   }
 
   .dashboard-profile h2 {
