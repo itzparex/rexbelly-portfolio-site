@@ -39,6 +39,10 @@
   --green: #99b79b;
 }
 
+:root[data-theme="dark"] .resource-button {
+  color: #24150c;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -1586,6 +1590,11 @@ p {
   background: #e8e9e7;
 }
 
+.nav-link:hover .nav-glyph,
+.nav-link.is-active .nav-glyph {
+  color: var(--accent);
+}
+
 :root[data-theme="dark"] .nav-link.is-active {
   background: #2b2c2b;
 }
@@ -1670,8 +1679,8 @@ p {
   padding: 0 17px;
   border-radius: 24px;
   color: #fff;
-  background: #111f3d;
-  box-shadow: 0 4px 10px rgb(16 31 60 / 11%);
+  background: var(--accent);
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--accent), transparent 82%);
   font-size: 11px;
   font-weight: 650;
   transition: transform 180ms ease, box-shadow 180ms ease;
@@ -1679,11 +1688,12 @@ p {
 
 .resource-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 7px 15px rgb(16 31 60 / 16%);
+  background: var(--accent-deep);
+  box-shadow: 0 7px 15px color-mix(in srgb, var(--accent), transparent 72%);
 }
 
 .resource-button span {
-  color: #f5c46b;
+  color: #fff0d6;
 }
 
 .hero-orbit {
@@ -1691,7 +1701,7 @@ p {
   right: 24%;
   width: 520px;
   height: 520px;
-  border-color: color-mix(in srgb, #8497ba, transparent 82%);
+  border-color: color-mix(in srgb, var(--accent), transparent 82%);
 }
 
 .hero-orbit--two {
@@ -1699,7 +1709,7 @@ p {
   right: calc(24% + 50px);
   width: 420px;
   height: 420px;
-  border-color: color-mix(in srgb, #8497ba, transparent 88%);
+  border-color: color-mix(in srgb, var(--accent), transparent 88%);
 }
 
 .toolbelt {
@@ -1710,9 +1720,9 @@ p {
   gap: 11px;
   margin: 0 auto 15px;
   padding: 8px;
-  border: 1px solid #dfe1e3;
+  border: 1px solid color-mix(in srgb, var(--accent), var(--line) 86%);
   border-radius: 20px;
-  background: linear-gradient(105deg, var(--surface), #edf2ff 78%, #cbd9fa);
+  background: linear-gradient(105deg, var(--surface), var(--accent-wash) 78%, color-mix(in srgb, var(--accent), var(--surface) 78%));
 }
 
 .toolbelt-label {
@@ -1724,7 +1734,7 @@ p {
 }
 
 .toolbelt-label .eyebrow {
-  color: #3269ae;
+  color: var(--accent);
   font-size: 8px;
 }
 
@@ -1791,10 +1801,10 @@ p {
   width: min(var(--content), calc(100% - 88px));
   margin: 0 auto 62px;
   padding: 12px;
-  border: 1px solid #dfe2e7;
+  border: 1px solid color-mix(in srgb, var(--accent), var(--line) 86%);
   border-radius: 24px;
-  background: linear-gradient(110deg, #f8fafc 10%, #edf2ff 60%, #c8d8fb 100%);
-  box-shadow: 0 16px 38px rgb(37 55 88 / 7%);
+  background: linear-gradient(110deg, var(--surface) 10%, var(--accent-wash) 65%, color-mix(in srgb, var(--accent), var(--surface) 76%) 100%);
+  box-shadow: 0 16px 38px color-mix(in srgb, var(--accent), transparent 93%);
 }
 
 .dashboard-grid {
@@ -1816,7 +1826,7 @@ p {
 
 :root[data-theme="dark"] .dashboard-wrap {
   border-color: var(--line);
-  background: linear-gradient(110deg, #202321, #252b35 65%, #303b50);
+  background: linear-gradient(110deg, var(--surface), var(--accent-wash) 75%);
 }
 
 :root[data-theme="dark"] .dashboard-card {
@@ -1830,12 +1840,12 @@ p {
   flex-direction: column;
   align-items: center;
   padding: 20px 15px 16px;
-  background: linear-gradient(155deg, #f8fbff, #e8f1ff 82%);
+  background: linear-gradient(155deg, var(--surface), var(--accent-wash) 96%);
   text-align: center;
 }
 
 :root[data-theme="dark"] .dashboard-profile {
-  background: linear-gradient(155deg, #232b37, #1d1d19 90%);
+  background: linear-gradient(155deg, var(--surface), var(--accent-wash) 90%);
 }
 
 .dashboard-portrait-wrap {
@@ -1855,7 +1865,7 @@ p {
 }
 
 .profile-overline {
-  color: #4774a6;
+  color: var(--accent);
   font-size: 8px;
   letter-spacing: 0.17em;
 }
@@ -1878,7 +1888,7 @@ p {
   width: 76%;
   height: 1px;
   margin: 10px 0 8px;
-  background: #6b91b6;
+  background: color-mix(in srgb, var(--accent), transparent 26%);
 }
 
 .profile-specialty {
@@ -1896,7 +1906,7 @@ p {
   gap: 6px;
   margin-top: auto;
   padding-top: 10px;
-  color: #355d8c;
+  color: var(--accent-deep);
   font-size: 9px;
   font-weight: 650;
 }
@@ -1915,7 +1925,7 @@ p {
   place-items: center;
   border-radius: 9px;
   color: #fff;
-  background: #1260ae;
+  background: var(--accent);
   font-size: 15px;
   font-weight: 700;
 }
@@ -2003,7 +2013,7 @@ p {
   align-items: center;
   gap: 5px;
   width: fit-content;
-  color: #3a6eaa;
+  color: var(--accent-deep);
   font-size: 9px;
   font-weight: 650;
 }
@@ -2544,7 +2554,7 @@ p {
   place-items: center;
   padding: 0;
   overflow: visible;
-  border: 2px solid var(--ink);
+  border: 2px solid var(--accent);
   border-radius: 50%;
   background: var(--surface);
   box-shadow: 0 7px 24px color-mix(in srgb, var(--ink), transparent 78%);
@@ -2554,7 +2564,36 @@ p {
 
 .chat-launcher:hover {
   transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 11px 30px color-mix(in srgb, var(--ink), transparent 72%);
+  box-shadow: 0 11px 30px color-mix(in srgb, var(--accent), transparent 62%);
+}
+
+.chat-launcher:focus-visible {
+  outline-color: color-mix(in srgb, var(--accent), transparent 35%);
+}
+
+.chat-tooltip {
+  position: absolute;
+  right: calc(100% + 13px);
+  top: 50%;
+  width: max-content;
+  padding: 8px 11px;
+  transform: translate(5px, -50%);
+  border: 1px solid color-mix(in srgb, var(--accent), var(--line) 75%);
+  border-radius: 9px;
+  color: var(--ink);
+  background: var(--surface);
+  box-shadow: 0 5px 18px color-mix(in srgb, var(--accent), transparent 88%);
+  font-size: 11px;
+  font-weight: 650;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.chat-launcher:hover .chat-tooltip,
+.chat-launcher:focus-visible .chat-tooltip {
+  transform: translate(0, -50%);
+  opacity: 1;
 }
 
 .chat-launcher img {
@@ -2658,6 +2697,12 @@ p {
   line-height: 1;
 }
 
+.chat-close:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-wash);
+}
+
 .chat-thread {
   display: flex;
   min-height: 110px;
@@ -2734,10 +2779,21 @@ p {
   transition: border-color 180ms ease, color 180ms ease, background 180ms ease;
 }
 
+.chat-prompts button::after {
+  float: right;
+  color: var(--accent);
+  content: "↗";
+  opacity: 0.75;
+}
+
 .chat-prompts button:hover {
   border-color: color-mix(in srgb, var(--accent), var(--line) 45%);
   color: var(--ink);
   background: var(--accent-wash);
+}
+
+.chat-prompts button:hover::after {
+  opacity: 1;
 }
 
 @keyframes chat-appear {
