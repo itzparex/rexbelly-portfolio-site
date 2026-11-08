@@ -44,12 +44,23 @@ export default async function handler(request, response) {
     }
 
     const result = await counterResponse.json();
-    if (!Number.isSafeInteger(result.value) || result.value < 0) {
-      console.error("CounterAPI returned an invalid visit count.");
+    const rawValue = result?.value;
+    const value =
+      typeof rawValue === "number"
+        ? rawValue
+        : typeof rawValue === "string" && /^\d+$/.test(rawValue)
+          ? Number(rawValue)
+          : NaN;
+
+    if (!Number.isSafeInteger(value) || value < 0) {
+      console.error("CounterAPI returned an invalid visit count.", {
+        responseKeys: Object.keys(result ?? {}),
+        valueType: typeof rawValue,
+      });
       return response.status(502).json({ error: "Unable to update visit count" });
     }
 
-    return response.status(200).json({ value: result.value });
+    return response.status(200).json({ value });
   } catch (error) {
     console.error("CounterAPI visit update failed.", error);
     return response.status(502).json({ error: "Unable to update visit count" });
