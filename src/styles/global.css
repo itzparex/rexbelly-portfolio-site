@@ -1850,6 +1850,7 @@ p {
   grid-row: span 2;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   padding: 20px 15px 16px;
   background: var(--surface);
   text-align: center;
@@ -1919,11 +1920,19 @@ p {
   line-height: 1.7;
 }
 
+.profile-summary {
+  max-width: 240px;
+  margin: 10px 0 0;
+  color: var(--ink-soft);
+  font-size: 9px;
+  line-height: 1.6;
+}
+
 .profile-contact {
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-top: auto;
+  margin-top: 16px;
   padding-top: 10px;
   color: var(--accent-deep);
   font-size: 9px;
@@ -2439,7 +2448,7 @@ p {
     display: grid;
     grid-row: auto;
     grid-template-columns: 84px minmax(0, 1fr);
-    grid-template-rows: auto auto auto 1fr;
+    grid-template-rows: auto auto auto auto;
     align-items: start;
     column-gap: 13px;
     padding: 13px;
@@ -2495,6 +2504,12 @@ p {
   .profile-specialty {
     grid-column: 2;
     font-size: 6px;
+  }
+
+  .profile-summary {
+    grid-column: 2;
+    margin-top: 7px;
+    font-size: 8px;
   }
 
   .profile-contact {
