@@ -2455,6 +2455,10 @@ p {
     font-size: 7px;
   }
 
+  .profile-overline-name {
+    display: none;
+  }
+
   .profile-name-line {
     grid-column: 2;
     justify-content: flex-start;
