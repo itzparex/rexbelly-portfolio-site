@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f6f5f1"/>
+  <circle cx="1040" cy="142" r="236" fill="none" stroke="#e9e2d9" stroke-width="2"/>
+  <circle cx="1040" cy="142" r="184" fill="none" stroke="#efebe4" stroke-width="2"/>
+  <rect x="76" y="74" width="48" height="48" rx="14" fill="#fffefa" stroke="#deddd5" stroke-width="2"/>
+  <text x="90" y="109" fill="#1d211d" font-family="system-ui, sans-serif" font-size="31" font-weight="750">R</text>
+  <circle cx="113" cy="107" r="3" fill="#c65a24"/>
+  <text x="76" y="255" fill="#1d211d" font-family="system-ui, sans-serif" font-size="72" font-weight="700" letter-spacing="-5">Rexbelly P. Zipagan</text>
+  <text x="76" y="337" fill="#1d211d" font-family="system-ui, sans-serif" font-size="42" font-weight="600" letter-spacing="-2">Shopify Developer &amp;</text>
+  <text x="76" y="394" fill="#c65a24" font-family="system-ui, sans-serif" font-size="42" font-weight="600" letter-spacing="-2">Web Design Engineer</text>
+  <path d="M76 474h1048" stroke="#deddd5" stroke-width="2"/>
+  <text x="76" y="523" fill="#5f625b" font-family="system-ui, sans-serif" font-size="21">Storefronts · Digital experiences · Marketing systems</text>
+  <text x="76" y="577" fill="#8d8e86" font-family="system-ui, sans-serif" font-size="16" letter-spacing="3">FROM BRIEF TO LAUNCH</text>
+</svg>
