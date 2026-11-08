@@ -1801,6 +1801,16 @@ p {
   object-fit: contain;
 }
 
+:root[data-theme="dark"] .tool-logo img {
+  padding: 2px;
+  border-radius: 3px;
+  background: #f5f4f0;
+}
+
+:root[data-theme="dark"] .tool-logo {
+  color: color-mix(in srgb, var(--tool-color), white 62%);
+}
+
 .tool-monogram {
   display: inline-grid;
   min-width: 15px;
@@ -1813,6 +1823,11 @@ p {
   font-weight: 800;
   letter-spacing: -0.05em;
   line-height: 1;
+}
+
+:root[data-theme="dark"] .tool-monogram {
+  color: color-mix(in srgb, var(--tool-color), white 62%);
+  background: color-mix(in srgb, var(--tool-color), transparent 82%);
 }
 
 .dashboard-wrap {
