@@ -1534,6 +1534,13 @@ p {
   font-size: 10px;
 }
 
+.sidebar-visits {
+  margin-top: 2px;
+  color: var(--ink-faint);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
 .sidebar-socials {
   justify-content: center;
   gap: 8px;

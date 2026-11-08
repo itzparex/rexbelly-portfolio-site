@@ -233,6 +233,9 @@ const services = [
         </span>
         <span class="sidebar-role">Shopify Developer</span>
         <span class="sidebar-handle">@itzparex · Philippines</span>
+        <span class="sidebar-visits" id="site-visit-count" role="status" aria-live="polite">
+          Loading visits…
+        </span>
       </a>
 
       <div class="sidebar-socials" aria-label="Social and contact links">
@@ -732,6 +735,30 @@ const services = [
 
       const initialTab = decodeURIComponent(location.hash.slice(1));
       activateTab(tabPanels.has(initialTab) ? initialTab : "home", { updateHistory: false });
+
+      const visitCount = document.querySelector("#site-visit-count");
+      const updateVisitCount = async () => {
+        try {
+          const response = await fetch("/api/visits", {
+            method: "POST",
+            headers: { Accept: "application/json" },
+          });
+          if (!response.ok) {
+            throw new Error(`Visit counter request failed with status ${response.status}`);
+          }
+
+          const result = await response.json();
+          if (!Number.isSafeInteger(result.value) || result.value < 0) {
+            throw new Error("Visit counter returned an invalid value");
+          }
+
+          visitCount.textContent = `${new Intl.NumberFormat().format(result.value)} visits`;
+        } catch (error) {
+          console.error("Unable to update the site visit count.", error);
+          visitCount.textContent = "Visits unavailable";
+        }
+      };
+      updateVisitCount();
 
       const chatPanel = document.querySelector("#chat-panel");
       const chatLauncher = document.querySelector(".chat-launcher");
