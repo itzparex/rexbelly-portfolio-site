@@ -237,12 +237,12 @@ const services = [
         </button>
       </div>
 
-      <nav class="side-nav" aria-label="Main">
-        <a class="nav-link is-active" href="#home"><span class="nav-glyph" aria-hidden="true">⌂</span> Home</a>
-        <a class="nav-link" href="#projects"><span class="nav-glyph" aria-hidden="true">▱</span> Projects</a>
-        <a class="nav-link" href="#services"><span class="nav-glyph" aria-hidden="true">◈</span> Services</a>
-        <a class="nav-link" href="#about"><span class="nav-glyph" aria-hidden="true">☆</span> About</a>
-        <a class="nav-link" href="#contact"><span class="nav-glyph" aria-hidden="true">◌</span> Contact</a>
+      <nav class="side-nav" role="tablist" aria-label="Portfolio pages" aria-orientation="vertical">
+        <button class="nav-link is-active" id="tab-home" type="button" role="tab" aria-selected="true" aria-controls="panel-home" data-tab-target="home"><span class="nav-glyph" aria-hidden="true">⌂</span> Home</button>
+        <button class="nav-link" id="tab-projects" type="button" role="tab" aria-selected="false" aria-controls="panel-projects" tabindex="-1" data-tab-target="projects"><span class="nav-glyph" aria-hidden="true">▱</span> Projects</button>
+        <button class="nav-link" id="tab-services" type="button" role="tab" aria-selected="false" aria-controls="panel-services" tabindex="-1" data-tab-target="services"><span class="nav-glyph" aria-hidden="true">◈</span> Services</button>
+        <button class="nav-link" id="tab-about" type="button" role="tab" aria-selected="false" aria-controls="panel-about" tabindex="-1" data-tab-target="about"><span class="nav-glyph" aria-hidden="true">☆</span> About</button>
+        <button class="nav-link" id="tab-contact" type="button" role="tab" aria-selected="false" aria-controls="panel-contact" tabindex="-1" data-tab-target="contact"><span class="nav-glyph" aria-hidden="true">◌</span> Contact</button>
       </nav>
 
       <div class="sidebar-bottom">
@@ -262,16 +262,17 @@ const services = [
             <a class="mobile-contact" href="#contact">Let’s talk <span aria-hidden="true">↗</span></a>
           </div>
         </div>
-        <nav class="mobile-nav" aria-label="Main">
-          <a class="is-active" href="#home">Home</a>
-          <a href="#projects">Projects</a>
-          <a href="#services">Services</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
+        <nav class="mobile-nav" role="tablist" aria-label="Portfolio pages">
+          <button class="is-active" type="button" role="tab" aria-selected="true" aria-controls="panel-home" data-tab-target="home">Home</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="panel-projects" tabindex="-1" data-tab-target="projects">Projects</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="panel-services" tabindex="-1" data-tab-target="services">Services</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="panel-about" tabindex="-1" data-tab-target="about">About</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="panel-contact" tabindex="-1" data-tab-target="contact">Contact</button>
         </nav>
       </header>
 
       <main id="main">
+        <div class="tab-panel" id="panel-home" role="tabpanel" aria-labelledby="tab-home" tabindex="0">
         <section class="hero section-wrap" id="home" aria-labelledby="hero-title">
           <div class="hero-header">
             <div>
@@ -411,7 +412,9 @@ const services = [
             </article>
           </div>
         </section>
+        </div>
 
+        <div class="tab-panel" id="panel-projects" role="tabpanel" aria-labelledby="tab-projects" tabindex="0" hidden>
         <section class="section-wrap work-section" id="projects" aria-labelledby="projects-title">
           <div class="section-heading">
             <div>
@@ -476,7 +479,9 @@ const services = [
             More work in the portfolio archive <span aria-hidden="true">↗</span>
           </a>
         </section>
+        </div>
 
+        <div class="tab-panel" id="panel-services" role="tabpanel" aria-labelledby="tab-services" tabindex="0" hidden>
         <section class="services-section" id="services" aria-labelledby="services-title">
           <div class="section-wrap">
             <div class="section-heading">
@@ -504,7 +509,9 @@ const services = [
             </div>
           </div>
         </section>
+        </div>
 
+        <div class="tab-panel" id="panel-about" role="tabpanel" aria-labelledby="tab-about" tabindex="0" hidden>
         <section class="about-section section-wrap" id="about" aria-labelledby="about-title">
           <div class="about-label">
             <span class="eyebrow section-kicker">03 / A LITTLE CONTEXT</span>
@@ -527,7 +534,9 @@ const services = [
             </div>
           </div>
         </section>
+        </div>
 
+        <div class="tab-panel" id="panel-contact" role="tabpanel" aria-labelledby="tab-contact" tabindex="0" hidden>
         <section class="contact-section" id="contact" aria-labelledby="contact-title">
           <div class="section-wrap contact-wrap">
             <div>
@@ -550,6 +559,7 @@ const services = [
             </form>
           </div>
         </section>
+        </div>
       </main>
 
       <footer class="footer section-wrap">
@@ -585,23 +595,93 @@ const services = [
         });
       });
 
-      const sections = [...document.querySelectorAll("main section[id]")];
-      const navLinks = [...document.querySelectorAll(".nav-link, .mobile-nav a")];
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            navLinks.forEach((link) => {
-              const active = link.getAttribute("href") === `#${entry.target.id}`;
-              link.classList.toggle("is-active", active);
-              if (active) link.setAttribute("aria-current", "location");
-              else link.removeAttribute("aria-current");
-            });
-          });
-        },
-        { rootMargin: "-30% 0px -60% 0px" },
+      const tabPanels = new Map(
+        [...document.querySelectorAll(".tab-panel")].map((panel) => [
+          panel.id.replace("panel-", ""),
+          panel,
+        ]),
       );
-      sections.forEach((section) => observer.observe(section));
+      const tabTriggers = [...document.querySelectorAll("[data-tab-target]")];
+
+      const activateTab = (tabName, { updateHistory = true, focus = false } = {}) => {
+        const selectedPanel = tabPanels.get(tabName);
+        if (!selectedPanel) return;
+
+        tabPanels.forEach((panel, name) => {
+          const selected = name === tabName;
+          panel.hidden = !selected;
+          panel.setAttribute("aria-hidden", String(!selected));
+        });
+
+        tabTriggers.forEach((trigger) => {
+          const selected = trigger.dataset.tabTarget === tabName;
+          trigger.classList.toggle("is-active", selected);
+          trigger.setAttribute("aria-selected", String(selected));
+          trigger.tabIndex = selected ? 0 : -1;
+          if (selected) trigger.setAttribute("aria-current", "page");
+          else trigger.removeAttribute("aria-current");
+        });
+
+        window.scrollTo(0, 0);
+
+        if (updateHistory && location.hash !== `#${tabName}`) {
+          history.pushState({ tabName }, "", `#${tabName}`);
+        }
+
+        if (focus) {
+          tabTriggers.find((trigger) => trigger.dataset.tabTarget === tabName)?.focus();
+        }
+      };
+
+      document.querySelectorAll('[role="tablist"]').forEach((tabList) => {
+        tabList.addEventListener("click", (event) => {
+          const trigger = event.target.closest("[data-tab-target]");
+          if (trigger) activateTab(trigger.dataset.tabTarget);
+        });
+
+        tabList.addEventListener("keydown", (event) => {
+          const current = event.target.closest("[data-tab-target]");
+          if (!current) return;
+
+          const triggers = [...tabList.querySelectorAll("[data-tab-target]")];
+          const currentIndex = triggers.indexOf(current);
+          let nextIndex = currentIndex;
+
+          if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+            nextIndex = (currentIndex + 1) % triggers.length;
+          } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+            nextIndex = (currentIndex - 1 + triggers.length) % triggers.length;
+          } else if (event.key === "Home") {
+            nextIndex = 0;
+          } else if (event.key === "End") {
+            nextIndex = triggers.length - 1;
+          } else {
+            return;
+          }
+
+          event.preventDefault();
+          activateTab(triggers[nextIndex].dataset.tabTarget, { focus: true });
+        });
+      });
+
+      document.addEventListener("click", (event) => {
+        const link = event.target.closest('a[href^="#"]');
+        if (!link) return;
+
+        const target = decodeURIComponent(link.hash.slice(1));
+        if (!tabPanels.has(target)) return;
+
+        event.preventDefault();
+        activateTab(target);
+      });
+
+      window.addEventListener("popstate", () => {
+        const tabName = decodeURIComponent(location.hash.slice(1));
+        activateTab(tabPanels.has(tabName) ? tabName : "home", { updateHistory: false });
+      });
+
+      const initialTab = decodeURIComponent(location.hash.slice(1));
+      activateTab(tabPanels.has(initialTab) ? initialTab : "home", { updateHistory: false });
 
       document.querySelector("#contact-form").addEventListener("submit", (event) => {
         event.preventDefault();
