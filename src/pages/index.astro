@@ -380,19 +380,20 @@ const services = [
               <a class="dashboard-card-link" href="#projects">Explore selected work <span aria-hidden="true">↗</span></a>
             </article>
 
-            <article class="dashboard-card dashboard-toolbox">
+            <article class="dashboard-card dashboard-process">
               <div class="dashboard-card-heading">
-                <span class="tile-icon" aria-hidden="true">✳</span>
+                <span class="tile-icon" aria-hidden="true">↗</span>
                 <div>
-                  <h2>My toolkit</h2>
-                  <p>Tools I use to get good work shipped.</p>
+                  <h2>Brief to launch</h2>
+                  <p>One connected process, from idea to live.</p>
                 </div>
               </div>
-              <div class="dashboard-tool-list">
-                {["Shopify", "Liquid", "JavaScript", "Figma", "Klaviyo", "Mailchimp", "systeme.io", "GoHighLevel", "Gorgias"].map((tool) => (
-                  <span class="dashboard-tool">{tool}<i aria-hidden="true"></i></span>
-                ))}
-              </div>
+              <ol class="process-steps">
+                <li><span>01</span><div><strong>Understand</strong><small>Goals, audience, and brief</small></div></li>
+                <li><span>02</span><div><strong>Design</strong><small>Plan the experience</small></div></li>
+                <li><span>03</span><div><strong>Build</strong><small>Bring it to life</small></div></li>
+                <li><span>04</span><div><strong>Launch</strong><small>Test, polish, and ship</small></div></li>
+              </ol>
             </article>
 
             <article class="dashboard-card dashboard-credentials">
