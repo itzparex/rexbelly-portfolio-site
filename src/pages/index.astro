@@ -353,14 +353,24 @@ const services = [
             <a class="mobile-contact" href="#contact">Let’s talk <span aria-hidden="true">↗</span></a>
           </div>
         </div>
-        <nav class="mobile-nav" role="tablist" aria-label="Portfolio pages">
-          <button class="is-active" type="button" role="tab" aria-selected="true" aria-controls="panel-home" data-tab-target="home">Home</button>
-          <button type="button" role="tab" aria-selected="false" aria-controls="panel-projects" tabindex="-1" data-tab-target="projects">Projects</button>
-          <button type="button" role="tab" aria-selected="false" aria-controls="panel-services" tabindex="-1" data-tab-target="services">Services</button>
-          <button type="button" role="tab" aria-selected="false" aria-controls="panel-about" tabindex="-1" data-tab-target="about">About</button>
-          <button type="button" role="tab" aria-selected="false" aria-controls="panel-contact" tabindex="-1" data-tab-target="contact">Contact</button>
-        </nav>
       </header>
+      <nav class="mobile-nav" role="tablist" aria-label="Portfolio pages">
+        <button class="is-active" type="button" role="tab" aria-selected="true" aria-controls="panel-home" data-tab-target="home">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3.5 10 8.5-7 8.5 7v9a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3.5 19v-9Z" /><path d="M9 20.5v-7h6v7" /></svg><span>Home</span>
+        </button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="panel-projects" tabindex="-1" data-tab-target="projects">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1.5" /><rect x="14" y="4" width="6" height="6" rx="1.5" /><rect x="4" y="14" width="6" height="6" rx="1.5" /><rect x="14" y="14" width="6" height="6" rx="1.5" /></svg><span>Projects</span>
+        </button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="panel-services" tabindex="-1" data-tab-target="services">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19.5h16M6.5 16V9.5h11V16M4.5 9.5l2-5h11l2 5M9 9.5V16m6-6.5V16" /></svg><span>Services</span>
+        </button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="panel-about" tabindex="-1" data-tab-target="about">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="3.5" /><path d="M5 20a7 7 0 0 1 14 0" /></svg><span>About</span>
+        </button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="panel-contact" tabindex="-1" data-tab-target="contact">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2.5" /><path d="m4.5 7 7.5 6 7.5-6" /></svg><span>Contact</span>
+        </button>
+      </nav>
 
       <main id="main">
         <div class="tab-panel" id="panel-home" role="tabpanel" aria-labelledby="tab-home" tabindex="0">
@@ -565,23 +575,25 @@ const services = [
             </div>
           </header>
 
-          <div class="project-filters" role="group" aria-label="Filter projects">
-            <button type="button" class="project-filter is-active" data-project-filter="all" aria-pressed="true">
-              <svg class="project-filter-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1.5" /><rect x="14" y="4" width="6" height="6" rx="1.5" /><rect x="4" y="14" width="6" height="6" rx="1.5" /><rect x="14" y="14" width="6" height="6" rx="1.5" /></svg>
-              <span class="project-filter-label">All work</span><span class="project-filter-count">{projectCount.toString().padStart(2, "0")}</span>
-            </button>
-            <button type="button" class="project-filter" data-project-filter="storefronts" aria-pressed="false">
-              <svg class="project-filter-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 10h16l-1.4-5H5.4L4 10Z" /><path d="M5 10v9h14v-9M9 19v-5h6v5M4 10a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0" /></svg>
-              <span class="project-filter-label">Storefronts</span><span class="project-filter-count">{storefrontProjects.length.toString().padStart(2, "0")}</span>
-            </button>
-            <button type="button" class="project-filter" data-project-filter="websites" aria-pressed="false">
-              <svg class="project-filter-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5" /><path d="M3.5 9h17M7 6.8h.01M10 6.8h.01" /></svg>
-              <span class="project-filter-label">Websites</span><span class="project-filter-count">{websiteProjects.length.toString().padStart(2, "0")}</span>
-            </button>
-            <button type="button" class="project-filter" data-project-filter="funnels" aria-pressed="false">
-              <svg class="project-filter-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h16l-6.2 7.1v5.5l-3.6 1.9v-7.4L4 5Z" /></svg>
-              <span class="project-filter-label">Funnels</span><span class="project-filter-count">{funnelCount.toString().padStart(2, "0")}</span>
-            </button>
+          <div class="project-filters-slot">
+            <div class="project-filters" role="group" aria-label="Filter projects">
+              <button type="button" class="project-filter is-active" data-project-filter="all" aria-pressed="true">
+                <svg class="project-filter-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1.5" /><rect x="14" y="4" width="6" height="6" rx="1.5" /><rect x="4" y="14" width="6" height="6" rx="1.5" /><rect x="14" y="14" width="6" height="6" rx="1.5" /></svg>
+                <span class="project-filter-label">All work</span><span class="project-filter-count">{projectCount.toString().padStart(2, "0")}</span>
+              </button>
+              <button type="button" class="project-filter" data-project-filter="storefronts" aria-pressed="false">
+                <svg class="project-filter-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 10h16l-1.4-5H5.4L4 10Z" /><path d="M5 10v9h14v-9M9 19v-5h6v5M4 10a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0" /></svg>
+                <span class="project-filter-label">Storefronts</span><span class="project-filter-count">{storefrontProjects.length.toString().padStart(2, "0")}</span>
+              </button>
+              <button type="button" class="project-filter" data-project-filter="websites" aria-pressed="false">
+                <svg class="project-filter-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5" /><path d="M3.5 9h17M7 6.8h.01M10 6.8h.01" /></svg>
+                <span class="project-filter-label">Websites</span><span class="project-filter-count">{websiteProjects.length.toString().padStart(2, "0")}</span>
+              </button>
+              <button type="button" class="project-filter" data-project-filter="funnels" aria-pressed="false">
+                <svg class="project-filter-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h16l-6.2 7.1v5.5l-3.6 1.9v-7.4L4 5Z" /></svg>
+                <span class="project-filter-label">Funnels</span><span class="project-filter-count">{funnelCount.toString().padStart(2, "0")}</span>
+              </button>
+            </div>
           </div>
 
           <section class="project-group project-reveal" data-project-group="storefronts" aria-labelledby="storefronts-title">
@@ -869,7 +881,18 @@ const services = [
 
       const projectFilters = [...document.querySelectorAll("[data-project-filter]")];
       const projectFilterDock = document.querySelector(".project-filters");
+      const projectHero = document.querySelector(".project-hero");
       const projectGroups = [...document.querySelectorAll("[data-project-group]")];
+
+      if (projectFilterDock && projectHero && "IntersectionObserver" in window) {
+        const projectDockObserver = new IntersectionObserver(([entry]) => {
+          if (entry.target.closest(".tab-panel")?.hidden) return;
+          const isDocked = !entry.isIntersecting;
+          projectFilterDock.classList.toggle("is-bottom-docked", isDocked);
+          root.classList.toggle("project-filters-pinned", isDocked);
+        });
+        projectDockObserver.observe(projectHero);
+      }
 
       if (projectFilterDock && !prefersReducedMotion && matchMedia("(pointer: fine)").matches) {
         const resetDock = () => {
@@ -1053,6 +1076,11 @@ const services = [
           selectedPanel.classList.remove("is-entering");
           requestAnimationFrame(() => selectedPanel.classList.add("is-entering"));
           window.setTimeout(() => selectedPanel.classList.remove("is-entering"), 1100);
+        }
+
+        if (tabName !== "projects") {
+          projectFilterDock?.classList.remove("is-bottom-docked");
+          root.classList.remove("project-filters-pinned");
         }
 
         window.scrollTo(0, 0);
