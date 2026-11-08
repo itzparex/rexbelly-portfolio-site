@@ -2465,7 +2465,13 @@ p {
   }
 
   .dashboard-profile h2 {
-    font-size: 19px;
+    font-size: clamp(12px, 4vw, 19px);
+    overflow-wrap: normal;
+    white-space: nowrap;
+  }
+
+  .profile-name-break {
+    display: none;
   }
 
   .profile-rule {
