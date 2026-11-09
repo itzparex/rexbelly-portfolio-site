@@ -867,14 +867,14 @@ p {
 }
 
 .project-filters-slot {
+  position: sticky;
+  z-index: 4;
+  top: 16px;
   min-height: 82px;
   margin-bottom: 54px;
 }
 
 .project-filters {
-  position: sticky;
-  z-index: 5;
-  top: 16px;
   display: flex;
   width: fit-content;
   max-width: 100%;
@@ -887,28 +887,6 @@ p {
   background: color-mix(in srgb, var(--surface), transparent 15%);
   box-shadow: 0 12px 34px color-mix(in srgb, var(--ink), transparent 92%);
   backdrop-filter: blur(18px) saturate(1.35);
-}
-
-.project-filters.is-bottom-docked {
-  position: fixed;
-  z-index: 35;
-  top: auto;
-  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
-  left: calc(var(--sidebar) + (100vw - var(--sidebar)) / 2);
-  margin: 0;
-  transform: translate(-50%, 0);
-  animation: project-dock-arrive 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-
-@keyframes project-dock-arrive {
-  from {
-    opacity: 0;
-    transform: translate(-50%, 18px) scale(0.97);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0) scale(1);
-  }
 }
 
 @supports not (backdrop-filter: blur(1px)) {
@@ -3094,14 +3072,6 @@ p {
     bottom: calc(96px + env(safe-area-inset-bottom, 0px));
   }
 
-  .project-filters-pinned.mobile-nav-pinned .project-filters.is-bottom-docked {
-    bottom: calc(92px + env(safe-area-inset-bottom, 0px));
-  }
-
-  .project-filters-pinned.mobile-nav-pinned .portfolio-chat {
-    bottom: calc(176px + env(safe-area-inset-bottom, 0px));
-  }
-
   .mobile-nav::-webkit-scrollbar {
     display: none;
   }
@@ -3156,12 +3126,12 @@ p {
   }
 
   .project-filters-slot {
+    top: 65px;
     min-height: 78px;
     margin-bottom: 42px;
   }
 
   .project-filters {
-    top: 65px;
     width: 100%;
     justify-content: flex-start;
     gap: 2px;
@@ -3171,15 +3141,6 @@ p {
 
   .project-filters::-webkit-scrollbar {
     display: none;
-  }
-
-  .project-filters.is-bottom-docked {
-    top: auto;
-    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
-    left: 50%;
-    width: min(390px, calc(100vw - 28px));
-    justify-content: space-between;
-    overflow: visible;
   }
 
   .project-filter {
@@ -3212,10 +3173,6 @@ p {
       width: 16px;
       height: 16px;
     }
-  }
-
-  .project-filters-pinned .portfolio-chat {
-    bottom: calc(106px + env(safe-area-inset-bottom, 0px));
   }
 
   .section-wrap,
@@ -4130,10 +4087,6 @@ p {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .project-filters.is-bottom-docked {
-    animation: none;
-  }
-
   .hero-highlight::after {
     animation: none;
     transform: scaleX(1);

@@ -1041,7 +1041,6 @@ const services = [
 
       const projectFilters = [...document.querySelectorAll("[data-project-filter]")];
       const projectFilterDock = document.querySelector(".project-filters");
-      const projectHero = document.querySelector(".project-hero");
       const projectGroups = [...document.querySelectorAll("[data-project-group]")];
       const mobileNavSlot = document.querySelector(".mobile-nav-slot");
       const mobileNav = document.querySelector(".mobile-nav");
@@ -1077,16 +1076,6 @@ const services = [
         updateMobileNavDock();
       });
       requestAnimationFrame(updateMobileNavDock);
-
-      if (projectFilterDock && projectHero && "IntersectionObserver" in window) {
-        const projectDockObserver = new IntersectionObserver(([entry]) => {
-          if (entry.target.closest(".tab-panel")?.hidden) return;
-          const isDocked = !entry.isIntersecting;
-          projectFilterDock.classList.toggle("is-bottom-docked", isDocked);
-          root.classList.toggle("project-filters-pinned", isDocked);
-        });
-        projectDockObserver.observe(projectHero);
-      }
 
       if (projectFilterDock && !prefersReducedMotion && matchMedia("(pointer: fine)").matches) {
         const resetDock = () => {
@@ -1284,11 +1273,6 @@ const services = [
           selectedPanel.classList.remove("is-entering");
           requestAnimationFrame(() => selectedPanel.classList.add("is-entering"));
           window.setTimeout(() => selectedPanel.classList.remove("is-entering"), 1100);
-        }
-
-        if (tabName !== "projects") {
-          projectFilterDock?.classList.remove("is-bottom-docked");
-          root.classList.remove("project-filters-pinned");
         }
 
         window.scrollTo(0, 0);
