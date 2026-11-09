@@ -372,7 +372,7 @@ html.has-brand-cursor select {
 
 .sidebar-socials {
   display: flex;
-  gap: 8px;
+  gap: 6px;
 }
 
 .sidebar-socials a {
@@ -392,6 +392,17 @@ html.has-brand-cursor select {
   transform: translateY(-2px);
   border-color: var(--accent);
   color: var(--accent);
+}
+
+.sidebar-socials .sidebar-social-link--brand {
+  border-color: transparent;
+  background: transparent;
+}
+
+.sidebar-socials svg {
+  display: block;
+  width: 23px;
+  height: 23px;
 }
 
 .copyright {
@@ -2057,9 +2068,9 @@ p {
 
 .sidebar-socials a,
 .theme-toggle--icon {
-  width: 37px;
-  height: 37px;
-  min-height: 37px;
+  width: 34px;
+  height: 34px;
+  min-height: 34px;
   justify-content: center;
   padding: 0;
   border: 1px solid var(--line);
@@ -2932,6 +2943,22 @@ p {
 
   .sidebar {
     padding-inline: 15px;
+  }
+
+  .sidebar-socials {
+    gap: 5px;
+  }
+
+  .sidebar-socials a,
+  .theme-toggle--icon {
+    width: 29px;
+    height: 29px;
+    min-height: 29px;
+  }
+
+  .sidebar-socials svg {
+    width: 21px;
+    height: 21px;
   }
 
   .dashboard-grid {
