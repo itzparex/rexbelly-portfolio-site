@@ -126,6 +126,11 @@ html.has-brand-cursor select {
   will-change: left, top, transform;
 }
 
+.brand-cursor,
+.brand-cursor * {
+  pointer-events: none !important;
+}
+
 .brand-cursor.is-visible {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
