@@ -1206,6 +1206,8 @@ const services = [
       const serviceDialogTitle = document.querySelector("#service-dialog-title");
       const serviceDialogContent = document.querySelector("#service-dialog-content");
       const serviceContactInput = document.querySelector("#contact-service");
+      const brandCursorParent = brandCursor?.parentNode;
+      const brandCursorNextSibling = brandCursor?.nextSibling;
       let serviceDialogOpener = null;
       let serviceDialogCloseReason = "restore";
       let serviceContactPending = false;
@@ -1278,6 +1280,7 @@ const services = [
 
         const firstTopic = serviceDialogContent.querySelector("[data-service-topic-tab]")?.dataset.serviceTopicTab;
         if (firstTopic) setServiceTopic(topic || firstTopic);
+        if (customCursorEnabled) serviceDialog.append(brandCursor);
         serviceDialog.showModal();
         serviceDialog.querySelector(".service-dialog-close").focus();
       };
@@ -1354,6 +1357,13 @@ const services = [
       });
 
       serviceDialog.addEventListener("close", () => {
+        if (customCursorEnabled && brandCursorParent) {
+          if (brandCursorNextSibling?.parentNode === brandCursorParent) {
+            brandCursorParent.insertBefore(brandCursor, brandCursorNextSibling);
+          } else {
+            brandCursorParent.append(brandCursor);
+          }
+        }
         if (serviceDialogCloseReason === "contact") {
           serviceDialogCloseReason = "restore";
           return;

@@ -3558,7 +3558,7 @@ p {
   max-height: min(84dvh, 760px);
   margin: auto;
   padding: 0;
-  overflow: hidden;
+  overflow: visible;
   border: 1px solid var(--line-strong);
   border-radius: 22px;
   color: var(--ink);
@@ -3576,6 +3576,8 @@ p {
   display: flex;
   max-height: min(84dvh, 760px);
   flex-direction: column;
+  overflow: hidden;
+  border-radius: inherit;
 }
 
 .service-dialog-header {
