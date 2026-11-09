@@ -3793,8 +3793,21 @@ p {
   color: var(--accent);
 }
 
-.service-dialog-content .service-contact-action {
+.service-dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
   margin-top: 23px;
+}
+
+.service-dialog-actions .roadmap-credit {
+  margin-right: auto;
+}
+
+.service-dialog-actions .service-contact-action {
+  margin-top: 0;
 }
 
 .research-roadmap {
