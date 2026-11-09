@@ -1707,6 +1707,32 @@ p {
   font-weight: 600;
 }
 
+.contact-selected-service {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  margin: 0 0 4px;
+  padding: 6px 12px;
+  border: 1px solid color-mix(in srgb, var(--accent), transparent 45%);
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--accent-wash);
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.contact-selected-service[hidden] {
+  display: none;
+}
+
+.contact-selected-service span {
+  color: var(--ink-soft);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
 .contact-form input,
 .contact-form textarea {
   width: 100%;

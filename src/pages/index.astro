@@ -792,6 +792,7 @@ const services = [
             </div>
             <form class="contact-form" id="contact-form">
               <input id="contact-service" name="service" type="hidden" value="" />
+              <p class="contact-selected-service" id="contact-selected-service" hidden><span>Service</span><strong id="contact-selected-service-name"></strong></p>
               <label for="contact-name">Your name</label>
               <input id="contact-name" name="name" autocomplete="name" placeholder="How should I address you?" required />
               <label for="contact-email">Email address</label>
@@ -1239,19 +1240,28 @@ const services = [
       const serviceDialogTitle = document.querySelector("#service-dialog-title");
       const serviceDialogContent = document.querySelector("#service-dialog-content");
       const serviceContactInput = document.querySelector("#contact-service");
+      const serviceSelectedNote = document.querySelector("#contact-selected-service");
+      const serviceSelectedName = document.querySelector("#contact-selected-service-name");
       const brandCursorParent = brandCursor?.parentNode;
       const brandCursorNextSibling = brandCursor?.nextSibling;
       let serviceDialogOpener = null;
       let serviceDialogCloseReason = "restore";
       let serviceContactPending = false;
 
+      const setContactService = (value) => {
+        if (serviceContactInput) serviceContactInput.value = value || "";
+        if (!serviceSelectedNote) return;
+        serviceSelectedNote.hidden = !value;
+        if (value && serviceSelectedName) serviceSelectedName.textContent = value;
+      };
+
       const activateTab = (tabName, { updateHistory = true, focus = false } = {}) => {
         const selectedPanel = tabPanels.get(tabName);
         if (!selectedPanel) return;
         setMobileNavDocked(false);
 
-        if (tabName === "contact" && !serviceContactPending && serviceContactInput) {
-          serviceContactInput.value = "";
+        if (tabName === "contact" && !serviceContactPending) {
+          setContactService("");
         }
 
         tabPanels.forEach((panel, name) => {
@@ -1298,6 +1308,40 @@ const services = [
         });
       };
 
+      const toggleRoadmapStep = (button) => {
+        const nextExpanded = button.getAttribute("aria-expanded") !== "true";
+        serviceDialogContent.querySelectorAll(".roadmap-step-toggle").forEach((item) => {
+          const expanded = item === button && nextExpanded;
+          item.setAttribute("aria-expanded", String(expanded));
+          const panel = document.getElementById(item.getAttribute("aria-controls"));
+          if (panel) panel.hidden = !expanded;
+        });
+      };
+
+      const openServiceContact = (serviceName) => {
+        setContactService(serviceName);
+        serviceDialogCloseReason = "contact";
+        serviceContactPending = true;
+        serviceDialog.close();
+        activateTab("contact");
+        serviceContactPending = false;
+        requestAnimationFrame(() => document.querySelector("#contact-message")?.focus());
+      };
+
+      const openExampleLink = (event, link) => {
+        if (event.defaultPrevented) return;
+        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        const url = link.getAttribute("href");
+        if (!url) return;
+
+        // Open the example explicitly so it works even when the browser blocks
+        // target="_blank". If the popup is refused, fall back to the native link.
+        const opened = window.open(url, "_blank");
+        if (!opened) return;
+        opened.opener = null;
+        event.preventDefault();
+      };
+
       const openServiceDialog = (serviceId, topic, title, opener) => {
         const template = document.querySelector(`#service-template-${serviceId}`);
         if (!title || !template || !serviceDialog || !serviceDialogContent) return;
@@ -1308,7 +1352,10 @@ const services = [
 
         const firstTopic = serviceDialogContent.querySelector("[data-service-topic-tab]")?.dataset.serviceTopicTab;
         if (firstTopic) setServiceTopic(topic || firstTopic);
-        if (customCursorEnabled) serviceDialog.append(brandCursor);
+        if (customCursorEnabled) {
+          brandCursor.style.pointerEvents = "none";
+          serviceDialog.append(brandCursor);
+        }
         serviceDialog.showModal();
         serviceDialog.querySelector(".service-dialog-close").focus();
       };
@@ -1324,33 +1371,51 @@ const services = [
         });
       });
 
-      serviceDialog.addEventListener("click", (event) => {
-        if (event.target === serviceDialog) serviceDialog.close();
+      // Dialog interactions are handled in the capture phase so they never depend on
+      // the click bubbling up to the <dialog> element.
+      document.addEventListener(
+        "click",
+        (event) => {
+          const target = event.target instanceof Element ? event.target : null;
+          if (!target || !serviceDialog || !serviceDialog.open) return;
+          if (!target.closest("#service-dialog")) return;
 
-        const topicButton = event.target.closest("[data-service-topic-tab]");
-        if (topicButton) setServiceTopic(topicButton.dataset.serviceTopicTab);
+          if (target === serviceDialog) {
+            const bounds = serviceDialog.getBoundingClientRect();
+            const outside =
+              event.clientX < bounds.left ||
+              event.clientX > bounds.right ||
+              event.clientY < bounds.top ||
+              event.clientY > bounds.bottom;
+            if (outside) serviceDialog.close();
+            return;
+          }
 
-        const roadmapButton = event.target.closest(".roadmap-step-toggle");
-        if (roadmapButton) {
-          const nextExpanded = roadmapButton.getAttribute("aria-expanded") !== "true";
-          serviceDialogContent.querySelectorAll(".roadmap-step-toggle").forEach((button) => {
-            const expanded = button === roadmapButton && nextExpanded;
-            button.setAttribute("aria-expanded", String(expanded));
-            document.getElementById(button.getAttribute("aria-controls")).hidden = !expanded;
-          });
-        }
+          const topicButton = target.closest("[data-service-topic-tab]");
+          if (topicButton) {
+            setServiceTopic(topicButton.dataset.serviceTopicTab);
+            return;
+          }
 
-        const contactButton = event.target.closest("[data-service-contact]");
-        if (contactButton) {
-          serviceContactInput.value = contactButton.dataset.serviceContact;
-          serviceDialogCloseReason = "contact";
-          serviceContactPending = true;
-          serviceDialog.close();
-          activateTab("contact");
-          serviceContactPending = false;
-          requestAnimationFrame(() => document.querySelector("#contact-message").focus());
-        }
-      });
+          const roadmapButton = target.closest(".roadmap-step-toggle");
+          if (roadmapButton) {
+            toggleRoadmapStep(roadmapButton);
+            return;
+          }
+
+          const exampleLink = target.closest(".service-example-links a");
+          if (exampleLink) {
+            openExampleLink(event, exampleLink);
+            return;
+          }
+
+          const contactButton = target.closest("[data-service-contact]");
+          if (contactButton) {
+            openServiceContact(contactButton.dataset.serviceContact);
+          }
+        },
+        true,
+      );
 
       serviceDialog.addEventListener("keydown", (event) => {
         if (event.key === "Escape") {
