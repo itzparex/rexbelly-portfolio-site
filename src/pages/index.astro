@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import "../styles/area-animations.css";
+import "../styles/techno-section.css";
 import {
   siClaude,
   siClickup,
@@ -390,17 +391,18 @@ const services = [
 
       <main id="main">
         <div class="tab-panel" id="panel-home" role="tabpanel" aria-labelledby="tab-home" tabindex="0">
-        <section class="hero section-wrap" id="home" aria-labelledby="hero-title">
-          <div class="hero-header">
+        <section class="hero section-wrap techno-section" id="home" aria-labelledby="hero-title">
+          <div class="hero-header techno-card">
             <div>
-              <span class="eyebrow">WEB DESIGN · SHOPIFY · MARKETING</span>
-              <h1 id="hero-title">I design and build<br /><span class="hero-highlight">websites and Shopify stores.</span></h1>
+              <span class="techno-badge">WEB DESIGN · SHOPIFY · MARKETING</span>
+              <h1 class="techno-title" id="hero-title">I design and build<br />websites and Shopify stores.</h1>
               <p class="hero-subtitle">I also research what drives customers to buy and turn those insights into copy and visuals for product pages, emails, and ads.</p>
+              <div class="techno-actions">
+                <a class="techno-cta techno-cta--primary" href="#projects">View selected work <span aria-hidden="true">↗</span></a>
+                <a class="techno-cta" href="#contact">Let’s talk <span aria-hidden="true">↗</span></a>
+              </div>
             </div>
-            <a class="resource-button" href="#projects"><span aria-hidden="true">✦</span> View selected work</a>
           </div>
-          <div class="hero-orbit hero-orbit--one" aria-hidden="true"></div>
-          <div class="hero-orbit hero-orbit--two" aria-hidden="true"></div>
         </section>
 
         <section class="toolbelt" aria-label="Tools and technologies">
