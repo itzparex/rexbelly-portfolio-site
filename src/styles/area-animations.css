@@ -1,0 +1,209 @@
+.hero h1 .hero-highlight {
+  color: var(--ink);
+  background: linear-gradient(var(--highlight-orange), var(--highlight-orange)) left center / 0% 100% no-repeat;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  animation: hero-highlight-sweep 680ms var(--ease) 120ms both;
+}
+
+.hero h1 .hero-highlight::after {
+  display: none;
+}
+
+@keyframes hero-highlight-sweep {
+  from {
+    color: var(--ink);
+    background-size: 0% 100%;
+  }
+  to {
+    color: #fffaf3;
+    background-size: 100% 100%;
+  }
+}
+
+.hero-subtitle {
+  animation: hero-intro-enter 420ms var(--ease) 180ms both;
+}
+
+.hero .resource-button {
+  animation: hero-intro-enter 420ms var(--ease) 260ms both;
+}
+
+@keyframes hero-intro-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.has-project-reveal .project-reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 460ms var(--ease), transform 460ms var(--ease);
+}
+
+.has-project-reveal .project-reveal.is-visible,
+.project-group.is-filtered-in .project-reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.side-nav,
+.mobile-nav {
+  position: relative;
+  isolation: isolate;
+}
+
+.side-nav::before,
+.mobile-nav::before {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: var(--active-width, 0px);
+  height: var(--active-height, 0px);
+  border-radius: var(--radius-control, 12px);
+  background: var(--surface-soft);
+  content: "";
+  opacity: 0;
+  transform: translate(var(--active-x, 0px), var(--active-y, 0px));
+  transition:
+    transform 220ms var(--ease),
+    width 220ms var(--ease),
+    height 220ms var(--ease);
+}
+
+.side-nav.has-motion-indicator::before,
+.mobile-nav.has-motion-indicator::before {
+  opacity: 1;
+}
+
+.side-nav.has-motion-indicator .nav-link.is-active,
+.mobile-nav.has-motion-indicator button.is-active {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+
+.tab-panel.is-motion-entering {
+  animation: tab-content-enter 220ms ease-out both;
+}
+
+@keyframes tab-content-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.button,
+.resource-button,
+button {
+  transition:
+    transform 160ms var(--ease),
+    color 160ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+@media (hover: hover) {
+  .button:hover:not(:disabled),
+  .resource-button:hover,
+  button:hover:not(:disabled) {
+    transform: translateY(-1px);
+  }
+}
+
+.button:active,
+.resource-button:active,
+button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.service-dialog[open] {
+  animation: dialog-enter 220ms var(--ease) both;
+}
+
+@keyframes dialog-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.chat-panel:not([hidden]) {
+  animation: chat-appear 220ms var(--ease) both;
+}
+
+.showcase-visual img,
+.funnel-card-visual img {
+  transition: transform 380ms var(--ease);
+}
+
+.showcase-glass i,
+.funnel-card-open {
+  display: inline-block;
+  transition: transform 180ms var(--ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .showcase-visual:hover img,
+  .showcase-card:hover .showcase-visual img,
+  .funnel-card-visual:hover img,
+  .funnel-card:hover .funnel-card-visual img {
+    transform: scale(1.035);
+  }
+
+  .showcase-visual:hover .showcase-glass i,
+  .showcase-card:hover .showcase-glass i,
+  .funnel-card-visual:hover .funnel-card-open,
+  .funnel-card:hover .funnel-card-open {
+    transform: translate(2px, -2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  .hero h1 .hero-highlight {
+    color: #fffaf3;
+    background-size: 100% 100%;
+  }
+
+  .has-project-reveal .project-reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .button:hover,
+  .resource-button:hover,
+  button:hover,
+  .button:active,
+  .resource-button:active,
+  button:active,
+  .showcase-visual:hover img,
+  .showcase-card:hover .showcase-visual img,
+  .funnel-card-visual:hover img,
+  .funnel-card:hover .funnel-card-visual img {
+    transform: none;
+  }
+}

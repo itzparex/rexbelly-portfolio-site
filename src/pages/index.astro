@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import "../styles/area-animations.css";
 import {
   siClaude,
   siClickup,
@@ -253,7 +254,7 @@ const services = [
       property="og:description"
       content="Business websites, Shopify development, customer research, direct-response copy, email marketing, and graphic design."
     />
-    <meta property="og:image" content="https://rexbelly-portfolio-site.vercel.app/rex-portrait.jpg" />
+    <meta property="og:image" content="https://rexbelly-portfolio-site.vercel.app/rex-portrait-640.webp" />
     <meta
       property="og:image:alt"
       content="Rexbelly P. Zipagan — Shopify developer and web design engineer"
@@ -267,7 +268,7 @@ const services = [
       name="twitter:description"
       content="Business websites, Shopify development, customer research, direct-response copy, email marketing, and graphic design."
     />
-    <meta name="twitter:image" content="https://rexbelly-portfolio-site.vercel.app/rex-portrait.jpg" />
+    <meta name="twitter:image" content="https://rexbelly-portfolio-site.vercel.app/rex-portrait-640.webp" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>Rexbelly P. Zipagan | Web Designer &amp; Developer</title>
     <script type="application/ld+json">
@@ -277,7 +278,7 @@ const services = [
         "name": "Rexbelly P. Zipagan",
         "alternateName": "Rex",
         "jobTitle": "Web Designer & Developer",
-        "image": "https://rexbelly-portfolio-site.vercel.app/rex-portrait.jpg",
+        "image": "https://rexbelly-portfolio-site.vercel.app/rex-portrait-640.webp",
         "url": "https://rexbelly-portfolio-site.vercel.app/",
         "email": "rexbelly.zipagan@gmail.com",
         "knowsAbout": [
@@ -438,7 +439,9 @@ const services = [
             <article class="dashboard-card dashboard-profile">
               <div class="dashboard-portrait-wrap">
                 <img
-                  src="/rex-portrait.jpg"
+                  src="/rex-portrait-320.webp"
+                  srcset="/rex-portrait-320.webp 320w, /rex-portrait-640.webp 640w"
+                  sizes="(max-width: 760px) 84px, (max-width: 1100px) 130px, 152px"
                   alt="Portrait of Rexbelly P. Zipagan"
                   width="768"
                   height="768"
@@ -932,7 +935,7 @@ const services = [
         hidden
       >
         <header class="chat-header">
-          <img src="/aris-chat-avatar.png" alt="" width="44" height="44" />
+          <img src="/aris-chat-avatar.webp" alt="" width="44" height="44" />
           <div class="chat-header-copy">
             <h2 id="chat-title">A.R.I.S.</h2>
             <p id="chat-description"><span aria-hidden="true"></span> Rex’s portfolio guide</p>
@@ -968,7 +971,7 @@ const services = [
         aria-controls="chat-panel"
         aria-expanded="false"
       >
-        <img src="/aris-chat-avatar.png" alt="" width="72" height="72" />
+        <img src="/aris-chat-avatar.webp" alt="" width="72" height="72" />
         <span class="chat-launcher-status" aria-hidden="true"></span>
         <span class="chat-tooltip" aria-hidden="true">How Can I Help?</span>
       </button>
@@ -978,6 +981,8 @@ const services = [
       <span class="brand-cursor-star">✦</span>
     </div>
     <script>
+      import "../scripts/area-animations.js";
+
       const root = document.documentElement;
       const themeButtons = document.querySelectorAll(".theme-toggle");
       const themeStates = document.querySelectorAll(".theme-state");
