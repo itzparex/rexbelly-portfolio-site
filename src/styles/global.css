@@ -2738,17 +2738,21 @@ p {
 
 .service-mini-list {
   display: grid;
-  gap: 6px;
+  min-height: 0;
+  flex: 1 1 auto;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 5px;
 }
 
 .service-mini {
   display: flex;
-  min-height: 36px;
+  min-height: 0;
   align-items: center;
-  gap: 7px;
-  padding: 5px 7px;
+  gap: 9px;
+  padding: 7px 9px;
   border: 1px solid var(--line);
-  border-radius: 9px;
+  border-radius: 10px;
   color: var(--ink);
   background: var(--surface);
   cursor: pointer;
@@ -2766,11 +2770,11 @@ p {
 
 .service-mini-icon {
   display: grid;
-  width: 23px;
-  height: 23px;
-  flex: 0 0 23px;
+  width: 27px;
+  height: 27px;
+  flex: 0 0 27px;
   place-items: center;
-  border-radius: 6px;
+  border-radius: 7px;
   color: var(--accent);
   background: var(--accent-wash);
 }
@@ -3401,7 +3405,7 @@ p {
   }
 
   .service-mini {
-    min-height: 39px;
+    min-height: 42px;
     font-size: 9px;
   }
 
