@@ -556,20 +556,8 @@
 
 .techno-home .dashboard-projects .dashboard-card-link { margin-top: auto; }
 
-.techno-home .portfolio-chat {
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(10px) scale(0.92);
-  transition: opacity 220ms ease, transform 220ms ease;
-}
-
-.techno-home.has-scrolled-home .portfolio-chat {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0) scale(1);
-}
-
-.techno-home .chat-launcher { width: 58px; height: 58px; border-width: 1px; }
+.techno-home .chat-launcher,
+.chat-launcher { width: 58px; height: 58px; border-width: 1px; }
 
 .techno-cta {
   display: inline-flex;
