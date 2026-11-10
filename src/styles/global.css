@@ -1637,6 +1637,30 @@ p {
   letter-spacing: 0.12em;
 }
 
+.about-principles {
+  margin-top: 18px;
+  padding: 15px 0 4px;
+  border-top: 1px solid var(--line);
+}
+
+.about-principles > .eyebrow {
+  color: var(--accent);
+  font-size: 8px;
+  letter-spacing: 0.13em;
+}
+
+.about-principles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.about-principles-grid div { display: grid; gap: 4px; }
+.about-principles-grid strong { font-size: 10px; }
+.about-principles-grid span { color: var(--ink-faint); font-size: 9px; line-height: 1.55; }
+.quote-card--secondary { margin-top: 12px; }
+
 .contact-section {
   padding: 94px 0 92px;
   border-top: 1px solid var(--line);
@@ -1960,6 +1984,9 @@ p {
   .about-facts { gap: 8px; }
   .about-facts strong { font-size: 10px; }
   .about-facts span { font-size: 8px; }
+  .about-principles-grid { grid-template-columns: 1fr; gap: 10px; }
+  .about-principles-grid div { grid-template-columns: 112px 1fr; align-items: baseline; gap: 8px; }
+  .about-monogram { opacity: 0.78; }
   .contact-section { padding: 73px 0 70px; }
   .contact-wrap { grid-template-columns: 1fr; gap: 31px; }
   .contact-wrap h2 { font-size: clamp(44px, 11vw, 60px); }
