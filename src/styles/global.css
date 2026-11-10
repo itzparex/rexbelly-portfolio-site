@@ -1615,6 +1615,12 @@ p {
 .about-start-link span { transition: transform 180ms ease; }
 .about-start-link:hover span { transform: translate(2px, -2px); }
 
+.about-client-start {
+  margin-top: 18px;
+  padding-top: 15px;
+  border-top: 1px solid var(--line);
+}
+
 .about-copy h2 {
   font-size: clamp(34px, 3.7vw, 51px);
 }
