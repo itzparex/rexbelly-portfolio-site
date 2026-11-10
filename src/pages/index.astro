@@ -1458,6 +1458,14 @@ const services = [
         });
       });
 
+      document.querySelectorAll(".service-row").forEach((row) => {
+        row.addEventListener("click", (event) => {
+          const target = event.target instanceof Element ? event.target : null;
+          if (target?.closest(".service-detail-panel a, .service-detail-panel button, [data-service-toggle]")) return;
+          row.querySelector("[data-service-toggle]")?.click();
+        });
+      });
+
       serviceDialog.addEventListener("click", (event) => {
         if (event.target !== serviceDialog) return;
         const bounds = serviceDialog.getBoundingClientRect();
@@ -1579,7 +1587,7 @@ const services = [
       requestAnimationFrame(updateScrollProgress);
 
       if (!prefersReducedMotion && "IntersectionObserver" in window) {
-        const revealTargets = document.querySelectorAll(".toolbelt, .dashboard-card, .services-section .section-heading, .about-section .about-copy, .contact-intro-card");
+        const revealTargets = document.querySelectorAll(".toolbelt, .dashboard-card, .services-section .section-heading, .service-row, .about-section .about-copy, .contact-intro-card");
         const revealObserver = new IntersectionObserver((entries, observer) => {
           entries.forEach((entry) => {
             if (!entry.isIntersecting) return;
