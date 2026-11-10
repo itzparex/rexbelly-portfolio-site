@@ -1525,10 +1525,22 @@ p {
 .service-detail-panel {
   grid-column: 1 / -1;
   display: grid;
+  max-height: 0;
   gap: 22px;
   margin: 2px 0 0 64px;
-  padding: 22px 0 25px;
+  overflow: hidden;
+  padding: 0;
   border-top: 1px solid var(--line);
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: max-height 260ms ease, opacity 220ms ease, transform 260ms ease, padding 260ms ease;
+}
+
+.service-detail-panel.is-open {
+  max-height: 760px;
+  padding: 22px 0 25px;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .service-detail-outcome { max-width: 700px; }
@@ -3570,6 +3582,13 @@ p {
 
 .tab-panel[hidden] {
   display: none !important;
+}
+
+.tab-panel:not([hidden]) { animation: tab-panel-enter 360ms cubic-bezier(0.2, 0.7, 0.25, 1) both; }
+
+@keyframes tab-panel-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .mobile-nav button:focus-visible {

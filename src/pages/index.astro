@@ -1443,7 +1443,16 @@ const services = [
             const otherRow = other.closest(".service-row");
             other.setAttribute("aria-expanded", String(other === trigger && !expanded));
             otherRow?.classList.toggle("is-expanded", other === trigger && !expanded);
-            if (otherPanel) otherPanel.hidden = !(other === trigger && !expanded);
+            if (otherPanel) {
+              const shouldOpen = other === trigger && !expanded;
+              if (shouldOpen) {
+                otherPanel.hidden = false;
+                requestAnimationFrame(() => otherPanel.classList.add("is-open"));
+              } else {
+                otherPanel.classList.remove("is-open");
+                window.setTimeout(() => { otherPanel.hidden = true; }, 220);
+              }
+            }
           });
           if (!expanded) requestAnimationFrame(() => row.scrollIntoView({ behavior: "smooth", block: "nearest" }));
         });
@@ -1568,6 +1577,21 @@ const services = [
       window.addEventListener("scroll", updateScrollProgress, { passive: true });
       window.addEventListener("resize", updateScrollProgress);
       requestAnimationFrame(updateScrollProgress);
+
+      if (!prefersReducedMotion && "IntersectionObserver" in window) {
+        const revealTargets = document.querySelectorAll(".toolbelt, .dashboard-card, .services-section .section-heading, .about-section .about-copy, .contact-intro-card");
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-revealed");
+            observer.unobserve(entry.target);
+          });
+        }, { threshold: 0.12, rootMargin: "0px 0px -30px" });
+        revealTargets.forEach((target) => {
+          target.classList.add("scroll-reveal");
+          revealObserver.observe(target);
+        });
+      }
 
       const visitCount = document.querySelector("#site-visit-count");
       const updateVisitCount = async () => {
