@@ -651,6 +651,7 @@ const services = [
                   </a>
                   <div class="showcase-copy">
                     <div class="showcase-copy-heading"><span class="showcase-index">0{index + 1}</span><h4>{project.name}</h4></div>
+                    <p>{project.myRole ?? project.description}</p>
                     {project.cardRoles && <div class="role-tags">{project.cardRoles.map((role) => <span>{role}</span>)}</div>}
                   </div>
                 </article>
@@ -672,6 +673,7 @@ const services = [
                   </a>
                   <div class="showcase-copy">
                     <div class="showcase-copy-heading"><span class="showcase-index">0{index + 1}</span><h4>{project.name}</h4></div>
+                    <p>{project.myRole ?? project.description}</p>
                     {project.cardRoles && <div class="role-tags">{project.cardRoles.map((role) => <span>{role}</span>)}</div>}
                   </div>
                 </article>
@@ -712,6 +714,7 @@ const services = [
                           <div class="funnel-card-copy">
                             <span class="funnel-card-brand">{funnelGroup.name} <i aria-hidden="true">·</i> PRODUCT PAGE</span>
                             <h5>{project.name}</h5>
+                            <p>{project.description}</p>
                             <div class="role-tags"><span>Direct-response · Shopify</span></div>
                           </div>
                         </article>
