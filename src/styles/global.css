@@ -1442,6 +1442,11 @@ p {
   margin-bottom: 35px;
 }
 
+.services-section .section-heading h2 {
+  font-size: clamp(44px, 5vw, 66px);
+  line-height: 1.04;
+}
+
 .service-list {
   display: grid;
   gap: 20px;
@@ -2083,6 +2088,7 @@ p {
   .section-kicker { margin-bottom: 13px; }
   .section-intro { max-width: 440px; font-size: 12px; }
   .services-section .section-heading { margin-bottom: 24px; }
+  .services-section .section-heading h2 { font-size: clamp(36px, 10vw, 52px); }
   .service-row {
     grid-template-columns: 25px minmax(0, 1fr) 18px;
     gap: 10px;
