@@ -1346,6 +1346,22 @@ const services = [
         serviceDialogTitle.textContent = title;
         serviceDialogContent.replaceChildren(template.content.cloneNode(true));
 
+        // Bind controls on the freshly-cloned dialog content. Keeping these
+        // handlers on the controls themselves avoids click retargeting issues
+        // with native modal dialogs and preserves normal link behavior.
+        serviceDialogContent.querySelectorAll("[data-service-topic-tab]").forEach((button) => {
+          button.addEventListener("click", () => setServiceTopic(button.dataset.serviceTopicTab));
+        });
+        serviceDialogContent.querySelectorAll(".roadmap-step-toggle").forEach((button) => {
+          button.addEventListener("click", () => toggleRoadmapStep(button));
+        });
+        serviceDialogContent.querySelectorAll(".service-example-links a").forEach((link) => {
+          link.addEventListener("click", (event) => openExampleLink(event, link));
+        });
+        serviceDialogContent.querySelectorAll("[data-service-contact]").forEach((button) => {
+          button.addEventListener("click", () => openServiceContact(button.dataset.serviceContact));
+        });
+
         const firstTopic = serviceDialogContent.querySelector("[data-service-topic-tab]")?.dataset.serviceTopicTab;
         if (firstTopic) setServiceTopic(topic || firstTopic);
         if (customCursorEnabled) {
@@ -1367,92 +1383,16 @@ const services = [
         });
       });
 
-      const dialogControlSelector =
-        "[data-service-topic-tab], .roadmap-step-toggle, [data-service-contact], .service-example-links a";
-
-      const findDialogControl = (event) => {
-        const path = typeof event.composedPath === "function" ? event.composedPath() : [];
-        for (const node of path) {
-          if (!(node instanceof Element)) continue;
-          if (!node.matches(dialogControlSelector)) continue;
-          if (serviceDialog.contains(node)) return node;
-        }
-
-        const target = event.target instanceof Element ? event.target : null;
-        if (!target) return null;
-        const matched = target.closest(dialogControlSelector);
-        if (matched && serviceDialog.contains(matched)) return matched;
-
-        // Some browsers report the <dialog> itself as the click target for
-        // controls inside a modal dialog. Match by pointer position instead.
-        if (!event.clientX && !event.clientY) return null;
-        let best = null;
-        let bestArea = Infinity;
-        serviceDialogContent.querySelectorAll(dialogControlSelector).forEach((element) => {
-          const rect = element.getBoundingClientRect();
-          if (
-            event.clientX < rect.left ||
-            event.clientX > rect.right ||
-            event.clientY < rect.top ||
-            event.clientY > rect.bottom
-          ) {
-            return;
-          }
-          const area = rect.width * rect.height;
-          if (area < bestArea) {
-            best = element;
-            bestArea = area;
-          }
-        });
-        return best;
-      };
-
-      // Dialog interactions are handled in the capture phase so they never depend on
-      // the click bubbling up to the <dialog> element.
-      document.addEventListener(
-        "click",
-        (event) => {
-          if (!serviceDialog || !serviceDialog.open) return;
-          const target = event.target instanceof Element ? event.target : null;
-          if (!target) return;
-
-          const control = findDialogControl(event);
-          if (control) {
-            if (control.matches("[data-service-topic-tab]")) {
-              setServiceTopic(control.dataset.serviceTopicTab);
-              return;
-            }
-
-            if (control.matches(".roadmap-step-toggle")) {
-              toggleRoadmapStep(control);
-              return;
-            }
-
-            if (control.matches(".service-example-links a")) {
-              openExampleLink(event, control);
-              return;
-            }
-
-            if (control.matches("[data-service-contact]")) {
-              openServiceContact(control.dataset.serviceContact);
-            }
-            return;
-          }
-
-          // Only a click on the backdrop closes the dialog. Clicks that land inside
-          // the dialog must never dismiss it.
-          if (target === serviceDialog) {
-            const bounds = serviceDialog.getBoundingClientRect();
-            const outside =
-              event.clientX < bounds.left ||
-              event.clientX > bounds.right ||
-              event.clientY < bounds.top ||
-              event.clientY > bounds.bottom;
-            if (outside) serviceDialog.close();
-          }
-        },
-        true,
-      );
+      serviceDialog.addEventListener("click", (event) => {
+        if (event.target !== serviceDialog) return;
+        const bounds = serviceDialog.getBoundingClientRect();
+        const outside =
+          event.clientX < bounds.left ||
+          event.clientX > bounds.right ||
+          event.clientY < bounds.top ||
+          event.clientY > bounds.bottom;
+        if (outside) serviceDialog.close();
+      });
 
       serviceDialog.addEventListener("keydown", (event) => {
         if (event.key === "Escape") {
