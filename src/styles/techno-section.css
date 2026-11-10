@@ -528,6 +528,10 @@
   min-height: 0;
   flex: 1 1 auto;
   height: auto;
+  border: 1px solid var(--techno-border);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 14px 34px color-mix(in srgb, var(--techno-bg), transparent 35%);
 }
 
 .techno-actions {
