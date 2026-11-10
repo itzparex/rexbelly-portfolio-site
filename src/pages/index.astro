@@ -787,7 +787,7 @@ const services = [
         <div class="tab-panel" id="panel-contact" role="tabpanel" aria-labelledby="tab-contact" tabindex="0" hidden>
         <section class="contact-section" id="contact" aria-labelledby="contact-title">
           <div class="section-wrap contact-wrap">
-            <div>
+            <div class="contact-intro-card">
               <span class="eyebrow section-kicker">04 / YOUR NEXT MOVE</span>
               <h2 id="contact-title">Tell me what you’re working on.</h2>
               <p class="contact-copy">Tell me what you’re building, what you’d like help with, and when you’d like to get started. If you already have a website or a brief, feel free to include it.</p>
@@ -795,7 +795,8 @@ const services = [
                 rexbelly.zipagan@gmail.com <span aria-hidden="true">↗</span>
               </a>
             </div>
-            <form class="contact-form" id="contact-form">
+            <div class="contact-lower-grid">
+              <form class="contact-form" id="contact-form">
               <input id="contact-service" name="service" type="hidden" value="" />
               <p class="contact-selected-service" id="contact-selected-service" hidden><span>Service</span><strong id="contact-selected-service-name"></strong></p>
               <label for="contact-name">Your name</label>
@@ -806,8 +807,8 @@ const services = [
               <textarea id="contact-message" name="message" rows="3" placeholder="What are you looking to build?" required></textarea>
               <button class="button button--primary" type="submit">Open email draft <span aria-hidden="true">↗</span></button>
               <p class="form-note" id="form-note" aria-live="polite">Opens a pre-filled message in your email app.</p>
-            </form>
-            <section class="contact-calendar" aria-labelledby="contact-calendar-title">
+              </form>
+              <section class="contact-calendar" aria-labelledby="contact-calendar-title">
               <div class="contact-calendar-heading">
                 <div>
                   <span class="eyebrow">30-MINUTE INTRO CALL</span>
@@ -822,7 +823,8 @@ const services = [
                 loading="lazy"
                 allow="payment"
               ></iframe>
-            </section>
+              </section>
+            </div>
           </div>
         </section>
         </div>

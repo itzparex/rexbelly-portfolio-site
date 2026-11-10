@@ -386,6 +386,69 @@
 :root.techno-home .contact-email,
 :root.techno-home .service-arrow { color: var(--techno-accent); }
 
+:root.techno-home .contact-wrap {
+  display: block;
+}
+
+:root.techno-home .contact-intro-card {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  margin-bottom: 24px;
+  padding: clamp(28px, 5vw, 70px) clamp(24px, 5vw, 72px);
+  overflow: hidden;
+  border: 1px solid var(--techno-border);
+  border-radius: 24px;
+  background:
+    radial-gradient(ellipse at 78% 40%, var(--hero-glow-blue), transparent 55%),
+    var(--techno-card);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 30px var(--techno-shadow);
+}
+
+:root.techno-home .contact-intro-card::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, var(--hero-glow-cyan), transparent);
+  content: "";
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+:root.techno-home .contact-intro-card .contact-copy {
+  max-width: 72ch;
+  margin-right: clamp(18px, 5vw, 96px);
+  margin-left: clamp(18px, 5vw, 96px);
+}
+
+:root.techno-home .contact-intro-card h2,
+:root.techno-home .contact-intro-card .contact-email,
+:root.techno-home .contact-intro-card .section-kicker {
+  margin-left: clamp(18px, 5vw, 96px);
+}
+
+:root.techno-home .contact-lower-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  align-items: start;
+  gap: 24px;
+}
+
+:root.techno-home .contact-lower-grid > :is(.contact-form, .contact-calendar) {
+  min-width: 0;
+  margin: 0;
+}
+
+:root.techno-home .contact-form {
+  padding: clamp(24px, 3vw, 42px);
+}
+
+:root.techno-home .contact-calendar {
+  padding: clamp(24px, 3vw, 42px);
+}
+
 .techno-actions {
   display: flex;
   flex-wrap: wrap;
@@ -449,6 +512,11 @@
   .hero .techno-card { padding: 24px 18px; border-radius: 16px; }
   .hero .techno-title { font-size: clamp(28px, 7vw, 48px); }
   .techno-badge { font-size: 9px; letter-spacing: 0.04em; }
+  :root.techno-home .contact-lower-grid { grid-template-columns: 1fr; }
+  :root.techno-home .contact-intro-card .contact-copy,
+  :root.techno-home .contact-intro-card h2,
+  :root.techno-home .contact-intro-card .contact-email,
+  :root.techno-home .contact-intro-card .section-kicker { margin-left: 0; margin-right: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
