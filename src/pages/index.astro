@@ -797,8 +797,16 @@ const services = [
             </div>
             <div class="contact-lower-grid">
               <form class="contact-form" id="contact-form">
-              <input id="contact-service" name="service" type="hidden" value="" />
-              <p class="contact-selected-service" id="contact-selected-service" hidden><span>Service</span><strong id="contact-selected-service-name"></strong></p>
+              <fieldset class="contact-services-fieldset">
+                <legend>What can I help you with?</legend>
+                <div class="contact-service-options">
+                  <label><input type="checkbox" name="services" value="Website &amp; Shopify Development" /> <span>Website &amp; Shopify Development</span></label>
+                  <label><input type="checkbox" name="services" value="Product Research &amp; Direct-Response Copy" /> <span>Product Research &amp; Direct-Response Copy</span></label>
+                  <label><input type="checkbox" name="services" value="Email Marketing &amp; Graphic Design" /> <span>Email Marketing &amp; Graphic Design</span></label>
+                  <label><input type="checkbox" name="services" value="Website Audit &amp; Improvement" /> <span>Website Audit &amp; Improvement</span></label>
+                  <label><input type="checkbox" name="services" value="Something else / I’m not sure yet" /> <span>Something else / I’m not sure yet</span></label>
+                </div>
+              </fieldset>
               <label for="contact-name">Your name</label>
               <input id="contact-name" name="name" autocomplete="name" placeholder="How should I address you?" required />
               <label for="contact-email">Email address</label>
@@ -1228,9 +1236,8 @@ const services = [
       const serviceDialog = document.querySelector("#service-dialog");
       const serviceDialogTitle = document.querySelector("#service-dialog-title");
       const serviceDialogContent = document.querySelector("#service-dialog-content");
-      const serviceContactInput = document.querySelector("#contact-service");
-      const serviceSelectedNote = document.querySelector("#contact-selected-service");
-      const serviceSelectedName = document.querySelector("#contact-selected-service-name");
+      const serviceOptions = [...document.querySelectorAll("#contact-form input[name='services']")];
+      const inquiryEndpoint = "https://script.google.com/macros/s/AKfycbzBNvA1wKIs_6ZCNp6CnJrDLXUpuBO9jCVyTkZDCGgXRk9Hk4Wu88ugLHrQoAstQLaz/exec";
       const brandCursorParent = brandCursor?.parentNode;
       const brandCursorNextSibling = brandCursor?.nextSibling;
       let serviceDialogOpener = null;
@@ -1238,10 +1245,9 @@ const services = [
       let serviceContactPending = false;
 
       const setContactService = (value) => {
-        if (serviceContactInput) serviceContactInput.value = value || "";
-        if (!serviceSelectedNote) return;
-        serviceSelectedNote.hidden = !value;
-        if (value && serviceSelectedName) serviceSelectedName.textContent = value;
+        serviceOptions.forEach((option) => {
+          option.checked = option.value === value;
+        });
       };
 
       const activateTab = (tabName, { updateHistory = true, focus = false } = {}) => {
@@ -1654,16 +1660,34 @@ const services = [
         chatThread.scrollTop = chatThread.scrollHeight;
       });
 
-      document.querySelector("#contact-form").addEventListener("submit", (event) => {
+      document.querySelector("#contact-form").addEventListener("submit", async (event) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
-        const service = formData.get("service");
+        const services = formData.getAll("services");
+        const service = services.join(", ");
+        const inquiry = {
+          name: formData.get("name"),
+          email: formData.get("email"),
+          services,
+          message: formData.get("message"),
+        };
+        try {
+          await fetch(inquiryEndpoint, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify(inquiry),
+            keepalive: true,
+          });
+        } catch (error) {
+          console.error("Unable to save inquiry to Google Sheets.", error);
+        }
         const subjectText = service
           ? `${service} inquiry from ${formData.get("name")}`
           : `Project inquiry from ${formData.get("name")}`;
         const subject = encodeURIComponent(subjectText);
         const body = encodeURIComponent(
-          `Hi Rex,\n\n${service ? `Service: ${service}\n\n` : ""}${formData.get("message")}\n\nYou can reach me at ${formData.get("email")}.\n\n${formData.get("name")}`,
+          `Hi Rex,\n\n${service ? `Services: ${service}\n\n` : ""}${formData.get("message")}\n\nYou can reach me at ${formData.get("email")}.\n\n${formData.get("name")}`,
         );
         window.location.href = `mailto:rexbelly.zipagan@gmail.com?subject=${subject}&body=${body}`;
         document.querySelector("#form-note").textContent =

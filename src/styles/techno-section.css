@@ -446,6 +446,55 @@
   padding: clamp(24px, 3vw, 42px);
 }
 
+:root.techno-home .contact-services-fieldset {
+  display: grid;
+  gap: 12px;
+  margin: 0 0 8px;
+  padding: 0;
+  border: 0;
+}
+
+:root.techno-home .contact-services-fieldset legend {
+  margin-bottom: 4px;
+  color: var(--techno-ink);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+:root.techno-home .contact-service-options {
+  display: grid;
+  gap: 8px;
+}
+
+:root.techno-home .contact-service-options label {
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 9px 12px;
+  border: 1px solid var(--techno-border);
+  border-radius: 12px;
+  color: var(--techno-ink);
+  background: var(--techno-pill);
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+:root.techno-home .contact-service-options label:has(input:checked) {
+  border-color: var(--techno-accent);
+  background: color-mix(in srgb, var(--techno-accent), transparent 86%);
+  box-shadow: 0 0 18px var(--techno-shadow);
+}
+
+:root.techno-home .contact-service-options input {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  accent-color: var(--techno-accent);
+}
+
 :root.techno-home .contact-calendar {
   display: flex;
   min-height: 600px;
