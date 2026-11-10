@@ -391,6 +391,7 @@ const services = [
 
       <main id="main">
         <div class="tab-panel" id="panel-home" role="tabpanel" aria-labelledby="tab-home" tabindex="0">
+        <div class="home-scroll-progress" aria-hidden="true"><span></span></div>
         <section class="hero section-wrap" id="home" aria-labelledby="hero-title">
           <div class="hero-header techno-card">
             <div>
@@ -489,6 +490,7 @@ const services = [
                 />
                 <span class="preview-caption"><b>PunkRIDE</b><span>Shopify storefront ↗</span></span>
               </a>
+              <p class="dashboard-outcome">A conversion-focused storefront built to make product discovery feel effortless.</p>
               <a class="dashboard-card-link" href="#projects">Browse all projects <span aria-hidden="true">↗</span></a>
             </article>
 
@@ -1498,6 +1500,18 @@ const services = [
 
       const initialTab = decodeURIComponent(location.hash.slice(1));
       activateTab(tabPanels.has(initialTab) ? initialTab : "home", { updateHistory: false });
+
+      const scrollProgress = document.querySelector(".home-scroll-progress span");
+      const updateScrollProgress = () => {
+        if (!scrollProgress) return;
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0;
+        scrollProgress.style.transform = `scaleX(${progress})`;
+        root.classList.toggle("has-scrolled-home", window.scrollY > 180);
+      };
+      window.addEventListener("scroll", updateScrollProgress, { passive: true });
+      window.addEventListener("resize", updateScrollProgress);
+      requestAnimationFrame(updateScrollProgress);
 
       const visitCount = document.querySelector("#site-visit-count");
       const updateVisitCount = async () => {
