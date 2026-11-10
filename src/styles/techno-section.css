@@ -14,6 +14,9 @@
   --techno-button: #086b80;
   --techno-button-ink: #ffffff;
   --techno-shadow: rgba(0, 143, 173, 0.16);
+  --hero-glow-cyan: rgba(0, 155, 185, 0.18);
+  --hero-glow-blue: rgba(45, 105, 245, 0.14);
+  --hero-glow-navy: rgba(30, 60, 120, 0.09);
   --paper: var(--techno-bg);
   --surface: var(--techno-card-solid);
   --surface-soft: var(--techno-pill);
@@ -57,6 +60,9 @@
   --techno-button: #67e8f9;
   --techno-button-ink: #052331;
   --techno-shadow: rgba(0, 240, 255, 0.16);
+  --hero-glow-cyan: rgba(0, 185, 215, 0.5);
+  --hero-glow-blue: rgba(35, 95, 255, 0.42);
+  --hero-glow-navy: rgba(12, 30, 85, 0.8);
 }
 
 .techno-card {
@@ -131,9 +137,32 @@
 }
 
 .techno-home .hero {
+  isolation: isolate;
   margin-block: 28px;
   padding: 0;
   overflow: visible;
+}
+
+.techno-home .hero::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: -28px -20px;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 24% 40%, var(--hero-glow-cyan) 0%, var(--hero-glow-cyan) 8%, transparent 62%),
+    radial-gradient(ellipse at 76% 60%, var(--hero-glow-blue) 0%, var(--hero-glow-blue) 10%, transparent 60%),
+    radial-gradient(ellipse at 48% 70%, var(--hero-glow-navy) 0%, transparent 68%);
+  mask-image: radial-gradient(ellipse, #000 25%, transparent 72%);
+  will-change: transform;
+  animation: hero-ambient-drift 18s ease-in-out infinite;
+}
+
+/* Animate only the prepainted layer's transform; the content stays still. */
+@keyframes hero-ambient-drift {
+  0%, 100% { transform: translate3d(-2%, 1%, 0) scale(0.98); }
+  35% { transform: translate3d(2%, -2%, 0) scale(1.04); }
+  70% { transform: translate3d(-1%, 2%, 0) scale(1.02); }
 }
 
 .hero .techno-card {
@@ -252,6 +281,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .techno-home .hero::before {
+    animation: none;
+    transform: none;
+    will-change: auto;
+  }
   .techno-home body, .techno-card, .techno-cta { transition: none; }
   .techno-card:hover, .techno-cta:hover,
   :root.techno-home :is(.dashboard-card, .dashboard-card-link, .profile-contact):hover { transform: none; }
