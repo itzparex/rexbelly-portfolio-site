@@ -394,6 +394,9 @@ const services = [
         <div class="home-scroll-progress" aria-hidden="true"><span></span></div>
         <section class="hero section-wrap" id="home" aria-labelledby="hero-title">
           <div class="hero-header techno-card">
+            <div class="home-matrix" aria-hidden="true">
+              {['01 10 11 00', '10 01 00 11', '11 00 10 01', '00 11 01 10', '10 10 01 00', '01 00 11 10'].map((column, index) => <span style={`--matrix-delay: ${index * -1.4}s; --matrix-duration: ${11 + index % 3}s`}>{column}</span>)}
+            </div>
             <div>
               <span class="techno-badge">WEB DESIGN · SHOPIFY · MARKETING</span>
               <h1 class="techno-title" id="hero-title">
@@ -823,6 +826,9 @@ const services = [
         <section class="contact-section" id="contact" aria-labelledby="contact-title">
           <div class="section-wrap contact-wrap">
             <div class="contact-intro-card">
+              <div class="contact-matrix" aria-hidden="true">
+                {['10 01 11 00', '01 10 00 11', '11 00 01 10', '00 11 10 01', '10 11 00 01', '01 00 10 11'].map((column, index) => <span style={`--matrix-delay: ${index * -1.5}s; --matrix-duration: ${12 + index % 3}s`}>{column}</span>)}
+              </div>
               <span class="eyebrow section-kicker">YOUR NEXT MOVE</span>
               <h2 id="contact-title">Tell me what you’re working on.</h2>
               <p class="contact-copy">Tell me what you’re building, what you’d like help with, and when you’d like to get started. If you already have a website or a brief, feel free to include it.</p>

@@ -211,6 +211,49 @@
   display: block;
 }
 
+.home-matrix,
+.contact-matrix {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 4%;
+  display: grid;
+  width: min(42%, 460px);
+  height: 100%;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 18px;
+  overflow: hidden;
+  padding: 8px 18px;
+  opacity: 0.3;
+  mask-image: linear-gradient(90deg, transparent, #000 28%, #000 82%, transparent);
+  pointer-events: none;
+}
+
+.home-matrix span,
+.contact-matrix span {
+  color: #7c9cff;
+  font: 700 13px/2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.16em;
+  white-space: pre;
+  text-shadow: 0 0 14px rgba(93, 124, 255, 0.52);
+  writing-mode: vertical-rl;
+  animation: matrix-fall var(--matrix-duration) linear var(--matrix-delay) infinite;
+}
+
+.contact-matrix {
+  right: 2%;
+  width: min(46%, 520px);
+  opacity: 0.24;
+}
+
+.contact-matrix span {
+  color: #f28bd3;
+  text-shadow: 0 0 14px rgba(242, 139, 211, 0.48);
+}
+
+.home-matrix + div,
+.contact-intro-card > :not(.contact-matrix) { position: relative; z-index: 1; }
+
 .hero .techno-title {
   max-width: 19ch;
   margin: 22px 0 18px;
@@ -687,6 +730,7 @@
   .techno-home .hero { margin-block: 18px 24px; }
   :root.techno-home .project-matrix { right: -10%; width: 70%; opacity: 0.24; }
   .hero .techno-card { padding: 24px 18px; border-radius: 16px; }
+  .home-matrix, .contact-matrix { right: -8%; width: 68%; opacity: 0.2; }
   .hero .techno-title { font-size: clamp(28px, 7vw, 48px); }
   .techno-badge { font-size: 9px; letter-spacing: 0.04em; }
   :root.techno-home .contact-lower-grid { grid-template-columns: 1fr; }
@@ -700,7 +744,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  :root.techno-home .project-matrix span { animation: none; opacity: 0.28; }
+  :root.techno-home :is(.project-matrix span, .home-matrix span, .contact-matrix span) { animation: none; opacity: 0.28; }
   .tab-panel:not([hidden]),
   .hero .techno-title,
   .techno-home .tool-chip,
