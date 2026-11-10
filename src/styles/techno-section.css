@@ -1,3 +1,15 @@
+@property --headline-wipe-edge {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: -15%;
+}
+
+@property --headline-wipe-color {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+
 :root.techno-home {
   --techno-bg: #edf5fa;
   --techno-card: rgba(255, 255, 255, 0.7);
@@ -12,6 +24,9 @@
   --techno-pill: rgba(0, 115, 138, 0.07);
   --techno-heading: linear-gradient(135deg, #006a78 0%, #2455bf 35%, #b32775 70%, #be244a 100%);
   --techno-heading-shadow: none;
+  --techno-heading-shadow-soft: none;
+  --techno-heading-shadow-solid: none;
+  --techno-heading-solid: #122d43;
   --techno-button: #086b80;
   --techno-button-ink: #ffffff;
   --techno-shadow: rgba(0, 143, 173, 0.16);
@@ -59,6 +74,9 @@
   --techno-pill: rgba(0, 240, 255, 0.06);
   --techno-heading: linear-gradient(135deg, #00f0ff 0%, #3b82f6 35%, #ec4899 70%, #f43f5e 100%);
   --techno-heading-shadow: 0 0 30px rgba(236, 72, 153, 0.3);
+  --techno-heading-shadow-soft: 0 0 22px rgba(59, 130, 246, 0.15);
+  --techno-heading-shadow-solid: 0 0 20px rgba(255, 255, 255, 0.12);
+  --techno-heading-solid: #ffffff;
   --techno-button: #67e8f9;
   --techno-button-ink: #052331;
   --techno-shadow: rgba(0, 240, 255, 0.16);
@@ -210,20 +228,48 @@
 
 @supports (background-clip: text) or (-webkit-background-clip: text) {
   .techno-home .techno-title {
-    background-image: var(--techno-heading);
-    background-size: 200% 200%;
-    background-position: 0% 50%;
+    background-image:
+      linear-gradient(90deg,
+        var(--headline-wipe-color) calc(var(--headline-wipe-edge) - 12%),
+        transparent var(--headline-wipe-edge)),
+      var(--techno-heading);
+    background-size: 100% 100%, 200% 200%;
+    background-position: 0% 50%, 0% 50%;
+    background-repeat: no-repeat;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     text-shadow: var(--techno-heading-shadow);
-    animation: headline-color-drift 18s ease-in-out infinite;
+    animation: headline-color-wipe 18s ease-in-out infinite;
   }
 }
 
-@keyframes headline-color-drift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+/* A feathered overlay wipes across the same glyphs, then fades away. */
+@keyframes headline-color-wipe {
+  0%, 60%, 65% {
+    background-position: 0% 50%, 0% 50%;
+    --headline-wipe-edge: -15%;
+    --headline-wipe-color: var(--techno-heading-solid);
+    text-shadow: var(--techno-heading-shadow-soft);
+  }
+  30% {
+    background-position: 0% 50%, 100% 50%;
+    --headline-wipe-edge: -15%;
+    --headline-wipe-color: var(--techno-heading-solid);
+    text-shadow: var(--techno-heading-shadow);
+  }
+  80%, 85% {
+    background-position: 0% 50%, 0% 50%;
+    --headline-wipe-edge: 115%;
+    --headline-wipe-color: var(--techno-heading-solid);
+    text-shadow: var(--techno-heading-shadow-solid);
+  }
+  100% {
+    background-position: 0% 50%, 0% 50%;
+    --headline-wipe-edge: 115%;
+    --headline-wipe-color: transparent;
+    text-shadow: var(--techno-heading-shadow-soft);
+  }
 }
 
 .techno-actions {
@@ -294,7 +340,9 @@
 @media (prefers-reduced-motion: reduce) {
   .techno-home .techno-title {
     animation: none;
-    background-size: 100% 100%;
+    background-size: 100% 100%, 100% 100%;
+    --headline-wipe-edge: -15%;
+    --headline-wipe-color: transparent;
   }
   .techno-home .hero::before {
     animation: none;
