@@ -377,6 +377,47 @@
   background-image: linear-gradient(135deg, var(--techno-card), var(--techno-pill));
 }
 
+:root.techno-home .project-matrix {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 2%;
+  display: grid;
+  width: min(54%, 520px);
+  height: 100%;
+  grid-template-columns: repeat(8, 1fr);
+  gap: clamp(14px, 2.2vw, 26px);
+  overflow: hidden;
+  padding: 10px 22px;
+  opacity: 0.42;
+  mask-image: linear-gradient(90deg, transparent 0%, #000 22%, #000 82%, transparent 100%);
+}
+
+:root.techno-home .project-matrix::before {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, var(--hero-glow-cyan), transparent);
+  content: "";
+  opacity: 0.16;
+}
+
+:root.techno-home .project-matrix span {
+  color: var(--techno-accent);
+  font: 700 clamp(10px, 1.1vw, 15px)/2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.16em;
+  white-space: pre;
+  text-shadow: 0 0 14px var(--techno-shadow);
+  writing-mode: vertical-rl;
+  animation: matrix-fall var(--matrix-duration) linear var(--matrix-delay) infinite;
+}
+
+@keyframes matrix-fall {
+  from { transform: translateY(-28%); opacity: 0; }
+  15% { opacity: 0.82; }
+  78% { opacity: 0.36; }
+  to { transform: translateY(32%); opacity: 0; }
+}
+
 :root.techno-home :is(.project-hero h2, .section-heading h2, .about-copy h2, .contact-wrap h2) {
   background-image: var(--techno-heading);
   background-size: 200% 200%;
@@ -644,6 +685,7 @@
 
 @media (max-width: 760px) {
   .techno-home .hero { margin-block: 18px 24px; }
+  :root.techno-home .project-matrix { right: -10%; width: 70%; opacity: 0.24; }
   .hero .techno-card { padding: 24px 18px; border-radius: 16px; }
   .hero .techno-title { font-size: clamp(28px, 7vw, 48px); }
   .techno-badge { font-size: 9px; letter-spacing: 0.04em; }
@@ -658,6 +700,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  :root.techno-home .project-matrix span { animation: none; opacity: 0.28; }
   .tab-panel:not([hidden]),
   .hero .techno-title,
   .techno-home .tool-chip,

@@ -605,14 +605,8 @@ const services = [
                 <span><b>{funnelCount.toString().padStart(2, "0")}</b> product pages</span>
               </div>
             </div>
-            <div class="project-tunnel" aria-hidden="true">
-              <span class="project-tunnel-glow"></span>
-              <span class="project-tunnel-ring"></span>
-              <span class="project-tunnel-ring"></span>
-              <span class="project-tunnel-ring"></span>
-              <span class="project-tunnel-ring"></span>
-              <span class="project-tunnel-ring"></span>
-              <span class="project-tunnel-core">R<span>.</span></span>
+            <div class="project-matrix" aria-hidden="true">
+              {['01 10 11 00 01 10', '10 01 00 11 10 01', '11 00 10 01 11 00', '00 11 01 10 00 11', '10 10 01 00 11 01', '01 00 11 10 01 10', '11 10 00 01 10 00', '00 01 10 11 00 01'].map((column, index) => <span style={`--matrix-delay: ${index * -1.7}s; --matrix-duration: ${12 + index % 3}s`}>{column}</span>)}
             </div>
           </header>
 
