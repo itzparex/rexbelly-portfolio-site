@@ -1,10 +1,4 @@
-@property --headline-wipe-edge {
-  syntax: "<percentage>";
-  inherits: false;
-  initial-value: -15%;
-}
-
-@property --headline-wipe-color {
+@property --headline-pink-fill {
   syntax: "<color>";
   inherits: false;
   initial-value: transparent;
@@ -27,6 +21,7 @@
   --techno-heading-shadow-soft: none;
   --techno-heading-shadow-solid: none;
   --techno-heading-solid: #122d43;
+  --techno-heading-pink: #be244a;
   --techno-button: #086b80;
   --techno-button-ink: #ffffff;
   --techno-shadow: rgba(0, 143, 173, 0.16);
@@ -77,6 +72,7 @@
   --techno-heading-shadow-soft: 0 0 22px rgba(59, 130, 246, 0.15);
   --techno-heading-shadow-solid: 0 0 20px rgba(255, 255, 255, 0.12);
   --techno-heading-solid: #ffffff;
+  --techno-heading-pink: #f43f5e;
   --techno-button: #67e8f9;
   --techno-button-ink: #052331;
   --techno-shadow: rgba(0, 240, 255, 0.16);
@@ -222,16 +218,29 @@
 }
 
 .techno-home .techno-title {
-  color: var(--techno-ink);
+  position: relative;
+  color: var(--techno-heading-solid);
   text-wrap: balance;
 }
 
+.techno-home .techno-title .headline-solid {
+  display: block;
+  color: var(--techno-heading-solid);
+  text-shadow: var(--techno-heading-shadow-solid);
+}
+
+.techno-home .techno-title .headline-neon {
+  display: none;
+}
+
 @supports (background-clip: text) or (-webkit-background-clip: text) {
-  .techno-home .techno-title {
+  .techno-home .techno-title .headline-neon {
+    display: block;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
     background-image:
-      linear-gradient(90deg,
-        var(--headline-wipe-color) calc(var(--headline-wipe-edge) - 12%),
-        transparent var(--headline-wipe-edge)),
+      linear-gradient(var(--headline-pink-fill), var(--headline-pink-fill)),
       var(--techno-heading);
     background-size: 100% 100%, 200% 200%;
     background-position: 0% 50%, 0% 50%;
@@ -239,35 +248,50 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    text-shadow: var(--techno-heading-shadow);
-    animation: headline-color-wipe 18s ease-in-out infinite;
+    text-shadow: var(--techno-heading-shadow-soft);
+    animation: headline-neon-wipe 18s ease-in-out infinite;
   }
 }
 
-/* A feathered overlay wipes across the same glyphs, then fades away. */
-@keyframes headline-color-wipe {
-  0%, 60%, 65% {
+/* Keep the solid text stationary; crop the neon layer from right to left. */
+@keyframes headline-neon-wipe {
+  0%, 100% {
     background-position: 0% 50%, 0% 50%;
-    --headline-wipe-edge: -15%;
-    --headline-wipe-color: var(--techno-heading-solid);
+    --headline-pink-fill: transparent;
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
     text-shadow: var(--techno-heading-shadow-soft);
   }
-  30% {
+  35%, 45% {
     background-position: 0% 50%, 100% 50%;
-    --headline-wipe-edge: -15%;
-    --headline-wipe-color: var(--techno-heading-solid);
+    --headline-pink-fill: transparent;
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
     text-shadow: var(--techno-heading-shadow);
   }
-  80%, 85% {
-    background-position: 0% 50%, 0% 50%;
-    --headline-wipe-edge: 115%;
-    --headline-wipe-color: var(--techno-heading-solid);
-    text-shadow: var(--techno-heading-shadow-solid);
+  60%, 65% {
+    background-position: 0% 50%, 100% 50%;
+    --headline-pink-fill: var(--techno-heading-pink);
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+    text-shadow: var(--techno-heading-shadow);
   }
-  100% {
+  80% {
+    background-position: 0% 50%, 100% 50%;
+    --headline-pink-fill: var(--techno-heading-pink);
+    clip-path: inset(0 100% 0 0);
+    opacity: 1;
+    text-shadow: var(--techno-heading-shadow);
+  }
+  85% {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+  }
+  85.01% {
     background-position: 0% 50%, 0% 50%;
-    --headline-wipe-edge: 115%;
-    --headline-wipe-color: transparent;
+    --headline-pink-fill: transparent;
+    clip-path: inset(0 0 0 0);
+    opacity: 0;
     text-shadow: var(--techno-heading-shadow-soft);
   }
 }
@@ -338,11 +362,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .techno-home .techno-title {
+  .techno-home .techno-title .headline-neon {
     animation: none;
     background-size: 100% 100%, 100% 100%;
-    --headline-wipe-edge: -15%;
-    --headline-wipe-color: transparent;
+    --headline-pink-fill: transparent;
+    clip-path: none;
+    opacity: 1;
   }
   .techno-home .hero::before {
     animation: none;
