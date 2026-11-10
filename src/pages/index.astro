@@ -1192,11 +1192,8 @@ const services = [
       }
 
       const updateThemeColor = () => {
-        const isHome = root.classList.contains("techno-home");
         const isDark = root.dataset.theme === "dark";
-        themeColor.setAttribute("content", isHome
-          ? (isDark ? "#050b14" : "#edf5fa")
-          : (isDark ? "#151512" : "#f6f5f1"));
+        themeColor.setAttribute("content", isDark ? "#050b14" : "#edf5fa");
       };
 
       const setTheme = (theme) => {
@@ -1249,7 +1246,6 @@ const services = [
         const selectedPanel = tabPanels.get(tabName);
         if (!selectedPanel) return;
         setMobileNavDocked(false);
-        root.classList.toggle("techno-home", tabName === "home");
         updateThemeColor();
 
         if (tabName === "contact" && !serviceContactPending) {

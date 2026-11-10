@@ -296,6 +296,96 @@
   }
 }
 
+/* Extend the same glass-and-neon language to every content tab. */
+:root.techno-home :is(.project-hero, .service-row, .quote-card, .contact-calendar, .contact-form) {
+  border-color: var(--techno-border);
+  border-radius: 20px;
+  background: var(--techno-card);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 24px var(--techno-shadow);
+}
+
+:root.techno-home :is(.project-hero, .services-section, .about-section, .contact-section) {
+  position: relative;
+  isolation: isolate;
+}
+
+:root.techno-home :is(.project-hero, .services-section, .about-section, .contact-section)::before {
+  position: absolute;
+  z-index: -1;
+  inset: -24px;
+  border-radius: 32px;
+  background: radial-gradient(ellipse at 50% 20%, var(--hero-glow-cyan), transparent 68%);
+  content: "";
+  opacity: 0.32;
+  pointer-events: none;
+}
+
+:root.techno-home .project-hero {
+  color: var(--techno-ink);
+  background-color: var(--techno-card);
+  background-image: linear-gradient(135deg, var(--techno-card), var(--techno-pill));
+}
+
+:root.techno-home :is(.project-hero h2, .section-heading h2, .about-copy h2, .contact-wrap h2) {
+  background-image: var(--techno-heading);
+  background-size: 200% 200%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: var(--techno-heading-shadow-soft);
+  animation: panel-heading-gradient 18s ease-in-out infinite;
+}
+
+@keyframes panel-heading-gradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+:root.techno-home :is(.project-group, .funnel-group, .service-list, .about-copy, .contact-wrap) {
+  color: var(--techno-ink);
+}
+
+:root.techno-home :is(.project-group-heading > p, .section-intro, .service-content p, .about-copy > p, .contact-copy, .contact-calendar-heading p) {
+  color: var(--techno-muted);
+}
+
+:root.techno-home :is(.showcase-card, .funnel-card) {
+  border-color: var(--techno-border);
+  background: var(--techno-card);
+  box-shadow: 0 0 18px var(--techno-shadow);
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+
+:root.techno-home :is(.showcase-copy, .funnel-card-copy) {
+  color: var(--techno-ink);
+  background: transparent;
+}
+
+:root.techno-home :is(.showcase-card:hover, .funnel-card:hover, .service-row:hover, .quote-card:hover, .contact-calendar:hover, .contact-form:hover) {
+  border-color: var(--techno-border-hover);
+  box-shadow: 0 0 30px var(--techno-shadow);
+  transform: translateY(-2px);
+}
+
+:root.techno-home :is(.service-row, .service-skills span, .role-tags span, .project-filters, .project-filter, .rail-toggle, .rail-controls button) {
+  border-color: var(--techno-border);
+  color: var(--techno-ink);
+  background: var(--techno-pill);
+}
+
+:root.techno-home :is(.contact-form input, .contact-form textarea, .contact-calendar) {
+  border-color: var(--techno-border);
+  color: var(--techno-ink);
+  background: var(--techno-card);
+}
+
+:root.techno-home .archive-link,
+:root.techno-home .contact-email,
+:root.techno-home .service-arrow { color: var(--techno-accent); }
+
 .techno-actions {
   display: flex;
   flex-wrap: wrap;
@@ -373,6 +463,10 @@
     animation: none;
     transform: none;
     will-change: auto;
+  }
+  :root.techno-home :is(.project-hero h2, .section-heading h2, .about-copy h2, .contact-wrap h2) {
+    animation: none;
+    background-size: 100% 100%;
   }
   .techno-home body, .techno-card, .techno-cta { transition: none; }
   .techno-card:hover, .techno-cta:hover,
