@@ -55,6 +55,11 @@
   transition: background-color 240ms ease, color 240ms ease, border-color 240ms ease;
 }
 
+/* Keep short tab views (especially Services) anchored above the footer. */
+.techno-home main {
+  min-height: calc(100vh - 88px);
+}
+
 :root[data-theme="dark"].techno-home {
   --techno-bg: #050b14;
   --techno-card: rgba(10, 22, 38, 0.6);
