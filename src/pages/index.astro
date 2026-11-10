@@ -1005,9 +1005,8 @@ const services = [
       const themeColor = document.querySelector('meta[name="theme-color"]');
 
       const brandCursor = document.querySelector(".brand-cursor");
-      const customCursorEnabled =
-        !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
-        window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+      // Keep the native pointer available so modal controls remain easy to target.
+      const customCursorEnabled = false;
 
       if (customCursorEnabled) {
         root.classList.add("has-brand-cursor");
@@ -1348,10 +1347,6 @@ const services = [
 
         const firstTopic = serviceDialogContent.querySelector("[data-service-topic-tab]")?.dataset.serviceTopicTab;
         if (firstTopic) setServiceTopic(topic || firstTopic);
-        if (customCursorEnabled) {
-          brandCursor.style.pointerEvents = "none";
-          serviceDialog.append(brandCursor);
-        }
         serviceDialog.showModal();
         serviceDialog.querySelector(".service-dialog-close").focus();
       };
@@ -1371,6 +1366,11 @@ const services = [
         if (roadmapToggle && serviceDialogContent.contains(roadmapToggle)) {
           event.preventDefault();
           toggleRoadmapStep(roadmapToggle);
+          return;
+        }
+        const exampleLink = target.closest(".service-example-links a, .roadmap-credit");
+        if (exampleLink && serviceDialogContent.contains(exampleLink)) {
+          openExampleLink(event, exampleLink);
           return;
         }
         const serviceContact = target.closest("[data-service-contact]");
