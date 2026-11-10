@@ -10,7 +10,8 @@
   --techno-border: rgba(0, 111, 140, 0.24);
   --techno-border-hover: rgba(0, 111, 140, 0.5);
   --techno-pill: rgba(0, 115, 138, 0.07);
-  --techno-heading: linear-gradient(110deg, #123b5b 10%, #00738a 55%, #3947a0);
+  --techno-heading: linear-gradient(135deg, #006a78 0%, #2455bf 35%, #b32775 70%, #be244a 100%);
+  --techno-heading-shadow: none;
   --techno-button: #086b80;
   --techno-button-ink: #ffffff;
   --techno-shadow: rgba(0, 143, 173, 0.16);
@@ -56,7 +57,8 @@
   --techno-border: rgba(0, 240, 255, 0.2);
   --techno-border-hover: rgba(0, 240, 255, 0.48);
   --techno-pill: rgba(0, 240, 255, 0.06);
-  --techno-heading: linear-gradient(110deg, #eefaff 10%, #67e8f9 55%, #a5b4fc);
+  --techno-heading: linear-gradient(135deg, #00f0ff 0%, #3b82f6 35%, #ec4899 70%, #f43f5e 100%);
+  --techno-heading-shadow: 0 0 30px rgba(236, 72, 153, 0.3);
   --techno-button: #67e8f9;
   --techno-button-ink: #052331;
   --techno-shadow: rgba(0, 240, 255, 0.16);
@@ -208,11 +210,20 @@
 
 @supports (background-clip: text) or (-webkit-background-clip: text) {
   .techno-home .techno-title {
-    background: var(--techno-heading);
+    background-image: var(--techno-heading);
+    background-size: 200% 200%;
+    background-position: 0% 50%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    text-shadow: var(--techno-heading-shadow);
+    animation: headline-color-drift 18s ease-in-out infinite;
   }
+}
+
+@keyframes headline-color-drift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 .techno-actions {
@@ -281,6 +292,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .techno-home .techno-title {
+    animation: none;
+    background-size: 100% 100%;
+  }
   .techno-home .hero::before {
     animation: none;
     transform: none;
