@@ -1514,6 +1514,35 @@ p {
   color: var(--accent);
 }
 
+.service-row.is-expanded {
+  align-items: start;
+  padding-bottom: 0;
+  background: color-mix(in srgb, var(--surface), transparent 28%);
+}
+
+.service-row.is-expanded .service-arrow { transform: rotate(90deg); color: var(--accent); }
+
+.service-detail-panel {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 22px;
+  margin: 2px 0 0 64px;
+  padding: 22px 0 25px;
+  border-top: 1px solid var(--line);
+}
+
+.service-detail-outcome { max-width: 700px; }
+.service-detail-outcome strong,
+.service-detail-panel h4 { margin: 0 0 8px; color: var(--accent); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; }
+.service-detail-outcome p { margin: 0; color: var(--ink); font-size: 15px; line-height: 1.6; }
+.service-detail-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px; }
+.service-detail-panel ol,
+.service-detail-panel ul { display: grid; gap: 7px; margin: 0; padding-left: 18px; color: var(--ink-soft); font-size: 10px; line-height: 1.6; }
+.service-detail-examples > div { display: flex; flex-wrap: wrap; gap: 8px; }
+.service-detail-examples a { padding: 8px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); background: var(--surface-soft); font-size: 9px; }
+.service-detail-examples a span { color: var(--accent); }
+.service-detail-cta { width: fit-content; padding: 11px 16px; border-radius: 999px; color: var(--techno-button-ink, var(--surface)); background: var(--accent); font-size: 10px; font-weight: 700; }
+
 .about-section {
   display: grid;
   grid-template-columns: minmax(180px, 0.65fr) minmax(0, 1.35fr);
@@ -2035,6 +2064,8 @@ p {
   .service-skills { grid-column: 2; gap: 5px; margin-top: 3px; }
   .service-skills span { padding: 4px 6px; font-size: 8px; }
   .service-arrow { grid-column: 3; grid-row: 1; }
+  .service-detail-panel { margin-left: 0; }
+  .service-detail-columns { grid-template-columns: 1fr; gap: 18px; }
   .about-section { grid-template-columns: 1fr; gap: 24px; padding-top: 76px; padding-bottom: 77px; }
   .about-label { min-height: 0; }
   .about-start-panel { width: 100%; margin-top: 18px; }

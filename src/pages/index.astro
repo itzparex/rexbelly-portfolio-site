@@ -751,9 +751,18 @@ const services = [
                   <div class="service-skills">
                     {service.skills.map((skill) => <span>{skill}</span>)}
                   </div>
-                  <button class="service-arrow" type="button" data-open-service={service.id} data-service-title={service.title} aria-label={`View details for ${service.title}`}>
+                  <button class="service-arrow" type="button" data-service-toggle={service.id} aria-expanded="false" aria-controls={`service-detail-${service.id}`} aria-label={`Expand details for ${service.title}`}>
                     <span aria-hidden="true">↗</span>
                   </button>
+                  <div class="service-detail-panel" id={`service-detail-${service.id}`} hidden>
+                    <div class="service-detail-outcome"><strong>Outcome</strong><p>{service.id === "website-shopify" ? "A clearer, easier-to-use website or Shopify store that helps customers take the next step." : service.id === "research-copy" ? "Sharper customer insight and messaging that gives every page a job." : "Consistent campaigns and visual assets that keep your marketing moving."}</p></div>
+                    <div class="service-detail-columns">
+                      <div><h4>Process</h4><ol>{(service.id === "website-shopify" ? ["Understand the audience and offer", "Plan the structure and visual direction", "Design, build, and test the experience", "Launch and refine"] : service.id === "research-copy" ? ["Review customer language and objections", "Shape the offer and message", "Write and organize the key assets"] : ["Clarify the campaign goal", "Plan the message and creative", "Build, test, and improve the assets"]).map((step) => <li>{step}</li>)}</ol></div>
+                      <div><h4>Included</h4><ul>{service.skills.map((skill) => <li>{skill}</li>)}</ul></div>
+                    </div>
+                    <div class="service-detail-examples"><h4>Relevant work</h4><div>{(service.id === "website-shopify" ? [{ name: "PunkRIDE", url: "https://www.punkride.com/en-uk" }, { name: "TripNinja", url: "https://tripninja.io/" }, { name: "Evolve Flooring", url: "https://evolveflooring.ca/" }] : service.id === "research-copy" ? [{ name: "Garden Monkeys", url: "https://www.gardenmonkeys.com/" }, { name: "Tour Flex", url: "https://19thtourflex.com/" }] : [{ name: "Winx Wheels", url: "https://winxwheels.com/" }]).map((example) => <a href={example.url} target="_blank" rel="noopener noreferrer">{example.name} <span aria-hidden="true">↗</span></a>)}</div></div>
+                    <a class="service-detail-cta" href="#contact">Discuss this service <span aria-hidden="true">↗</span></a>
+                  </div>
                 </article>
               ))}
             </div>
@@ -1420,6 +1429,23 @@ const services = [
             trigger.dataset.serviceTitle,
             trigger,
           );
+        });
+      });
+
+      document.querySelectorAll("[data-service-toggle]").forEach((trigger) => {
+        trigger.addEventListener("click", () => {
+          const panel = document.getElementById(trigger.getAttribute("aria-controls"));
+          const row = trigger.closest(".service-row");
+          if (!panel || !row) return;
+          const expanded = trigger.getAttribute("aria-expanded") === "true";
+          document.querySelectorAll("[data-service-toggle]").forEach((other) => {
+            const otherPanel = document.getElementById(other.getAttribute("aria-controls"));
+            const otherRow = other.closest(".service-row");
+            other.setAttribute("aria-expanded", String(other === trigger && !expanded));
+            otherRow?.classList.toggle("is-expanded", other === trigger && !expanded);
+            if (otherPanel) otherPanel.hidden = !(other === trigger && !expanded);
+          });
+          if (!expanded) requestAnimationFrame(() => row.scrollIntoView({ behavior: "smooth", block: "nearest" }));
         });
       });
 
