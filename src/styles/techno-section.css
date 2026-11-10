@@ -432,7 +432,7 @@
 :root.techno-home .contact-lower-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-  align-items: start;
+  align-items: stretch;
   gap: 24px;
 }
 
@@ -442,16 +442,22 @@
 }
 
 :root.techno-home .contact-form {
+  min-height: 600px;
   padding: clamp(24px, 3vw, 42px);
 }
 
 :root.techno-home .contact-calendar {
+  display: flex;
+  min-height: 600px;
+  flex-direction: column;
   grid-column: auto;
   padding: clamp(24px, 3vw, 42px);
 }
 
 :root.techno-home .contact-calendar .calendly-frame {
-  height: 560px;
+  min-height: 0;
+  flex: 1 1 auto;
+  height: auto;
 }
 
 .techno-actions {
@@ -519,7 +525,8 @@
   .techno-badge { font-size: 9px; letter-spacing: 0.04em; }
   :root.techno-home .contact-lower-grid { grid-template-columns: 1fr; }
   :root.techno-home .contact-calendar { grid-column: auto; }
-  :root.techno-home .contact-calendar .calendly-frame { height: 620px; }
+  :root.techno-home :is(.contact-form, .contact-calendar) { min-height: 0; }
+  :root.techno-home .contact-calendar .calendly-frame { height: 620px; flex: 0 0 auto; }
   :root.techno-home .contact-intro-card .contact-copy,
   :root.techno-home .contact-intro-card h2,
   :root.techno-home .contact-intro-card .contact-email,
