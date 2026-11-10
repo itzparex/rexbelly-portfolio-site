@@ -234,11 +234,11 @@ const services = [
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="techno-home">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#f6f5f1" />
+    <meta name="theme-color" content="#edf5fa" />
     <meta
       name="description"
       content="Rexbelly P. Zipagan designs and builds business websites and Shopify stores, and creates customer-informed copy and visuals for product pages, emails, and ads."
@@ -391,7 +391,7 @@ const services = [
 
       <main id="main">
         <div class="tab-panel" id="panel-home" role="tabpanel" aria-labelledby="tab-home" tabindex="0">
-        <section class="hero section-wrap techno-section" id="home" aria-labelledby="hero-title">
+        <section class="hero section-wrap" id="home" aria-labelledby="hero-title">
           <div class="hero-header techno-card">
             <div>
               <span class="techno-badge">WEB DESIGN · SHOPIFY · MARKETING</span>
@@ -1188,28 +1188,13 @@ const services = [
         });
       }
 
-      if (!prefersReducedMotion && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-        dashboardCards.forEach((card) => {
-          card.addEventListener("pointermove", (event) => {
-            if (event.pointerType !== "mouse") return;
-
-            const bounds = card.getBoundingClientRect();
-            const x = (event.clientX - bounds.left) / bounds.width;
-            const y = (event.clientY - bounds.top) / bounds.height;
-            card.style.setProperty("--card-rotate-x", `${((0.5 - y) * 5).toFixed(2)}deg`);
-            card.style.setProperty("--card-rotate-y", `${((x - 0.5) * 5).toFixed(2)}deg`);
-            card.style.setProperty("--card-pointer-x", `${(x * 100).toFixed(1)}%`);
-            card.style.setProperty("--card-pointer-y", `${(y * 100).toFixed(1)}%`);
-            card.classList.add("is-tilting");
-          });
-
-          card.addEventListener("pointerleave", () => {
-            card.style.setProperty("--card-rotate-x", "0deg");
-            card.style.setProperty("--card-rotate-y", "0deg");
-            card.classList.remove("is-tilting");
-          });
-        });
-      }
+      const updateThemeColor = () => {
+        const isHome = root.classList.contains("techno-home");
+        const isDark = root.dataset.theme === "dark";
+        themeColor.setAttribute("content", isHome
+          ? (isDark ? "#050b14" : "#edf5fa")
+          : (isDark ? "#151512" : "#f6f5f1"));
+      };
 
       const setTheme = (theme) => {
         root.dataset.theme = theme;
@@ -1220,7 +1205,7 @@ const services = [
         themeButtons.forEach((button) => {
           button.setAttribute("aria-label", `Switch to ${theme === "dark" ? "light" : "dark"} theme`);
         });
-        themeColor.setAttribute("content", theme === "dark" ? "#151512" : "#f6f5f1");
+        updateThemeColor();
       };
 
       const savedTheme = localStorage.getItem("rexbelly-theme");
@@ -1261,6 +1246,8 @@ const services = [
         const selectedPanel = tabPanels.get(tabName);
         if (!selectedPanel) return;
         setMobileNavDocked(false);
+        root.classList.toggle("techno-home", tabName === "home");
+        updateThemeColor();
 
         if (tabName === "contact" && !serviceContactPending) {
           setContactService("");

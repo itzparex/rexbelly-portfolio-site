@@ -1,4 +1,4 @@
-.techno-section {
+:root.techno-home {
   --techno-bg: #edf5fa;
   --techno-card: rgba(255, 255, 255, 0.7);
   --techno-card-solid: #f7fbfe;
@@ -14,12 +14,23 @@
   --techno-button: #086b80;
   --techno-button-ink: #ffffff;
   --techno-shadow: rgba(0, 143, 173, 0.16);
-  position: relative;
-  isolation: isolate;
-  padding: clamp(14px, 2.5vw, 28px);
-  overflow: hidden;
-  border: 1px solid var(--techno-grid);
-  border-radius: 28px;
+  --paper: var(--techno-bg);
+  --surface: var(--techno-card-solid);
+  --surface-soft: var(--techno-pill);
+  --ink: var(--techno-ink);
+  --ink-soft: var(--techno-muted);
+  --ink-faint: var(--techno-muted);
+  --line: var(--techno-border);
+  --line-strong: var(--techno-border-hover);
+  --accent: var(--techno-accent);
+  --accent-deep: var(--techno-accent);
+  --accent-wash: var(--techno-pill);
+  --accent-strong: #086b80;
+  --accent-strong-hover: #075769;
+}
+
+.techno-home body {
+  min-height: 100vh;
   color: var(--techno-ink);
   background-color: var(--techno-bg);
   background-image:
@@ -30,7 +41,7 @@
   transition: background-color 240ms ease, color 240ms ease, border-color 240ms ease;
 }
 
-:root[data-theme="dark"] .techno-section {
+:root[data-theme="dark"].techno-home {
   --techno-bg: #050b14;
   --techno-card: rgba(10, 22, 38, 0.6);
   --techno-card-solid: #0a1626;
@@ -51,6 +62,11 @@
 .techno-card {
   position: relative;
   padding: clamp(24px, 4vw, 48px);
+}
+
+.techno-card,
+:root.techno-home .dashboard-card,
+:root.techno-home .toolbelt {
   border: 1px solid var(--techno-border);
   border-radius: 20px;
   background: var(--techno-card);
@@ -60,10 +76,64 @@
   transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease, background-color 240ms ease;
 }
 
-.hero.techno-section {
+:root.techno-home .dashboard-wrap {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+:root.techno-home .dashboard-card {
+  transform: none;
+  transform-style: flat;
+}
+
+:root.techno-home .dashboard-card::after {
+  display: none;
+}
+
+:root.techno-home :is(.sidebar, .mobile-header, .mobile-nav) {
+  border-color: var(--techno-border);
+  background: var(--techno-card);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+:root.techno-home :is(.marquee-viewport, .process-steps li, .testimonial-review, .service-mini) {
+  border-color: var(--techno-border);
+  background: var(--techno-pill);
+}
+
+:root.techno-home .dashboard-project-preview {
+  border-color: var(--techno-border);
+}
+
+:root.techno-home :is(.profile-overline, .toolbelt-label .eyebrow, .testimonial-review-label) {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: var(--techno-accent);
+}
+
+:root.techno-home :is(.dashboard-card-link, .profile-contact) {
+  width: fit-content;
+  min-height: 36px;
+  padding: 8px 12px;
+  border: 1px solid var(--techno-border);
+  border-radius: 999px;
+  background: var(--techno-pill);
+  color: var(--techno-accent);
+  line-height: 1.4;
+  transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+
+:root.techno-home :is(.dashboard-card-link, .profile-contact):focus-visible {
+  outline: 3px solid var(--techno-accent);
+  outline-offset: 4px;
+}
+
+.techno-home .hero {
   margin-block: 28px;
-  padding: clamp(14px, 2.5vw, 28px);
-  border: 1px solid var(--techno-grid);
+  padding: 0;
+  overflow: visible;
 }
 
 .hero .techno-card {
@@ -78,7 +148,7 @@
   letter-spacing: -0.045em;
 }
 
-.techno-section .hero-subtitle {
+.techno-home .hero-subtitle {
   max-width: 65ch;
   margin: 0;
   color: var(--techno-muted);
@@ -102,13 +172,13 @@
   letter-spacing: 0.09em;
 }
 
-.techno-section .techno-title {
+.techno-home .techno-title {
   color: var(--techno-ink);
   text-wrap: balance;
 }
 
 @supports (background-clip: text) or (-webkit-background-clip: text) {
-  .techno-section .techno-title {
+  .techno-home .techno-title {
     background: var(--techno-heading);
     -webkit-background-clip: text;
     background-clip: text;
@@ -152,13 +222,15 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .techno-card:hover {
+  .techno-card:hover,
+  :root.techno-home .dashboard-card:hover {
     border-color: var(--techno-border-hover);
     box-shadow: 0 0 32px var(--techno-shadow);
     transform: translateY(-2px);
   }
 
-  .techno-cta:hover {
+  .techno-cta:hover,
+  :root.techno-home :is(.dashboard-card-link, .profile-contact):hover {
     border-color: var(--techno-accent);
     box-shadow: 0 4px 22px var(--techno-shadow);
     transform: translateY(-2px);
@@ -166,17 +238,21 @@
 }
 
 @supports not ((backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px))) {
-  .techno-card { background: var(--techno-card-solid); }
+  .techno-card,
+  :root.techno-home :is(.dashboard-card, .toolbelt, .sidebar, .mobile-header, .mobile-nav) {
+    background: var(--techno-card-solid);
+  }
 }
 
 @media (max-width: 760px) {
-  .hero.techno-section { margin-block: 18px 24px; border-radius: 22px; }
+  .techno-home .hero { margin-block: 18px 24px; }
   .hero .techno-card { padding: 24px 18px; border-radius: 16px; }
   .hero .techno-title { font-size: clamp(28px, 7vw, 48px); }
   .techno-badge { font-size: 9px; letter-spacing: 0.04em; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .techno-section, .techno-card, .techno-cta { transition: none; }
-  .techno-card:hover, .techno-cta:hover { transform: none; }
+  .techno-home body, .techno-card, .techno-cta { transition: none; }
+  .techno-card:hover, .techno-cta:hover,
+  :root.techno-home :is(.dashboard-card, .dashboard-card-link, .profile-contact):hover { transform: none; }
 }
