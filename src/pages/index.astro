@@ -1346,22 +1346,6 @@ const services = [
         serviceDialogTitle.textContent = title;
         serviceDialogContent.replaceChildren(template.content.cloneNode(true));
 
-        // Bind controls on the freshly-cloned dialog content. Keeping these
-        // handlers on the controls themselves avoids click retargeting issues
-        // with native modal dialogs and preserves normal link behavior.
-        serviceDialogContent.querySelectorAll("[data-service-topic-tab]").forEach((button) => {
-          button.addEventListener("click", () => setServiceTopic(button.dataset.serviceTopicTab));
-        });
-        serviceDialogContent.querySelectorAll(".roadmap-step-toggle").forEach((button) => {
-          button.addEventListener("click", () => toggleRoadmapStep(button));
-        });
-        serviceDialogContent.querySelectorAll(".service-example-links a").forEach((link) => {
-          link.addEventListener("click", (event) => openExampleLink(event, link));
-        });
-        serviceDialogContent.querySelectorAll("[data-service-contact]").forEach((button) => {
-          button.addEventListener("click", () => openServiceContact(button.dataset.serviceContact));
-        });
-
         const firstTopic = serviceDialogContent.querySelector("[data-service-topic-tab]")?.dataset.serviceTopicTab;
         if (firstTopic) setServiceTopic(topic || firstTopic);
         if (customCursorEnabled) {
@@ -1371,6 +1355,30 @@ const services = [
         serviceDialog.showModal();
         serviceDialog.querySelector(".service-dialog-close").focus();
       };
+
+      // Delegate from the stable content wrapper so controls cloned from a
+      // template remain interactive every time the dialog opens.
+      serviceDialogContent.addEventListener("click", (event) => {
+        const target = event.target instanceof Element ? event.target : null;
+        if (!target) return;
+        const topicTab = target.closest("[data-service-topic-tab]");
+        if (topicTab && serviceDialogContent.contains(topicTab)) {
+          event.preventDefault();
+          setServiceTopic(topicTab.dataset.serviceTopicTab);
+          return;
+        }
+        const roadmapToggle = target.closest(".roadmap-step-toggle");
+        if (roadmapToggle && serviceDialogContent.contains(roadmapToggle)) {
+          event.preventDefault();
+          toggleRoadmapStep(roadmapToggle);
+          return;
+        }
+        const serviceContact = target.closest("[data-service-contact]");
+        if (serviceContact && serviceDialogContent.contains(serviceContact)) {
+          event.preventDefault();
+          openServiceContact(serviceContact.dataset.serviceContact);
+        }
+      });
 
       document.querySelectorAll("[data-open-service]").forEach((trigger) => {
         trigger.addEventListener("click", () => {
