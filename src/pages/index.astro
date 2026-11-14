@@ -1840,6 +1840,22 @@ const services = [
       };
       setupStepper("#breakdown-dialog", "[data-breakdown-open]", "#breakdown");
       setupStepper("#gallery-dialog", "[data-gallery-open]", "#gallery");
+      document.querySelectorAll("[data-rotator]").forEach((box) => {
+        const stage = box.querySelector(".rotator-stage") || box;
+        const slides = [...stage.querySelectorAll(".rotator-slide")];
+        if (slides.length < 2) return;
+        const track = document.createElement("div");
+        track.className = "review-track";
+        slides.forEach((el) => track.appendChild(el));
+        slides.forEach((el) => {
+          const copy = el.cloneNode(true);
+          copy.setAttribute("aria-hidden", "true");
+          track.appendChild(copy);
+        });
+        stage.appendChild(track);
+        stage.classList.add("review-window");
+        track.style.setProperty("--review-time", slides.length * 14 + "s");
+      });
       document.querySelectorAll("[data-rail]").forEach((box) => {
         const view = box.querySelector(".rail-viewport");
         const cards = [...view.querySelectorAll(".rail-card")];
