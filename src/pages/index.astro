@@ -854,22 +854,23 @@ const services = [
                 <div><strong>Leave it useful</strong><span>Ship work that is easy to use and improve.</span></div>
               </div>
             </div>
-            <div class="quote-card" data-rotator aria-label="Client and colleague reviews">
-              <span class="quote-mark" aria-hidden="true">“</span>
-              <div class="rotator-stage">
-                <div class="rotator-slide">
+            <div class="review-rail" data-rail role="region" aria-roledescription="carousel" aria-label="Client and colleague reviews">
+              <button type="button" class="rail-arrow rail-prev" aria-label="Previous review">‹</button>
+              <button type="button" class="rail-arrow rail-next" aria-label="Next review">›</button>
+              <div class="rail-viewport">
+                <div class="rail-card">
                   <blockquote>Rexbelly went above and beyond to serve our team. I appreciate his fast communication and skills!</blockquote>
                   <span class="quote-credit">CHRIS FIELD · FIELDTRIP INC.</span>
                 </div>
-                <div class="rotator-slide">
+                <div class="rail-card">
                   <blockquote>Rex was an absolute powerhouse for us at Winx Wheels. As our marketing project manager and true jack-of-all-trades, he owned everything from our web and graphic design to our Klaviyo email marketing and social media strategy. He was constantly optimizing and improving our site performance, combining creative execution with sharp strategic oversight. Any team would be lucky to have his versatility and drive.</blockquote>
                   <span class="quote-credit">BUBBA J. · WINX WHEELS</span>
                 </div>
-                <div class="rotator-slide">
+                <div class="rail-card">
                   <blockquote>Working alongside Rex on the Tour Flex product pages was fantastic. His dual expertise in web and graphic design brought a high level of polish and conversion focus to every layout we built. He has an incredible eye for detail and knows how to translate product features into clean, high-performing web experiences.</blockquote>
                   <span class="quote-credit">MITCH · TOUR FLEX</span>
                 </div>
-                <div class="rotator-slide">
+                <div class="rail-card">
                   <blockquote>Perfect experience, skilled and communicative.</blockquote>
                   <span class="quote-credit">TRINA LO · FRESHINK COMMUNICATIONS</span>
                 </div>
@@ -1835,21 +1836,40 @@ const services = [
       };
       setupStepper("#breakdown-dialog", "[data-breakdown-open]", "#breakdown");
       setupStepper("#gallery-dialog", "[data-gallery-open]", "#gallery");
-      document.querySelectorAll("[data-rotator]").forEach((box) => {
-        const stage = box.querySelector(".rotator-stage") || box;
-        const slides = [...stage.querySelectorAll(".rotator-slide")];
-        if (slides.length < 2) return;
+      document.querySelectorAll("[data-rail]").forEach((box) => {
+        const view = box.querySelector(".rail-viewport");
+        const cards = [...view.querySelectorAll(".rail-card")];
         const track = document.createElement("div");
-        track.className = "review-track";
-        slides.forEach((el) => track.appendChild(el));
-        slides.forEach((el) => {
-          const copy = el.cloneNode(true);
-          copy.setAttribute("aria-hidden", "true");
-          track.appendChild(copy);
-        });
-        stage.appendChild(track);
-        stage.classList.add("review-window");
-        track.style.setProperty("--review-time", slides.length * 14 + "s");
+        track.className = "rail-track";
+        cards.forEach((el) => track.appendChild(el));
+        cards.forEach((el) => { const c = el.cloneNode(true); c.setAttribute("aria-hidden", "true"); track.appendChild(c); });
+        view.appendChild(track);
+        if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          box.classList.add("is-static");
+          box.querySelector(".rail-prev").addEventListener("click", () => view.scrollBy({ left: -280, behavior: "smooth" }));
+          box.querySelector(".rail-next").addEventListener("click", () => view.scrollBy({ left: 280, behavior: "smooth" }));
+          return;
+        }
+        let pos = 0, last = 0, paused = false, boost = 0;
+        const speed = 38; // px per second, cards travel left to right
+        const half = () => track.scrollWidth / 2;
+        const draw = () => { const h = half(); pos = ((pos % h) + h) % h; track.style.transform = "translateX(" + (pos - h) + "px)"; };
+        const step = (t) => {
+          const dt = Math.min((t - (last || t)) / 1000, 0.1);
+          last = t;
+          if (!paused) pos += speed * dt;
+          if (boost) { const d = boost * Math.min(1, dt * 7); pos += d; boost -= d; if (Math.abs(boost) < 0.5) boost = 0; }
+          if (box.offsetParent) draw();
+          requestAnimationFrame(step);
+        };
+        box.addEventListener("mouseenter", () => { paused = true; });
+        box.addEventListener("mouseleave", () => { paused = false; });
+        box.addEventListener("focusin", () => { paused = true; });
+        box.addEventListener("focusout", () => { paused = false; });
+        const nudge = () => (cards[0].getBoundingClientRect().width || 280) + 12;
+        box.querySelector(".rail-prev").addEventListener("click", () => { boost += nudge(); }); // brings the earlier card in from the left
+        box.querySelector(".rail-next").addEventListener("click", () => { boost -= nudge(); });
+        requestAnimationFrame(step);
       });
 
       document.querySelectorAll(".page-process-cta [data-tab-target]").forEach((button) => {

@@ -6572,3 +6572,23 @@ p {
   .review-track { animation: none; }
   .review-track > [aria-hidden="true"] { display: none; }
 }
+
+/* About reviews: continuous left-to-right rail with arrow buttons. */
+.review-rail { position: relative; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); padding: 12px 0; }
+.rail-viewport { overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent); mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent); }
+.rail-track { display: flex; gap: 12px; width: max-content; will-change: transform; }
+.rail-card { flex: none; width: 270px; box-sizing: border-box; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-soft); display: flex; flex-direction: column; justify-content: space-between; gap: 8px; }
+.rail-card blockquote { margin: 0; color: var(--ink); font-size: 11px; font-style: italic; line-height: 1.6; }
+.rail-arrow { position: absolute; top: 50%; z-index: 2; width: 28px; height: 28px; margin-top: -14px; padding: 0 0 2px; border: 1px solid var(--line); border-radius: 50%; background: var(--surface); color: var(--accent-deep); font-size: 18px; line-height: 1; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,.12); }
+.rail-arrow:hover { background: var(--surface-soft); }
+.rail-prev { left: 8px; }
+.rail-next { right: 8px; }
+.review-rail.is-static .rail-viewport { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+.review-rail.is-static .rail-track { width: max-content; }
+.review-rail.is-static .rail-track > [aria-hidden="true"] { display: none; }
+@media (max-width: 600px) { .rail-card { width: 78vw; } }
+
+.about-copy { min-width: 0; }
+.review-rail { min-width: 0; max-width: 100%; width: 100%; contain: inline-size; overflow: hidden; }
+.rail-card { align-self: flex-start; }
+.rail-track { align-items: stretch; }
