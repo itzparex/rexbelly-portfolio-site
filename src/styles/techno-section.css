@@ -809,3 +809,18 @@
 .dashboard-projects .dashboard-card-link { font-size: 11px; white-space: nowrap; }
 .dashboard-process .process-steps { gap: 4px; margin-top: 6px; }
 .testimonial-list.review-window { --review-height: 140px; }
+
+/* Projects reel: images scroll bottom to top, full card height */
+.dashboard-projects .project-reel { position: relative; grid-column: 2; grid-row: 1 / span 3; align-self: stretch; min-height: 0; overflow: hidden; border-radius: 10px; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent); }
+.project-reel-track { position: absolute; inset: 0 0 auto 0; display: flex; flex-direction: column; gap: 8px; animation: reel-up 36s linear infinite; will-change: transform; }
+.project-reel:hover .project-reel-track { animation-play-state: paused; }
+.reel-item { position: relative; display: block; flex: none; aspect-ratio: 4 / 3; overflow: hidden; border: 1px solid var(--techno-border); border-radius: 10px; background: #1b1b1b; }
+.reel-item img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform 350ms ease; }
+.reel-item:hover img { transform: scale(1.04); }
+@keyframes reel-up { from { transform: translateY(0); } to { transform: translateY(calc(-50% - 4px)); } }
+@media (prefers-reduced-motion: reduce) {
+  .project-reel-track { animation: none; position: static; }
+  .project-reel { overflow-y: auto; -webkit-mask-image: none; mask-image: none; }
+  .reel-item[aria-hidden="true"] { display: none; }
+}
+@media (max-width: 760px) { .dashboard-projects .project-reel { grid-column: 1; grid-row: auto; height: 220px; } }
