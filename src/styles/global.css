@@ -2220,6 +2220,7 @@ p {
 }
 
 .sidebar-role {
+  text-wrap: balance;
   color: var(--ink-soft);
   font-size: 11px;
 }
