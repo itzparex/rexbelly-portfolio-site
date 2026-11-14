@@ -809,25 +809,6 @@ const services = [
         <section class="about-section section-wrap" id="about" aria-labelledby="about-title">
           <div class="about-label">
             <span class="eyebrow section-kicker">A LITTLE CONTEXT</span>
-            <div class="about-start-panel">
-              <span class="about-start-kicker">HOW I USUALLY WORK</span>
-              <ol>
-                <li><strong>Discovery</strong><span>Understand your business, audience, current site, and goals.</span></li>
-                <li><strong>Structure and direction</strong><span>Define the sitemap, user journey, content, and technical approach.</span></li>
-                <li><strong>Design and build</strong><span>Create the experience in Shopify, Webflow, WordPress, or custom code.</span></li>
-                <li><strong>Review and refine</strong><span>Test real pages, interactions, and responsive layouts together.</span></li>
-                <li><strong>Launch and improve</strong><span>Prepare the launch and identify the most useful next improvements.</span></li>
-              </ol>
-              <a class="about-start-link" href="#contact">Have a project in mind? Let’s talk <span aria-hidden="true">↗</span></a>
-              <div class="about-client-start">
-                <span class="about-start-kicker">HOW CLIENTS USUALLY START</span>
-                <ol>
-                  <li><strong>Send a brief</strong><span>Goals, audience, and what needs improving.</span></li>
-                  <li><strong>Get a focused recommendation</strong><span>Priorities, scope, and the clearest next step.</span></li>
-                  <li><strong>Build together</strong><span>Design, development, testing, and launch.</span></li>
-                </ol>
-              </div>
-            </div>
           </div>
           <div class="about-copy">
             <h2 id="about-title">I design, build, and market<br /><span>websites that customers understand.</span></h2>
@@ -847,6 +828,43 @@ const services = [
               </div>
             </div>
           </div>
+        </section>
+        <section class="process-section section-wrap" aria-labelledby="process-title">
+          <span class="eyebrow">HOW I WORK</span>
+          <h2 id="process-title">From first brief to launch, in five clear steps.</h2>
+          <ol class="process-grid" data-process>
+          <li class="process-card">
+            <div class="process-top"><span class="process-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.5" /><path d="m20 20-4.2-4.2M11 8v6M8 11h6" /></svg></span><span class="process-num">01</span></div>
+            <h3>Discovery</h3>
+            <p>Understand your business, audience, current site, and goals.</p>
+            <span class="process-get"><b>You get</b>A shared picture of your goals and audience.</span>
+          </li>
+          <li class="process-card">
+            <div class="process-top"><span class="process-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="9" y="3.5" width="6" height="5" rx="1.5" /><rect x="3.5" y="15.5" width="6" height="5" rx="1.5" /><rect x="14.5" y="15.5" width="6" height="5" rx="1.5" /><path d="M12 8.5V12M6.5 15.5V12h11v3.5" /></svg></span><span class="process-num">02</span></div>
+            <h3>Structure and direction</h3>
+            <p>Define the sitemap, user journey, content, and technical approach.</p>
+            <span class="process-get"><b>You get</b>A clear sitemap and plan.</span>
+          </li>
+          <li class="process-card">
+            <div class="process-top"><span class="process-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m8.5 8-4.5 4 4.5 4M15.5 8l4.5 4-4.5 4M13.5 5.5l-3 13" /></svg></span><span class="process-num">03</span></div>
+            <h3>Design and build</h3>
+            <p>Create the experience in Shopify, Webflow, WordPress, or custom code.</p>
+            <span class="process-get"><b>You get</b>Your site built on the platform that fits.</span>
+          </li>
+          <li class="process-card">
+            <div class="process-top"><span class="process-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5" /><path d="m8.5 12.3 2.4 2.4 4.6-5" /></svg></span><span class="process-num">04</span></div>
+            <h3>Review and refine</h3>
+            <p>Test real pages, interactions, and responsive layouts together.</p>
+            <span class="process-get"><b>You get</b>Pages tested together with you.</span>
+          </li>
+          <li class="process-card">
+            <div class="process-top"><span class="process-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5c3.5 1.6 5.5 5 5.5 8.5l-2 3h-7l-2-3c0-3.5 2-6.9 5.5-8.5Z" /><circle cx="12" cy="10" r="1.6" /><path d="m9 15-1.5 4 3-1.2M15 15l1.5 4-3-1.2" /></svg></span><span class="process-num">05</span></div>
+            <h3>Launch and improve</h3>
+            <p>Prepare the launch and identify the most useful next improvements.</p>
+            <span class="process-get"><b>You get</b>A launch plan and your next improvements.</span>
+          </li>
+          </ol>
+          <a class="process-cta" href="#contact">Have a project in mind? Let’s talk <span aria-hidden="true">↗</span></a>
         </section>
     <div class="review-rail" data-rail role="region" aria-roledescription="carousel" aria-label="Client and colleague reviews">
       <button type="button" class="rail-arrow rail-prev" aria-label="Previous review">‹</button>
@@ -2115,6 +2133,17 @@ const services = [
         document.querySelector("#form-note").textContent =
           "Thanks — your inquiry was sent successfully. I’ll be in touch soon.";
       });
+    </script>
+    <script>
+      (function () {
+        var cards = document.querySelectorAll("[data-process] .process-card");
+        if (!cards.length || !("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        document.documentElement.classList.add("process-anim");
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } });
+        }, { threshold: 0.2 });
+        cards.forEach(function (c, i) { c.style.transitionDelay = i * 90 + "ms"; io.observe(c); });
+      })();
     </script>
   </body>
 </html>
