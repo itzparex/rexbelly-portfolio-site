@@ -6533,3 +6533,22 @@ p {
 .contact-intro-card > [data-breakdown-open] {
   margin: 4px 0 16px;
 }
+
+/* Pop-up openers: teal outlined pill, same family as the site's other pills */
+.button[data-breakdown-open],
+.button[data-gallery-open] {
+  min-height: 40px;
+  padding: 0 18px;
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  border-radius: 999px;
+  color: var(--accent-deep);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  text-align: left;
+}
+.button[data-breakdown-open]:hover,
+.button[data-gallery-open]:hover {
+  transform: translateY(-2px);
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+.button[data-breakdown-open] span,
+.button[data-gallery-open] span { color: var(--accent); }
