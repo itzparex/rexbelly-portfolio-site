@@ -733,8 +733,7 @@ const services = [
               <div class="page-process-cta">
                 <p>Need a product page for your store?</p>
                 <button class="button button--primary" type="button" data-tab-target="contact">Let's talk <span aria-hidden="true">→</span></button>
-                <button class="button" type="button" data-breakdown-open>See a page broken down section by section <span aria-hidden="true">→</span></button>
-                <button class="button" type="button" data-gallery-open>See the product image gallery <span aria-hidden="true">→</span></button>
+                <button class="button" type="button" data-breakdown-open>See how this page is built <span aria-hidden="true">→</span></button>
               </div>
             </div>
           </section>
@@ -1120,6 +1119,11 @@ const services = [
           <a href="https://19thtourflex.com/" target="_blank" rel="noopener noreferrer">Tour Flex <span aria-hidden="true">↗</span></a>
           <a href="https://winxwheels.com/" target="_blank" rel="noopener noreferrer">Winx Wheels <span aria-hidden="true">↗</span></a>
           <a href="https://www.gardenmonkeys.com/" target="_blank" rel="noopener noreferrer">Garden Monkeys <span aria-hidden="true">↗</span></a>
+        </div>
+        <h3>How I build a product page</h3>
+        <div class="page-process-cta">
+          <button class="button" type="button" data-breakdown-open>See a page broken down section by section <span aria-hidden="true">→</span></button>
+          <button class="button" type="button" data-gallery-open>See the product image gallery <span aria-hidden="true">→</span></button>
         </div>
       </section>
       <div class="service-dialog-actions">
@@ -1752,7 +1756,7 @@ const services = [
             if (location.hash !== hashName) history.replaceState(null, "", hashName);
             breakdown.querySelector("[data-breakdown-close]").focus();
           };
-          document.querySelectorAll(openSel).forEach((b) => b.addEventListener("click", () => openBreakdown(b)));
+          document.addEventListener("click", (e) => { const b = e.target.closest(openSel); if (b) openBreakdown(b); });
           bPrev.addEventListener("click", () => showBreakdown(bIndex - 1));
           bNext.addEventListener("click", () => showBreakdown(bIndex + 1));
           breakdown.querySelector("[data-breakdown-close]").addEventListener("click", () => breakdown.close());
