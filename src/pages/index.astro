@@ -6,7 +6,6 @@ import {
   siClaude,
   siClickup,
   siCss,
-  siDocker,
   siFacebook,
   siFigma,
   siGit,
@@ -26,33 +25,29 @@ import {
 const tools = [
   { name: "Shopify", icon: siShopify },
   { name: "Liquid", mark: "LQ", color: "#5eacff" },
+  { name: "Figma", icon: siFigma },
+  { name: "Klaviyo", logo: "/tool-logos/klaviyo.png" },
+  { name: "Webflow", icon: siWebflow },
+  { name: "WordPress", icon: siWordpress },
   { name: "HTML5", icon: siHtml5 },
   { name: "CSS3", icon: siCss },
   { name: "JavaScript", icon: siJavascript, color: "#947a00" },
   { name: "React", icon: siReact },
   { name: "TypeScript", icon: siTypescript },
-  { name: "Figma", icon: siFigma },
   { name: "Adobe Photoshop", mark: "Ps", color: "#31a8ff" },
   { name: "Canva", logo: "/tool-logos/canva.ico" },
-  { name: "Klaviyo", logo: "/tool-logos/klaviyo.png" },
   { name: "Mailchimp", icon: siMailchimp },
-  { name: "systeme.io", logo: "/tool-logos/systemeio.png" },
   { name: "Funnelish", logo: "/tool-logos/funnelish.svg" },
   { name: "ClickFunnels", logo: "/tool-logos/clickfunnels.png" },
   { name: "GoHighLevel", logo: "/tool-logos/gohighlevel.ico" },
+  { name: "systeme.io", logo: "/tool-logos/systemeio.png" },
   { name: "Gorgias", logo: "/tool-logos/gorgias.png" },
-  { name: "Docker", icon: siDocker },
-  { name: "Git", icon: siGit },
-  { name: "Webflow", icon: siWebflow },
-  { name: "WordPress", icon: siWordpress },
-  { name: "Hermes AI", mark: "H", color: "#527a68" },
-  { name: "Claude", icon: siClaude },
-  { name: "Codex", mark: "CX", color: "#171717" },
-  { name: "Google Workspace", icon: siGoogledrive },
   { name: "Zendesk", icon: siZendesk },
+  { name: "Git", icon: siGit },
+  { name: "Claude", icon: siClaude },
+  { name: "Google Workspace", icon: siGoogledrive },
   { name: "Slack", logo: "/tool-logos/slack.png" },
   { name: "ClickUp", icon: siClickup },
-  { name: "VS Code", logo: "/tool-logos/vscode.ico" },
 ];
 
 const toolColor = (tool) => tool.color ?? `#${tool.icon?.hex ?? "3269ae"}`;
@@ -70,6 +65,8 @@ const storefrontProjects = [
   {
     name: "Tour Flex",
     description: "Shopify storefront and direct-response product pages for golf apparel and accessories.",
+    myRole: "I planned, wrote, designed and built the product pages in Shopify: the layout, the copy, the theme setup and the images.",
+    cardRoles: ["Product pages", "Copy", "Theme setup", "Images"],
     image: "https://19thtourflex.com/cdn/shop/files/ChatGPT_Image_Jul_24_2026_04_39_38_PM_1.png?height=800&pad_color=ffffff&v=1784904098&width=1200",
     alt: "Tour Flex golf storefront campaign image",
     url: "https://19thtourflex.com/",
@@ -86,6 +83,8 @@ const storefrontProjects = [
   {
     name: "Garden Monkeys",
     description: "Shopify storefront and direct-response product pages for gardening gear.",
+    myRole: "I planned, wrote, designed and built the product pages in Shopify: the layout, the copy, the theme setup and the images.",
+    cardRoles: ["Product pages", "Copy", "Theme setup", "Images"],
     image: "https://www.gardenmonkeys.com/cdn/shop/files/hero_1.png?v=1790182357&width=1200",
     alt: "Garden Monkeys waterproof gardening shoes",
     url: "https://www.gardenmonkeys.com/",
@@ -404,6 +403,7 @@ const services = [
                 <span class="headline-neon" aria-hidden="true">I design and build<br />websites and Shopify stores.</span>
               </h1>
               <p class="hero-subtitle">I also research what drives customers to buy and turn those insights into copy and visuals for product pages, emails, and ads.</p>
+              <p class="hero-proof">15+ years in e-commerce · Shopify, Webflow, WordPress</p>
               <div class="techno-actions">
                 <a class="techno-cta techno-cta--primary" href="#projects">View selected work <span aria-hidden="true">↗</span></a>
                 <a class="techno-cta" href="#contact">Let’s talk <span aria-hidden="true">↗</span></a>
@@ -493,7 +493,7 @@ const services = [
                 />
                 <span class="preview-caption"><b>PunkRIDE</b><span>Shopify storefront ↗</span></span>
               </a>
-              <p class="dashboard-outcome">A conversion-focused storefront built to make product discovery feel effortless.</p>
+              <p class="dashboard-outcome">Live Shopify storefronts and product pages, including <a href="https://19thtourflex.com/" target="_blank" rel="noopener noreferrer">Tour Flex ↗</a>, where I built the product pages from layout to copy.</p>
               <a class="dashboard-card-link" href="#projects">Browse all projects <span aria-hidden="true">↗</span></a>
               <button class="dashboard-card-link" type="button" data-breakdown-open>See how a product page is built <span aria-hidden="true">→</span></button>
             </article>
@@ -570,21 +570,37 @@ const services = [
                   <p>What people say about working together.</p>
                 </div>
               </div>
-              <div class="testimonial-list">
-                <figure class="testimonial-review">
-                  <span class="testimonial-review-label">Client review</span>
-                  <blockquote>“Perfect experience, skilled and communicative.”</blockquote>
+              <div class="testimonial-list" data-rotator aria-label="Client and colleague reviews">
+                <figure class="testimonial-review rotator-slide">
+                  <span class="testimonial-review-label">Review</span>
+                  <blockquote>“Working alongside Rex on the Tour Flex product pages was fantastic. His dual expertise in web and graphic design brought a high level of polish and conversion focus to every layout we built. He has an incredible eye for detail and knows how to translate product features into clean, high-performing web experiences.”</blockquote>
                   <figcaption>
-                    <span class="testimonial-avatar" aria-hidden="true">TL</span>
-                    <span class="testimonial-author"><strong>Trina Lo</strong><span>FreshInk Communications</span></span>
+                    <span class="testimonial-avatar" aria-hidden="true">M</span>
+                    <span class="testimonial-author"><strong>Mitch</strong><span>Tour Flex</span></span>
                   </figcaption>
                 </figure>
-                <figure class="testimonial-review">
+                <figure class="testimonial-review rotator-slide">
+                  <span class="testimonial-review-label">Review</span>
+                  <blockquote>“Rex was an absolute powerhouse for us at Winx Wheels. As our marketing project manager and true jack-of-all-trades, he owned everything from our web and graphic design to our Klaviyo email marketing and social media strategy. He was constantly optimizing and improving our site performance, combining creative execution with sharp strategic oversight. Any team would be lucky to have his versatility and drive.”</blockquote>
+                  <figcaption>
+                    <span class="testimonial-avatar" aria-hidden="true">BJ</span>
+                    <span class="testimonial-author"><strong>Bubba J.</strong><span>Winx Wheels</span></span>
+                  </figcaption>
+                </figure>
+                <figure class="testimonial-review rotator-slide">
                   <span class="testimonial-review-label">Client review</span>
                   <blockquote>“Rexbelly went above and beyond to serve our team. I appreciate his fast communication and skills!”</blockquote>
                   <figcaption>
                     <span class="testimonial-avatar" aria-hidden="true">CF</span>
                     <span class="testimonial-author"><strong>Chris Field</strong><span>Fieldtrip Inc.</span></span>
+                  </figcaption>
+                </figure>
+                <figure class="testimonial-review rotator-slide">
+                  <span class="testimonial-review-label">Client review</span>
+                  <blockquote>“Perfect experience, skilled and communicative.”</blockquote>
+                  <figcaption>
+                    <span class="testimonial-avatar" aria-hidden="true">TL</span>
+                    <span class="testimonial-author"><strong>Trina Lo</strong><span>FreshInk Communications</span></span>
                   </figcaption>
                 </figure>
               </div>
@@ -830,11 +846,6 @@ const services = [
               <div><strong>Design + code</strong><span>Considered, then built</span></div>
               <div><strong>15+ years</strong><span>Across e-commerce, creative work, support, and team leadership</span></div>
             </div>
-            <div class="quote-card">
-              <span class="quote-mark" aria-hidden="true">“</span>
-              <blockquote>“Rexbelly went above and beyond to serve our team. I appreciate his fast communication and skills!”</blockquote>
-              <span class="quote-credit">CHRIS FIELD · FIELDTRIP INC.</span>
-            </div>
             <div class="about-principles" aria-label="Working with Rex">
               <span class="eyebrow">WORKING WITH ME</span>
               <div class="about-principles-grid">
@@ -843,10 +854,26 @@ const services = [
                 <div><strong>Leave it useful</strong><span>Ship work that is easy to use and improve.</span></div>
               </div>
             </div>
-            <div class="quote-card quote-card--secondary">
+            <div class="quote-card" data-rotator aria-label="Client and colleague reviews">
               <span class="quote-mark" aria-hidden="true">“</span>
-              <blockquote>“Perfect experience, skilled and communicative.”</blockquote>
-              <span class="quote-credit">TRINA LO · FRESHINK COMMUNICATIONS</span>
+              <div class="rotator-stage">
+                <div class="rotator-slide">
+                  <blockquote>Rexbelly went above and beyond to serve our team. I appreciate his fast communication and skills!</blockquote>
+                  <span class="quote-credit">CHRIS FIELD · FIELDTRIP INC.</span>
+                </div>
+                <div class="rotator-slide">
+                  <blockquote>Rex was an absolute powerhouse for us at Winx Wheels. As our marketing project manager and true jack-of-all-trades, he owned everything from our web and graphic design to our Klaviyo email marketing and social media strategy. He was constantly optimizing and improving our site performance, combining creative execution with sharp strategic oversight. Any team would be lucky to have his versatility and drive.</blockquote>
+                  <span class="quote-credit">BUBBA J. · WINX WHEELS</span>
+                </div>
+                <div class="rotator-slide">
+                  <blockquote>Working alongside Rex on the Tour Flex product pages was fantastic. His dual expertise in web and graphic design brought a high level of polish and conversion focus to every layout we built. He has an incredible eye for detail and knows how to translate product features into clean, high-performing web experiences.</blockquote>
+                  <span class="quote-credit">MITCH · TOUR FLEX</span>
+                </div>
+                <div class="rotator-slide">
+                  <blockquote>Perfect experience, skilled and communicative.</blockquote>
+                  <span class="quote-credit">TRINA LO · FRESHINK COMMUNICATIONS</span>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -862,6 +889,7 @@ const services = [
               <span class="eyebrow section-kicker">YOUR NEXT MOVE</span>
               <h2 id="contact-title">Tell me what you’re working on.</h2>
               <p class="contact-copy">Tell me what you’re building, what you’d like help with, and when you’d like to get started. If you already have a website or a brief, feel free to include it.</p>
+              <p class="contact-next"><b>What happens next:</b> send the form or book the 30-minute intro call below, and I’ll reply personally with next steps.</p>
               <button class="button" type="button" data-breakdown-open>See how I build a product page <span aria-hidden="true">→</span></button>
               <a class="contact-email" href="mailto:rexbelly.zipagan@gmail.com?subject=Project%20inquiry">
                 rexbelly.zipagan@gmail.com <span aria-hidden="true">↗</span>
@@ -875,7 +903,6 @@ const services = [
                   <label><input type="checkbox" name="services" value="Website &amp; Shopify Development" /> <span>Website &amp; Shopify Development</span></label>
                   <label><input type="checkbox" name="services" value="Product Research &amp; Direct-Response Copy" /> <span>Product Research &amp; Direct-Response Copy</span></label>
                   <label><input type="checkbox" name="services" value="Email Marketing &amp; Graphic Design" /> <span>Email Marketing &amp; Graphic Design</span></label>
-                  <label><input type="checkbox" name="services" value="Website Audit &amp; Improvement" /> <span>Website Audit &amp; Improvement</span></label>
                   <label><input type="checkbox" name="services" value="Something else / I’m not sure yet" /> <span>Something else / I’m not sure yet</span></label>
                 </div>
               </fieldset>
@@ -1808,6 +1835,36 @@ const services = [
       };
       setupStepper("#breakdown-dialog", "[data-breakdown-open]", "#breakdown");
       setupStepper("#gallery-dialog", "[data-gallery-open]", "#gallery");
+      document.querySelectorAll("[data-rotator]").forEach((box) => {
+        const stage = box.querySelector(".rotator-stage") || box;
+        const slides = [...stage.querySelectorAll(".rotator-slide")];
+        if (slides.length < 2) return;
+        const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const dots = document.createElement("div");
+        dots.className = "rotator-dots";
+        let current = 0, timer = null;
+        const show = (i) => {
+          current = (i + slides.length) % slides.length;
+          slides.forEach((el, k) => { el.classList.toggle("is-active", k === current); el.setAttribute("aria-hidden", k === current ? "false" : "true"); });
+          [...dots.children].forEach((d, k) => d.setAttribute("aria-current", k === current ? "true" : "false"));
+        };
+        slides.forEach((_, k) => {
+          const d = document.createElement("button");
+          d.type = "button";
+          d.className = "rotator-dot";
+          d.setAttribute("aria-label", "Show review " + (k + 1) + " of " + slides.length);
+          d.addEventListener("click", () => { show(k); start(); });
+          dots.appendChild(d);
+        });
+        stage.insertAdjacentElement("afterend", dots);
+        const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
+        const start = () => { stop(); if (!still) timer = setInterval(() => show(current + 1), 8000); };
+        ["mouseenter", "focusin"].forEach((ev) => box.addEventListener(ev, stop));
+        ["mouseleave", "focusout"].forEach((ev) => box.addEventListener(ev, start));
+        document.addEventListener("visibilitychange", () => (document.hidden ? stop() : start()));
+        show(0);
+        start();
+      });
 
       document.querySelectorAll(".page-process-cta [data-tab-target]").forEach((button) => {
         button.addEventListener("click", () => activateTab(button.dataset.tabTarget));
