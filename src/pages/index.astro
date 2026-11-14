@@ -1839,36 +1839,17 @@ const services = [
         const stage = box.querySelector(".rotator-stage") || box;
         const slides = [...stage.querySelectorAll(".rotator-slide")];
         if (slides.length < 2) return;
-        const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        const dots = document.createElement("div");
-        dots.className = "rotator-dots";
-        let current = 0, timer = null;
-        const show = (i) => {
-          const prev = current;
-          current = (i + slides.length) % slides.length;
-          slides.forEach((el, k) => {
-            el.classList.toggle("is-leaving", k === prev && k !== current);
-            el.classList.toggle("is-active", k === current);
-            el.setAttribute("aria-hidden", k === current ? "false" : "true");
-          });
-          [...dots.children].forEach((d, k) => d.setAttribute("aria-current", k === current ? "true" : "false"));
-        };
-        slides.forEach((_, k) => {
-          const d = document.createElement("button");
-          d.type = "button";
-          d.className = "rotator-dot";
-          d.setAttribute("aria-label", "Show review " + (k + 1) + " of " + slides.length);
-          d.addEventListener("click", () => { show(k); start(); });
-          dots.appendChild(d);
+        const track = document.createElement("div");
+        track.className = "review-track";
+        slides.forEach((el) => track.appendChild(el));
+        slides.forEach((el) => {
+          const copy = el.cloneNode(true);
+          copy.setAttribute("aria-hidden", "true");
+          track.appendChild(copy);
         });
-        stage.insertAdjacentElement("afterend", dots);
-        const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
-        const start = () => { stop(); if (!still) timer = setInterval(() => show(current + 1), 8000); };
-        ["mouseenter", "focusin"].forEach((ev) => box.addEventListener(ev, stop));
-        ["mouseleave", "focusout"].forEach((ev) => box.addEventListener(ev, start));
-        document.addEventListener("visibilitychange", () => (document.hidden ? stop() : start()));
-        show(0);
-        start();
+        stage.appendChild(track);
+        stage.classList.add("review-window");
+        track.style.setProperty("--review-time", slides.length * 14 + "s");
       });
 
       document.querySelectorAll(".page-process-cta [data-tab-target]").forEach((button) => {

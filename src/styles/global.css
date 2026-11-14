@@ -6560,15 +6560,15 @@ p {
 .dashboard-outcome a { color: var(--accent-deep); text-decoration: underline; }
 
 /* Rotating reviews: slides share one grid cell, so the box is always as tall as the longest review and never jumps. */
-.testimonial-list[data-rotator], .rotator-stage { display: grid; }
-.testimonial-list[data-rotator], .rotator-stage { overflow: hidden; }
-.rotator-slide { grid-area: 1 / 1; opacity: 0; visibility: hidden; transform: translateY(-100%); }
-.rotator-slide.is-active, .rotator-slide.is-leaving { transition: transform 600ms cubic-bezier(.4, 0, .2, 1), opacity 600ms ease; }
-.rotator-slide.is-active { opacity: 1; visibility: visible; transform: translateY(0); }
-.rotator-slide.is-leaving { opacity: 0; visibility: visible; transform: translateY(100%); }
-.rotator-dots { display: flex; justify-content: center; gap: 4px; margin-top: 8px; }
-.rotator-dot { position: relative; width: 14px; height: 14px; padding: 0; border: 0; background: none; cursor: pointer; }
-.rotator-dot::after { content: ""; position: absolute; inset: 4px; border-radius: 50%; background: var(--line); transition: background 200ms ease, transform 200ms ease; }
-.rotator-dot[aria-current="true"]::after { background: var(--accent); transform: scale(1.25); }
-.rotator-dot:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-radius: 50%; }
-@media (prefers-reduced-motion: reduce) { .rotator-slide, .rotator-slide.is-active, .rotator-slide.is-leaving { transition: none; } }
+.review-window { position: relative; overflow: hidden; height: var(--review-height, 200px); -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent); }
+.testimonial-list.review-window { --review-height: 210px; display: block; }
+.quote-card .review-window { --review-height: 170px; }
+.review-track { display: flex; flex-direction: column; animation: review-down var(--review-time, 56s) linear infinite; will-change: transform; }
+.review-track > * { flex: none; min-width: 0; max-width: 100%; margin: 0 0 12px; }
+.review-window:hover .review-track { animation-play-state: paused; }
+@keyframes review-down { from { transform: translateY(-50%); } to { transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) {
+  .review-window { height: auto; max-height: var(--review-height, 200px); overflow-y: auto; -webkit-mask-image: none; mask-image: none; }
+  .review-track { animation: none; }
+  .review-track > [aria-hidden="true"] { display: none; }
+}
