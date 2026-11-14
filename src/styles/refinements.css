@@ -325,3 +325,10 @@ button:disabled { cursor: not-allowed; }
   .hero h1 .hero-highlight { background-size: 100% 100%; color: #fffaf3; }
   .has-project-reveal .project-reveal { opacity: 1; transform: none; }
 }
+
+/* Sample product pages: how-I-build steps and closing call to action */
+.page-process { margin-top: 48px; display: grid; gap: 20px; }
+.page-process h4 { font-size: 1.25rem; margin: 0; }
+.page-process-steps { margin: 0; padding-left: 1.25rem; display: grid; gap: 10px; max-width: 70ch; font-size: var(--text-body); line-height: 1.6; }
+.page-process-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 8px; }
+.page-process-cta p { margin: 0; font-size: var(--text-body); }
