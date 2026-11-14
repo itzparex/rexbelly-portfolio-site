@@ -6552,3 +6552,5 @@ p {
 }
 .button[data-breakdown-open] span,
 .button[data-gallery-open] span { color: var(--accent); }
+
+.breakdown-intro { margin: 10px 0 0; max-width: 52ch; font-size: 0.95rem; line-height: 1.5; opacity: 0.85; }
