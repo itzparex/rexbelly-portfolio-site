@@ -1622,62 +1622,6 @@ p {
   line-height: 1.75;
 }
 
-.about-start-panel {
-  width: min(100%, 285px);
-  margin-top: 25px;
-  padding: 17px;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  background: var(--surface);
-  box-shadow: 0 12px 30px color-mix(in srgb, var(--ink), transparent 94%);
-}
-
-.about-start-kicker {
-  color: var(--accent);
-  font: 700 8px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  letter-spacing: 0.1em;
-}
-
-.about-start-panel ol {
-  display: grid;
-  gap: 14px;
-  margin: 17px 0 18px;
-  padding: 0;
-  list-style: none;
-  counter-reset: start-step;
-}
-
-.about-start-panel li {
-  display: grid;
-  grid-template-columns: 22px 1fr;
-  gap: 8px;
-  counter-increment: start-step;
-}
-
-.about-start-panel li::before {
-  content: counter(start-step, decimal-leading-zero);
-  color: var(--accent);
-  font: 700 9px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-}
-
-.about-start-panel li strong,
-.about-start-panel li span { grid-column: 2; }
-.about-start-panel li strong { grid-row: 1; font-size: 10px; }
-.about-start-panel li span { grid-row: 2; color: var(--ink-faint); font-size: 9px; line-height: 1.55; }
-.about-start-panel li::before { grid-row: 1 / span 2; }
-
-.about-start-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  color: var(--accent);
-  font-size: 9px;
-  font-weight: 700;
-}
-
-.about-start-link span { transition: transform 180ms ease; }
-.about-start-link:hover span { transform: translate(2px, -2px); }
-
 .about-client-start {
   margin-top: 18px;
   padding-top: 15px;
@@ -1730,39 +1674,6 @@ p {
   font-size: 9px;
 }
 
-.quote-card {
-  position: relative;
-  padding: 17px 19px 16px 46px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface);
-}
-
-.quote-mark {
-  position: absolute;
-  top: 8px;
-  left: 15px;
-  color: var(--accent);
-  font-family: Georgia, serif;
-  font-size: 33px;
-  line-height: 1;
-}
-
-.quote-card blockquote {
-  margin: 0 0 8px;
-  color: var(--ink);
-  font-size: 11px;
-  font-style: italic;
-  line-height: 1.7;
-}
-
-.quote-credit {
-  color: var(--ink-faint);
-  font-size: 8px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-}
-
 .about-principles {
   margin-top: 18px;
   padding: 15px 0 4px;
@@ -1785,7 +1696,6 @@ p {
 .about-principles-grid div { display: grid; gap: 4px; }
 .about-principles-grid strong { font-size: 10px; }
 .about-principles-grid span { color: var(--ink-faint); font-size: 9px; line-height: 1.55; }
-.quote-card--secondary { margin-top: 12px; }
 
 .contact-section {
   padding: 94px 0 92px;
@@ -2104,7 +2014,6 @@ p {
   .service-detail-columns { grid-template-columns: 1fr; gap: 18px; }
   .about-section { grid-template-columns: 1fr; gap: 24px; padding-top: 76px; padding-bottom: 77px; }
   .about-label { min-height: 0; }
-  .about-start-panel { width: 100%; margin-top: 18px; }
   .about-copy h2 { font-size: clamp(36px, 10vw, 52px); }
   .about-copy > p.about-lead { font-size: 13px; }
   .about-copy > p { font-size: 11px; }
@@ -6597,7 +6506,6 @@ p {
 /* Rotating reviews: slides share one grid cell, so the box is always as tall as the longest review and never jumps. */
 .review-window { position: relative; overflow: hidden; height: var(--review-height, 200px); -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent); }
 .testimonial-list.review-window { --review-height: 210px; display: block; }
-.quote-card .review-window { --review-height: 170px; }
 .review-track { display: flex; flex-direction: column; animation: review-down var(--review-time, 56s) linear infinite; will-change: transform; }
 .review-track > * { flex: none; min-width: 0; max-width: 100%; margin: 0 0 12px; }
 .review-window:hover .review-track { animation-play-state: paused; }
