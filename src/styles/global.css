@@ -6592,3 +6592,6 @@ p {
 .review-rail { min-width: 0; max-width: 100%; width: 100%; contain: inline-size; overflow: hidden; }
 .rail-card { align-self: flex-start; }
 .rail-track { align-items: stretch; }
+
+.review-rail { width: 100%; max-width: 100%; margin: 0 0 90px; border-left: 0; border-right: 0; border-radius: 0; }
+.rail-prev { left: 16px; } .rail-next { right: 16px; }
