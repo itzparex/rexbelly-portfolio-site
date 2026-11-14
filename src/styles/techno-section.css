@@ -824,3 +824,8 @@
   .reel-item[aria-hidden="true"] { display: none; }
 }
 @media (max-width: 760px) { .dashboard-projects .project-reel { grid-column: 1; grid-row: auto; height: 220px; } }
+
+/* Logo symbol: one mask asset tinted by text colour, so it follows light and dark themes */
+.logo-mark { display: inline-block; flex: none; width: 18px; height: 18px; background-color: currentColor; -webkit-mask: url("/logo-symbol-black.svg") center / contain no-repeat; mask: url("/logo-symbol-black.svg") center / contain no-repeat; }
+.mobile-brand { display: inline-flex; align-items: center; gap: 8px; }
+.mobile-brand .logo-mark { width: 20px; height: 20px; }
