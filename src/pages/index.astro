@@ -734,6 +734,7 @@ const services = [
                 <p>Need a product page for your store?</p>
                 <button class="button button--primary" type="button" data-tab-target="contact">Let's talk <span aria-hidden="true">→</span></button>
                 <button class="button" type="button" data-breakdown-open>See a page broken down section by section <span aria-hidden="true">→</span></button>
+                <button class="button" type="button" data-gallery-open>See the product image gallery <span aria-hidden="true">→</span></button>
               </div>
             </div>
           </section>
@@ -983,6 +984,101 @@ const services = [
         <footer class="breakdown-nav">
           <button class="button" type="button" data-breakdown-prev>← Back</button>
           <span class="breakdown-count" data-breakdown-count>1 of 9</span>
+          <button class="button button--primary" type="button" data-breakdown-next>Next →</button>
+        </footer>
+      </div>
+    </dialog>
+    <dialog class="service-dialog breakdown-dialog" id="gallery-dialog" aria-labelledby="gallery-title">
+      <div class="service-dialog-shell">
+        <header class="service-dialog-header">
+          <div>
+            <span class="eyebrow section-kicker">PRODUCT IMAGE GALLERY</span>
+            <h2 id="gallery-title">Tour Flex Golf Glove, image by image</h2>
+          </div>
+          <button class="service-dialog-close" type="button" data-breakdown-close aria-label="Close gallery">×</button>
+        </header>
+        <div class="service-dialog-content breakdown-content" aria-live="polite">
+          <article class="breakdown-step" data-breakdown-step>
+            <h3>1. Hero image</h3>
+            <div class="breakdown-shot breakdown-shot--square"><img src="/gallery/01.jpg" alt="Tour Flex Golf Glove product gallery image 1: hero image" width="900" height="900" loading="eager" decoding="async" /></div>
+            <dl class="breakdown-notes">
+              <div><dt>What it is</dt><dd>The first image in the gallery: the glove on a club, a risk-free guarantee badge and three benefit icons.</dd></div>
+              <div><dt>Why it helps</dt><dd>It is the thumbnail shoppers see in ads and search too. The promise and the guarantee land in one glance.</dd></div>
+            </dl>
+          </article>
+          <article class="breakdown-step" data-breakdown-step hidden>
+            <h3>2. Common aches</h3>
+            <div class="breakdown-shot breakdown-shot--square"><img src="/gallery/02.jpg" alt="Tour Flex Golf Glove product gallery image 2: common aches" width="900" height="900" loading="lazy" decoding="async" /></div>
+            <dl class="breakdown-notes">
+              <div><dt>What it is</dt><dd>A list of the aches golfers know too well: stiff hands, slipping grip, elbow, wrist and forearm.</dd></div>
+              <div><dt>Why it helps</dt><dd>Naming the problem fast makes the buyer feel understood and keeps them swiping.</dd></div>
+            </dl>
+          </article>
+          <article class="breakdown-step" data-breakdown-step hidden>
+            <h3>3. Versus regular gloves</h3>
+            <div class="breakdown-shot breakdown-shot--square"><img src="/gallery/03.jpg" alt="Tour Flex Golf Glove product gallery image 3: versus regular gloves" width="900" height="900" loading="lazy" decoding="async" /></div>
+            <dl class="breakdown-notes">
+              <div><dt>What it is</dt><dd>A quick check-and-cross table: Tour Flex against an ordinary glove, row by row.</dd></div>
+              <div><dt>Why it helps</dt><dd>The buyer sees the winner in seconds, with no need to read a long description.</dd></div>
+            </dl>
+          </article>
+          <article class="breakdown-step" data-breakdown-step hidden>
+            <h3>4. Golfers' reviews</h3>
+            <div class="breakdown-shot breakdown-shot--square"><img src="/gallery/04.jpg" alt="Tour Flex Golf Glove product gallery image 4: golfers' reviews" width="900" height="900" loading="lazy" decoding="async" /></div>
+            <dl class="breakdown-notes">
+              <div><dt>What it is</dt><dd>A wall of short review quotes around one happy golfer.</dd></div>
+              <div><dt>Why it helps</dt><dd>Many voices saying the same thing beat any claim the brand can make about itself.</dd></div>
+            </dl>
+          </article>
+          <article class="breakdown-step" data-breakdown-step hidden>
+            <h3>5. The big numbers</h3>
+            <div class="breakdown-shot breakdown-shot--square"><img src="/gallery/05.jpg" alt="Tour Flex Golf Glove product gallery image 5: the big numbers" width="900" height="900" loading="lazy" decoding="async" /></div>
+            <dl class="breakdown-notes">
+              <div><dt>What it is</dt><dd>Three stat cards in large type, built to be read at a glance.</dd></div>
+              <div><dt>Why it helps</dt><dd>Big, simple numbers are easy to remember and make the result feel real.</dd></div>
+            </dl>
+          </article>
+          <article class="breakdown-step" data-breakdown-step hidden>
+            <h3>6. Feature close-up</h3>
+            <div class="breakdown-shot breakdown-shot--square"><img src="/gallery/06.jpg" alt="Tour Flex Golf Glove product gallery image 6: feature close-up" width="900" height="900" loading="lazy" decoding="async" /></div>
+            <dl class="breakdown-notes">
+              <div><dt>What it is</dt><dd>A close-up of the glove with four callouts: free movement, a slip-proof grip, copper-infused fabric and sweat control.</dd></div>
+              <div><dt>Why it helps</dt><dd>It shows exactly what the buyer is paying for, right on the product.</dd></div>
+            </dl>
+          </article>
+          <article class="breakdown-step" data-breakdown-step hidden>
+            <h3>7. Review spotlight</h3>
+            <div class="breakdown-shot breakdown-shot--square"><img src="/gallery/07.jpg" alt="Tour Flex Golf Glove product gallery image 7: review spotlight" width="900" height="900" loading="lazy" decoding="async" /></div>
+            <dl class="breakdown-notes">
+              <div><dt>What it is</dt><dd>One five-star review shown big, with a real-looking golf moment beside it.</dd></div>
+              <div><dt>Why it helps</dt><dd>A single clear story is easy to trust and easy to picture yourself in.</dd></div>
+            </dl>
+          </article>
+          <article class="breakdown-step" data-breakdown-step hidden>
+            <h3>8. Pain vs. relief</h3>
+            <div class="breakdown-shot breakdown-shot--square"><img src="/gallery/08.jpg" alt="Tour Flex Golf Glove product gallery image 8: pain vs. relief" width="900" height="900" loading="lazy" decoding="async" /></div>
+            <dl class="breakdown-notes">
+              <div><dt>What it is</dt><dd>A split image: regular glove in red, Tour Flex in green.</dd></div>
+              <div><dt>Why it helps</dt><dd>Colour does the talking. Red means trouble, green means relief, and the choice feels obvious.</dd></div>
+            </dl>
+          </article>
+          <article class="breakdown-step" data-breakdown-step hidden>
+            <h3>9. Lifestyle finish</h3>
+            <div class="breakdown-shot breakdown-shot--square"><img src="/gallery/09.jpg" alt="Tour Flex Golf Glove product gallery image 9: lifestyle finish" width="900" height="900" loading="lazy" decoding="async" /></div>
+            <dl class="breakdown-notes">
+              <div><dt>What it is</dt><dd>A happy golf moment, with the product in an inset circle and one short callout.</dd></div>
+              <div><dt>Why it helps</dt><dd>It ends on the feeling the buyer wants: playing all 18 holes and enjoying it.</dd></div>
+            </dl>
+          </article>
+          <article class="breakdown-step breakdown-step--end" data-breakdown-step hidden>
+            <h3>Need product images that sell?</h3>
+            <p>I design the gallery so each image answers one question a buyer has, from the first swipe to the last.</p>
+            <button class="button button--primary" type="button" data-breakdown-contact>Let's talk <span aria-hidden="true">→</span></button>
+          </article>
+        </div>
+        <footer class="breakdown-nav">
+          <button class="button" type="button" data-breakdown-prev>← Back</button>
+          <span class="breakdown-count" data-breakdown-count>1 of 10</span>
           <button class="button button--primary" type="button" data-breakdown-next>Next →</button>
         </footer>
       </div>
@@ -1626,63 +1722,68 @@ const services = [
         serviceDialogOpener?.focus();
       });
 
-      const breakdown = document.querySelector("#breakdown-dialog");
-      if (breakdown) {
-        const bSteps = [...breakdown.querySelectorAll("[data-breakdown-step]")];
-        const bPrev = breakdown.querySelector("[data-breakdown-prev]");
-        const bNext = breakdown.querySelector("[data-breakdown-next]");
-        const bCount = breakdown.querySelector("[data-breakdown-count]");
-        const bBody = breakdown.querySelector(".breakdown-content");
-        let bIndex = 0;
-        let bOpener = null;
-        let bToContact = false;
-        const showBreakdown = (i) => {
-          bIndex = Math.max(0, Math.min(bSteps.length - 1, i));
-          bSteps.forEach((el, k) => { el.hidden = k !== bIndex; });
-          bPrev.disabled = bIndex === 0;
-          bNext.disabled = bIndex === bSteps.length - 1;
-          bCount.textContent = `${bIndex + 1} of ${bSteps.length}`;
-          bBody.scrollTop = 0;
-          const nextImg = bSteps[bIndex + 1]?.querySelector("img");
-          if (nextImg) nextImg.loading = "eager";
-        };
-        const openBreakdown = (opener) => {
-          bOpener = opener || null;
-          showBreakdown(0);
-          if (!breakdown.open) breakdown.showModal();
-          if (location.hash !== "#breakdown") history.replaceState(null, "", "#breakdown");
-          breakdown.querySelector("[data-breakdown-close]").focus();
-        };
-        document.querySelectorAll("[data-breakdown-open]").forEach((b) => b.addEventListener("click", () => openBreakdown(b)));
-        bPrev.addEventListener("click", () => showBreakdown(bIndex - 1));
-        bNext.addEventListener("click", () => showBreakdown(bIndex + 1));
-        breakdown.querySelector("[data-breakdown-close]").addEventListener("click", () => breakdown.close());
-        breakdown.querySelector("[data-breakdown-contact]").addEventListener("click", () => {
-          bToContact = true;
-          breakdown.close();
-          activateTab("contact");
-          requestAnimationFrame(() => document.querySelector("#contact-message")?.focus());
-        });
-        breakdown.addEventListener("keydown", (e) => {
-          if (e.key === "ArrowRight") { e.preventDefault(); showBreakdown(bIndex + 1); }
-          if (e.key === "ArrowLeft") { e.preventDefault(); showBreakdown(bIndex - 1); }
-        });
-        breakdown.addEventListener("click", (e) => {
-          if (e.target !== breakdown) return;
-          const r = breakdown.getBoundingClientRect();
-          if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) breakdown.close();
-        });
-        breakdown.addEventListener("close", () => {
-          if (location.hash === "#breakdown") history.replaceState(null, "", location.pathname + location.search);
-          if (bToContact) { bToContact = false; return; }
-          bOpener?.focus();
-        });
-        if (location.hash === "#breakdown") {
-          const projects = document.querySelector('[data-tab-target="projects"]');
-          if (projects) activateTab("projects");
-          openBreakdown(null);
+      const setupStepper = (dialogSel, openSel, hashName) => {
+        const breakdown = document.querySelector(dialogSel);
+        if (breakdown) {
+          const bSteps = [...breakdown.querySelectorAll("[data-breakdown-step]")];
+          const bPrev = breakdown.querySelector("[data-breakdown-prev]");
+          const bNext = breakdown.querySelector("[data-breakdown-next]");
+          const bCount = breakdown.querySelector("[data-breakdown-count]");
+          const bBody = breakdown.querySelector(".breakdown-content");
+          let bIndex = 0;
+          let bOpener = null;
+          let bToContact = false;
+          const showBreakdown = (i) => {
+            bIndex = Math.max(0, Math.min(bSteps.length - 1, i));
+            bSteps.forEach((el, k) => { el.hidden = k !== bIndex; });
+            bPrev.disabled = bIndex === 0;
+            bNext.disabled = bIndex === bSteps.length - 1;
+            bCount.textContent = `${bIndex + 1} of ${bSteps.length}`;
+            bBody.scrollTop = 0;
+            const nextImg = bSteps[bIndex + 1]?.querySelector("img");
+            if (nextImg) nextImg.loading = "eager";
+          };
+          const openBreakdown = (opener) => {
+            bOpener = opener || null;
+            showBreakdown(0);
+            if (!breakdown.open) breakdown.showModal();
+            if (location.hash !== hashName) history.replaceState(null, "", hashName);
+            breakdown.querySelector("[data-breakdown-close]").focus();
+          };
+          document.querySelectorAll(openSel).forEach((b) => b.addEventListener("click", () => openBreakdown(b)));
+          bPrev.addEventListener("click", () => showBreakdown(bIndex - 1));
+          bNext.addEventListener("click", () => showBreakdown(bIndex + 1));
+          breakdown.querySelector("[data-breakdown-close]").addEventListener("click", () => breakdown.close());
+          breakdown.querySelector("[data-breakdown-contact]").addEventListener("click", () => {
+            bToContact = true;
+            breakdown.close();
+            activateTab("contact");
+            requestAnimationFrame(() => document.querySelector("#contact-message")?.focus());
+          });
+          breakdown.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowRight") { e.preventDefault(); showBreakdown(bIndex + 1); }
+            if (e.key === "ArrowLeft") { e.preventDefault(); showBreakdown(bIndex - 1); }
+          });
+          breakdown.addEventListener("click", (e) => {
+            if (e.target !== breakdown) return;
+            const r = breakdown.getBoundingClientRect();
+            if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) breakdown.close();
+          });
+          breakdown.addEventListener("close", () => {
+            if (location.hash === hashName) history.replaceState(null, "", location.pathname + location.search);
+            if (bToContact) { bToContact = false; return; }
+            bOpener?.focus();
+          });
+          if (location.hash === hashName) {
+            const projects = document.querySelector('[data-tab-target="projects"]');
+            if (projects) activateTab("projects");
+            openBreakdown(null);
+          }
         }
-      }
+
+      };
+      setupStepper("#breakdown-dialog", "[data-breakdown-open]", "#breakdown");
+      setupStepper("#gallery-dialog", "[data-gallery-open]", "#gallery");
 
       document.querySelectorAll(".page-process-cta [data-tab-target]").forEach((button) => {
         button.addEventListener("click", () => activateTab(button.dataset.tabTarget));
