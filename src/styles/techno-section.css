@@ -790,3 +790,22 @@
 .dashboard-process .process-steps strong { font-size: 11px; }
 .dashboard-process .process-steps strong em { font-size: 9px; }
 .dashboard-process .process-steps small { font-size: 10px; }
+
+/* Tighter Home dashboard rows */
+.dashboard-projects { gap: 6px 12px; align-content: start; }
+.dashboard-projects .dashboard-project-preview img { min-height: 0; }
+.dashboard-projects .dashboard-outcome { margin: 0; align-self: start; }
+.dashboard-projects .dashboard-card-link { min-height: 30px; padding: 5px 11px; }
+.dashboard-project-links { gap: 6px; }
+.dashboard-process .dashboard-card-heading p { display: none; }
+.dashboard-process .process-steps { gap: 6px; margin-top: 8px; }
+.dashboard-services .service-mini { min-height: 42px; padding: 6px 10px; }
+.dashboard-services .service-mini-list { gap: 5px; margin-top: 6px; }
+.testimonial-list.review-window { --review-height: 176px; }
+
+/* Row-height pass 2 */
+.dashboard-projects { grid-template-columns: 1.3fr 0.7fr; }
+.dashboard-project-links { flex-wrap: wrap; flex-direction: row; align-items: center; }
+.dashboard-projects .dashboard-card-link { font-size: 11px; white-space: nowrap; }
+.dashboard-process .process-steps { gap: 4px; margin-top: 6px; }
+.testimonial-list.review-window { --review-height: 140px; }
