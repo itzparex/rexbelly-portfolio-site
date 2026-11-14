@@ -860,22 +860,26 @@ const services = [
       <button type="button" class="rail-arrow rail-prev" aria-label="Previous review">‹</button>
       <button type="button" class="rail-arrow rail-next" aria-label="Next review">›</button>
       <div class="rail-viewport">
-        <div class="rail-card">
+        <article class="rail-card">
+          <span class="rail-quote-mark" aria-hidden="true">“</span>
           <blockquote>Rexbelly went above and beyond to serve our team. I appreciate his fast communication and skills!</blockquote>
-          <span class="quote-credit">CHRIS FIELD · FIELDTRIP INC.</span>
-        </div>
-        <div class="rail-card">
+          <footer class="rail-who"><span class="rail-avatar" aria-hidden="true">C</span><span class="rail-name"><b>Chris Field</b><small>Fieldtrip Inc.</small></span></footer>
+        </article>
+        <article class="rail-card">
+          <span class="rail-quote-mark" aria-hidden="true">“</span>
           <blockquote>Rex was an absolute powerhouse for us at Winx Wheels. As our marketing project manager and true jack-of-all-trades, he owned everything from our web and graphic design to our Klaviyo email marketing and social media strategy. He was constantly optimizing and improving our site performance, combining creative execution with sharp strategic oversight. Any team would be lucky to have his versatility and drive.</blockquote>
-          <span class="quote-credit">BUBBA J. · WINX WHEELS</span>
-        </div>
-        <div class="rail-card">
+          <footer class="rail-who"><span class="rail-avatar" aria-hidden="true">B</span><span class="rail-name"><b>Bubba J.</b><small>Winx Wheels</small></span></footer>
+        </article>
+        <article class="rail-card">
+          <span class="rail-quote-mark" aria-hidden="true">“</span>
           <blockquote>Working alongside Rex on the Tour Flex product pages was fantastic. His dual expertise in web and graphic design brought a high level of polish and conversion focus to every layout we built. He has an incredible eye for detail and knows how to translate product features into clean, high-performing web experiences.</blockquote>
-          <span class="quote-credit">MITCH · TOUR FLEX</span>
-        </div>
-        <div class="rail-card">
+          <footer class="rail-who"><span class="rail-avatar" aria-hidden="true">M</span><span class="rail-name"><b>Mitch</b><small>Tour Flex</small></span></footer>
+        </article>
+        <article class="rail-card">
+          <span class="rail-quote-mark" aria-hidden="true">“</span>
           <blockquote>Perfect experience, skilled and communicative.</blockquote>
-          <span class="quote-credit">TRINA LO · FRESHINK COMMUNICATIONS</span>
-        </div>
+          <footer class="rail-who"><span class="rail-avatar" aria-hidden="true">T</span><span class="rail-name"><b>Trina Lo</b><small>Freshink Communications</small></span></footer>
+        </article>
       </div>
     </div>
         </div>
@@ -1844,6 +1848,21 @@ const services = [
         cards.forEach((el) => track.appendChild(el));
         cards.forEach((el) => { const c = el.cloneNode(true); c.setAttribute("aria-hidden", "true"); track.appendChild(c); });
         view.appendChild(track);
+        const all = [...track.children];
+        const addMore = () => all.forEach((el, i) => {
+          const q = el.querySelector("blockquote");
+          if (q.scrollHeight <= q.clientHeight + 2) return;
+          const b = document.createElement("button");
+          b.type = "button"; b.className = "rail-more"; b.textContent = "Read more";
+          if (el.getAttribute("aria-hidden")) b.tabIndex = -1;
+          b.addEventListener("click", () => {
+            const open = !el.classList.contains("is-open");
+            [all[i % cards.length], all[i % cards.length + cards.length]].forEach((c) => { c.classList.toggle("is-open", open); c.querySelector(".rail-more").textContent = open ? "Show less" : "Read more"; });
+          });
+          q.after(b);
+        });
+        const waitVisible = () => { if (box.offsetParent) addMore(); else requestAnimationFrame(waitVisible); };
+        waitVisible();
         if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
           box.classList.add("is-static");
           box.querySelector(".rail-prev").addEventListener("click", () => view.scrollBy({ left: -280, behavior: "smooth" }));

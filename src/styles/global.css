@@ -6595,3 +6595,21 @@ p {
 
 .review-rail { width: 100%; max-width: 100%; margin: 0 0 90px; border-left: 0; border-right: 0; border-radius: 0; }
 .rail-prev { left: 16px; } .rail-next { right: 16px; }
+
+/* Review rail restyle: equal-height review cards, no frame lines */
+.review-rail { border-top: 0; border-bottom: 0; background: transparent; padding: 8px 0; }
+.rail-viewport { -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent); }
+.rail-track { gap: 18px; align-items: stretch; padding: 8px 0 14px; }
+.rail-card { align-self: stretch; width: 340px; padding: 22px 24px 20px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); box-shadow: 0 6px 22px rgba(15, 60, 70, .08); gap: 16px; justify-content: flex-start; position: relative; }
+.rail-quote-mark { color: var(--accent-deep); font-family: Georgia, serif; font-size: 54px; line-height: .6; height: 24px; opacity: .85; }
+.rail-card blockquote { font-size: 15px; font-style: normal; line-height: 1.6; color: var(--ink); display: -webkit-box; -webkit-line-clamp: 7; -webkit-box-orient: vertical; overflow: hidden; }
+.rail-card.is-open blockquote { display: block; overflow: visible; }
+.rail-more { align-self: flex-start; margin-top: -8px; padding: 0; border: 0; background: none; color: var(--accent-deep); font: inherit; font-size: 12px; font-weight: 700; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.rail-who { margin-top: auto; display: flex; align-items: center; gap: 12px; padding-top: 14px; border-top: 1px solid var(--line); }
+.rail-avatar { flex: none; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: var(--accent-deep); color: #fff; font-weight: 700; font-size: 15px; }
+.rail-name { display: flex; flex-direction: column; min-width: 0; }
+.rail-name b { font-size: 14px; color: var(--ink); }
+.rail-name small { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-deep); }
+.rail-arrow { width: 44px; height: 44px; margin-top: -22px; font-size: 26px; padding: 0 0 4px; border: 0; background: #fff; box-shadow: 0 6px 18px rgba(0,0,0,.18); }
+.rail-arrow:hover { transform: scale(1.06); }
+@media (max-width: 600px) { .rail-card { width: 80vw; } .rail-arrow { width: 38px; height: 38px; margin-top: -19px; } }
