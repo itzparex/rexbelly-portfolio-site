@@ -1844,8 +1844,13 @@ const services = [
         dots.className = "rotator-dots";
         let current = 0, timer = null;
         const show = (i) => {
+          const prev = current;
           current = (i + slides.length) % slides.length;
-          slides.forEach((el, k) => { el.classList.toggle("is-active", k === current); el.setAttribute("aria-hidden", k === current ? "false" : "true"); });
+          slides.forEach((el, k) => {
+            el.classList.toggle("is-leaving", k === prev && k !== current);
+            el.classList.toggle("is-active", k === current);
+            el.setAttribute("aria-hidden", k === current ? "false" : "true");
+          });
           [...dots.children].forEach((d, k) => d.setAttribute("aria-current", k === current ? "true" : "false"));
         };
         slides.forEach((_, k) => {
