@@ -6529,3 +6529,7 @@ p {
 }
 .breakdown-notes dt { color: var(--techno-accent); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.75rem; letter-spacing: .09em; }
 .breakdown-nav { background: var(--techno-pill); }
+
+.contact-intro-card > [data-breakdown-open] {
+  margin: 4px 0 16px;
+}

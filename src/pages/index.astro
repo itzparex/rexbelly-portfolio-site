@@ -495,6 +495,7 @@ const services = [
               </a>
               <p class="dashboard-outcome">A conversion-focused storefront built to make product discovery feel effortless.</p>
               <a class="dashboard-card-link" href="#projects">Browse all projects <span aria-hidden="true">↗</span></a>
+              <button class="dashboard-card-link" type="button" data-breakdown-open>See how a product page is built <span aria-hidden="true">→</span></button>
             </article>
 
             <article class="dashboard-card dashboard-process">
@@ -689,6 +690,11 @@ const services = [
                   <div class="funnel-group-heading">
                     <div><span class="eyebrow">PRODUCT PAGE FUNNELS</span><h4 id={`${funnelGroup.id}-title`}>{funnelGroup.name}</h4></div>
                     <div class="funnel-group-actions">
+                      {funnelGroup.id === "tour-flex-funnels" && (
+                        <button class="rail-toggle" type="button" data-breakdown-open>
+                          <span class="rail-toggle-label">See how it's built</span><span aria-hidden="true">→</span>
+                        </button>
+                      )}
                       {funnelGroup.projects.length > 3 && (
                         <button class="rail-toggle" type="button" data-rail-toggle={funnelGroup.id} aria-expanded="false">
                           <span class="rail-toggle-label">View all {funnelGroup.projects.length} pages</span><span aria-hidden="true">↗</span>
@@ -773,6 +779,15 @@ const services = [
                       <div><h4>Included</h4><ul>{service.skills.map((skill) => <li>{skill}</li>)}</ul></div>
                     </div>
                     <div class="service-detail-examples"><h4>Relevant work</h4><div>{(service.id === "website-shopify" ? [{ name: "PunkRIDE", url: "https://www.punkride.com/en-uk" }, { name: "TripNinja", url: "https://tripninja.io/" }, { name: "Evolve Flooring", url: "https://evolveflooring.ca/" }] : service.id === "research-copy" ? [{ name: "Garden Monkeys", url: "https://www.gardenmonkeys.com/" }, { name: "Tour Flex", url: "https://19thtourflex.com/" }] : [{ name: "Winx Wheels", url: "https://winxwheels.com/" }]).map((example) => <a href={example.url} target="_blank" rel="noopener noreferrer">{example.name} <span aria-hidden="true">↗</span></a>)}</div></div>
+                    {service.id === "website-shopify" && (
+                      <div class="service-detail-examples">
+                        <h4>How I build a product page</h4>
+                        <div class="page-process-cta">
+                          <button class="button" type="button" data-breakdown-open>See a page broken down section by section <span aria-hidden="true">→</span></button>
+                          <button class="button" type="button" data-gallery-open>See the product image gallery <span aria-hidden="true">→</span></button>
+                        </div>
+                      </div>
+                    )}
                     <a class="service-detail-cta" href="#contact">Discuss this service <span aria-hidden="true">↗</span></a>
                   </div>
                 </article>
@@ -847,6 +862,7 @@ const services = [
               <span class="eyebrow section-kicker">YOUR NEXT MOVE</span>
               <h2 id="contact-title">Tell me what you’re working on.</h2>
               <p class="contact-copy">Tell me what you’re building, what you’d like help with, and when you’d like to get started. If you already have a website or a brief, feel free to include it.</p>
+              <button class="button" type="button" data-breakdown-open>Not sure yet? See how I build a product page <span aria-hidden="true">→</span></button>
               <a class="contact-email" href="mailto:rexbelly.zipagan@gmail.com?subject=Project%20inquiry">
                 rexbelly.zipagan@gmail.com <span aria-hidden="true">↗</span>
               </a>
