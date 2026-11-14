@@ -126,7 +126,7 @@
   backdrop-filter: blur(10px);
 }
 
-:root.techno-home :is(.marquee-viewport, .process-steps li, .testimonial-review, .service-mini) {
+:root.techno-home :is(.marquee-viewport, .testimonial-review, .service-mini) {
   border-color: var(--techno-border);
   background: var(--techno-pill);
 }
