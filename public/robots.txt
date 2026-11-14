@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rexbelly-portfolio-site.vercel.app/sitemap.xml
