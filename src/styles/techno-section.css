@@ -770,3 +770,23 @@
   .techno-card:hover, .techno-cta:hover,
   :root.techno-home :is(.dashboard-card, .dashboard-card-link, .profile-contact):hover { transform: none; }
 }
+
+.dashboard-project-links { grid-column: 1; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 8px; margin-top: auto; }
+.dashboard-project-links .dashboard-card-link { margin-top: 0; }
+@media (max-width: 760px) { .dashboard-project-links { grid-column: 1; } }
+
+/* Home dashboard: keep Services and How I work on the same compact type scale as the other cards */
+.dashboard-services .service-mini, .dashboard-services .service-mini-label { font-size: 11px; }
+.dashboard-services .service-mini { min-height: 50px; gap: 10px; padding: 8px 10px; }
+.dashboard-services .service-mini-icon { width: 28px; height: 28px; flex-basis: 28px; }
+.dashboard-services .service-mini-icon svg { width: 16px; height: 16px; }
+.dashboard-services .service-mini-arrow { font-size: 10px; }
+.dashboard-services .service-mini-list { gap: 6px; margin-top: 8px; }
+.dashboard-process .process-steps { gap: 8px; margin-top: 10px; }
+.dashboard-process .process-steps::before { left: 12px; top: 13px; bottom: 13px; }
+.dashboard-process .process-steps li { gap: 10px; }
+.dashboard-process .ps-icon { width: 26px; height: 26px; flex-basis: 26px; border-radius: 8px; }
+.dashboard-process .ps-icon svg { width: 14px; height: 14px; }
+.dashboard-process .process-steps strong { font-size: 11px; }
+.dashboard-process .process-steps strong em { font-size: 9px; }
+.dashboard-process .process-steps small { font-size: 10px; }
