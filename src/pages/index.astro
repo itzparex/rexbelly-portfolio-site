@@ -338,10 +338,10 @@ const services = [
       </a>
 
       <div class="sidebar-socials" aria-label="Social and contact links">
-        <a href="https://github.com/itzparex" target="_blank" rel="noreferrer" aria-label="GitHub">
+        <a href="https://github.com/itzparex" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d={siGithub.path} fill="currentColor" /></svg>
         </a>
-        <a class="sidebar-social-link--brand sidebar-social-link--whatsapp" href="https://wa.me/639622633810" target="_blank" rel="noreferrer" aria-label="WhatsApp">
+        <a class="sidebar-social-link--brand sidebar-social-link--whatsapp" href="https://wa.me/639622633810" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="12" cy="12" r="12" fill="#25D366" />
             <path d={siWhatsapp.path} transform="translate(4 4) scale(0.667)" fill="#fff" />
@@ -435,7 +435,7 @@ const services = [
                     <span class="tool-chip" style={`--tool-color: ${toolColor(tool)}`}>
                       <span class="tool-logo" aria-hidden="true">
                         {tool.logo ? (
-                          <img src={tool.logo} alt="" />
+                          <img src={tool.logo} alt="" width="20" height="20" loading="lazy" />
                         ) : tool.icon ? (
                           <svg viewBox="0 0 24 24" role="presentation" focusable="false">
                             <path d={tool.icon.path} />
@@ -496,7 +496,7 @@ const services = [
               <div class="project-reel" role="group" aria-label="Selected live projects">
                 <div class="project-reel-track">
                   {[0, 1].map((copy) => reelProjects.map((item) => (
-                    <a class="reel-item" href={item.url} target="_blank" rel="noreferrer" aria-hidden={copy ? "true" : undefined} tabindex={copy ? -1 : undefined} aria-label={copy ? undefined : `View ${item.name}`}>
+                    <a class="reel-item" href={item.url} target="_blank" rel="noopener noreferrer" aria-hidden={copy ? "true" : undefined} tabindex={copy ? -1 : undefined} aria-label={copy ? undefined : `View ${item.name}`}>
                       <img src={item.image} alt={copy ? "" : item.alt} loading={copy ? "lazy" : "eager"} decoding="async" />
                       <span class="preview-caption"><b>{item.name}</b><span>{item.kind} ↗</span></span>
                     </a>
