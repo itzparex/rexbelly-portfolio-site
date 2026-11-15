@@ -1063,20 +1063,6 @@ p {
   transform: scale(1.045);
 }
 
-.showcase-visual.project-image--logo {
-  display: grid;
-  place-items: center;
-  padding: 26px;
-  background: linear-gradient(140deg, #71497b, #3f294c);
-}
-
-.showcase-visual.project-image--logo img {
-  width: 72%;
-  height: 72%;
-  object-fit: contain;
-  filter: drop-shadow(0 10px 24px rgb(28 17 34 / 20%));
-}
-
 .showcase-glass {
   position: absolute;
   right: 10px;

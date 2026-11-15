@@ -96,15 +96,14 @@ const websiteProjects = [
     name: "TripNinja",
     description: "A travel technology website that explains flight content tools for travel platforms.",
     image: "/projects/tripninja.webp",
-    alt: "TripNinja travel map visual",
+    alt: "TripNinja website homepage hero section",
     url: "https://tripninja.io/",
   },
   {
     name: "Censea Solutions",
     description: "A business website introducing the firm’s accounting, bookkeeping, and advisory services.",
-    image: "/projects/censea.jpg",
-    alt: "Censea Accounting & Business Solutions logo",
-    imageClass: "project-image--logo",
+    image: "/projects/censea.webp",
+    alt: "Censea Solutions website homepage hero section",
     url: "https://censeasolutions.ca/",
   },
   {
@@ -693,7 +692,7 @@ const services = [
             <div class="showcase-grid showcase-grid--websites">
               {websiteProjects.map((project, index) => (
                 <article class="showcase-card project-reveal">
-                  <a class:list={["showcase-visual", project.imageClass]} href={project.url} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${project.name} website. ${project.description}`}>
+                  <a class="showcase-visual" href={project.url} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${project.name} website. ${project.description}`}>
                     <img src={project.image} alt={project.alt} loading="lazy" decoding="async" width="900" height="600" />
                     <span class="showcase-glass"><span>WEBSITE</span><b>Visit site <i aria-hidden="true">↗</i></b></span>
                   </a>
