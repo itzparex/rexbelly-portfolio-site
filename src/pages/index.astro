@@ -238,6 +238,20 @@ const services = [
     skills: ["Klaviyo", "Email automation", "Campaign design", "Graphic design"],
   },
 ];
+
+const appsList = [
+  {
+    name: "Voltes IIV",
+    platform: "macOS Desktop App",
+    language: "Python",
+    tagline: "Offline-first local password manager for macOS",
+    description:
+      "A 100% local macOS password vault built with Python, native Cocoa (AppKit), and pywebview. Zero cloud servers, zero telemetry, Argon2id + AES-256-GCM encryption, built-in 2FA TOTP authenticator, Menu Bar mini-vault, Quick-Fill Spotlight overlay, and Touch ID support.",
+    icon: "/apps/voltes-iiv-icon.png",
+    repoUrl: "https://github.com/itzparex/voltes-iiv",
+    tags: ["Python", "AppKit / Cocoa", "Argon2id + AES-256-GCM", "Touch ID", "Offline-First"],
+  },
+];
 ---
 
 <!doctype html>
@@ -354,6 +368,7 @@ const services = [
       <nav class="side-nav" role="tablist" aria-label="Portfolio pages" aria-orientation="vertical">
         <button class="nav-link is-active" id="tab-home" type="button" role="tab" aria-selected="true" aria-controls="panel-home" data-tab-target="home"><span class="nav-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m3.5 10.5 8.5-7 8.5 7V19a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3.5 19v-8.5Z" /><path d="M9.5 20.5v-6h5v6" /></svg></span> Home</button>
         <button class="nav-link" id="tab-projects" type="button" role="tab" aria-selected="false" aria-controls="panel-projects" tabindex="-1" data-tab-target="projects"><span class="nav-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="3.5" width="7" height="7" rx="2" /><rect x="13.5" y="3.5" width="7" height="7" rx="2" /><rect x="3.5" y="13.5" width="7" height="7" rx="2" /><path d="M17 13.5v7M13.5 17h7" /></svg></span> Projects</button>
+        <button class="nav-link" id="tab-apps" type="button" role="tab" aria-selected="false" aria-controls="panel-apps" tabindex="-1" data-tab-target="apps"><span class="nav-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="4.5" width="17" height="15" rx="3" /><path d="M3.5 9.5h17M8.5 14l2.5 2.5L15.5 12" /></svg></span> Apps</button>
         <button class="nav-link" id="tab-services" type="button" role="tab" aria-selected="false" aria-controls="panel-services" tabindex="-1" data-tab-target="services"><span class="nav-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m12 3 2.2 5.3L20 9l-4.3 3.9 1.3 5.6L12 15.6 7 18.5l1.3-5.6L4 9l5.8-.7L12 3Z" /></svg></span> Services</button>
         <button class="nav-link" id="tab-about" type="button" role="tab" aria-selected="false" aria-controls="panel-about" tabindex="-1" data-tab-target="about"><span class="nav-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" /><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0" /></svg></span> About</button>
         <button class="nav-link" id="tab-contact" type="button" role="tab" aria-selected="false" aria-controls="panel-contact" tabindex="-1" data-tab-target="contact"><span class="nav-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v8a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 3.5V17A2.5 2.5 0 0 1 4 14.5v-8Z" /><path d="M8.5 9h7M8.5 12.5h4" /></svg></span> Contact</button>
@@ -384,6 +399,9 @@ const services = [
           </button>
           <button type="button" role="tab" aria-selected="false" aria-controls="panel-projects" tabindex="-1" data-tab-target="projects">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1.5" /><rect x="14" y="4" width="6" height="6" rx="1.5" /><rect x="4" y="14" width="6" height="6" rx="1.5" /><rect x="14" y="14" width="6" height="6" rx="1.5" /></svg><span>Projects</span>
+          </button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="panel-apps" tabindex="-1" data-tab-target="apps">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="3" /><path d="M3.5 9.5h17M8.5 14l2.5 2.5L15.5 12" /></svg><span>Apps</span>
           </button>
           <button type="button" role="tab" aria-selected="false" aria-controls="panel-services" tabindex="-1" data-tab-target="services">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19.5h16M6.5 16V9.5h11V16M4.5 9.5l2-5h11l2 5M9 9.5V16m6-6.5V16" /></svg><span>Services</span>
@@ -771,6 +789,57 @@ const services = [
             </div>
           </section>
 
+        </section>
+        </div>
+
+        <div class="tab-panel" id="panel-apps" role="tabpanel" aria-labelledby="tab-apps" tabindex="0" hidden>
+        <section class="section-wrap apps-section" id="apps" aria-labelledby="apps-title">
+          <header class="project-hero">
+            <div class="project-hero-copy">
+              <span class="project-hero-kicker">APPS <i></i> OPEN SOURCE</span>
+              <h2 id="apps-title">Apps &amp; tools I build.</h2>
+              <p>Desktop utilities, software tools, and open-source GitHub repositories I created.</p>
+              <div class="project-hero-counts" aria-label="Apps summary">
+                <span><b>{appsList.length.toString().padStart(2, "0")}</b> {appsList.length === 1 ? "app" : "apps"}</span>
+                <i aria-hidden="true"></i>
+                <span><b>Open source</b> on GitHub</span>
+              </div>
+            </div>
+            <div class="project-matrix" aria-hidden="true">
+              {['01 10 11 00 01 10', '10 01 00 11 10 01', '11 00 10 01 11 00', '00 11 01 10 00 11', '10 10 01 00 11 01', '01 00 11 10 01 10', '11 10 00 01 10 00', '00 01 10 11 00 01'].map((column, index) => <span style={`--matrix-delay: ${index * -1.7}s; --matrix-duration: ${12 + index % 3}s`}>{column}</span>)}
+            </div>
+          </header>
+
+          <div class="apps-grid">
+            {appsList.map((app) => (
+              <article class="app-card">
+                <div class="app-card-head">
+                  <div class="app-card-icon">
+                    <img src={app.icon} alt={`${app.name} app icon`} loading="lazy" decoding="async" width="72" height="72" />
+                  </div>
+                  <div class="app-card-title-group">
+                    <div class="app-card-meta">
+                      <span class="app-card-platform">{app.platform}</span>
+                      <span class="app-card-lang">{app.language}</span>
+                    </div>
+                    <h3>{app.name}</h3>
+                    <p class="app-card-tagline">{app.tagline}</p>
+                  </div>
+                </div>
+                <p class="app-card-desc">{app.description}</p>
+                <div class="role-tags">
+                  {app.tags.map((tag) => <span>{tag}</span>)}
+                </div>
+                <div class="app-card-footer">
+                  <a class="app-repo-link" href={app.repoUrl} target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d={siGithub.path} /></svg>
+                    <span>View on GitHub</span>
+                    <span class="app-repo-arrow" aria-hidden="true">↗</span>
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
         </section>
         </div>
 
